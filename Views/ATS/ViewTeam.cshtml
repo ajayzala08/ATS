@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "ViewTeam";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+    <form class="onlyform">
+
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+        <h1>View Team</h1>
+        <div style="width:100%; padding:10px;">
+            <table id="myTable" class="display cell-border">
+                <thead>
+                    <tr>
+                        <th>Team Lead</th>
+                        <th>Team Member</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        @section scripts{
+            @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+            <script scr="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+            <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+
+            <script>
+                var editrole =@(User.IsInRole("Edit")?"true":"false");
+                var deleterole = @(User.IsInRole("Delete")?"true":"false");
+                $(document).ready(function () {
+
+                    $("#myTable").DataTable({
+                        "processing": true, // for show progress bar
+                        //"serverSide": true, // for process server side
+                        "filter": true, // this is for disable filter (search box)
+                        "orderMulti": true, // for disable multiple column at once
+
+                        "ajax": {
+                            "url": "/ATS/LoadTeamData",
+                            "type": "GET",
+                            "datatype": "json"
+                        },
+                        "columnDefs":[
+                            {
+                                "targets":[2],
+                                "visible": editrole
+                            },
+                            {
+                                "targets":[3],
+                                "visible":deleterole
+                            }
+
+                        ],
+                        "columns": [
+                                { "data": "T_TeamLead", "name": "T_TeamLead", "autoWidth": true },
+                                { "data": "T_TeamMember", "name": "T_TeamMember", "autoWidth": true },
+                                {// this is Actions Column
+                                    mRender: function (data, type, row) {
+
+                                        var linkedit = '@Html.ActionLink("Edit", "EditTeam", new { @tid = -1 }, new { @Class = "editclass" })';
+                                        linkedit = linkedit.replace("-1", row.T_Id);
+                                        return linkedit ;
+                                    }
+                                },
+                                {
+                                    mRender: function(data, type, row){
+                                        var linkdelete = '@Html.ActionLink("Delete", "DeleteTeam", new { @tid = -1 }, new { @Class="deleteclass" })';
+                                        linkdelete = linkdelete.replace("-1",row.T_Id);
+                                        return linkdelete;
+                                    }
+                                }
+                        ],
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'excel',
+                                messageTop: 'Team Member',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'csv',
+                                messageTop: 'Team Member',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'pdf',
+                                messageTop: 'Team Member',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            'colvis'
+                        ],
+                        select: true
+                    });
+
+
+
+                    $('#myTable').on('click', '.deleteclass', function () {
+                        if (confirm("Want to delete team data ?")) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+
+                    });
+
+                    $('#myTable').on('click', '.editclass', function () {
+                        if (confirm("Want to update team data ?")) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+
+                    });
+
+
+
+
+
+                });
+            </script>
+        }
+    </form>
+

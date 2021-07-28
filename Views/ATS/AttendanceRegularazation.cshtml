@@ -1,0 +1,247 @@
+﻿@model ATS2019_2.User_Master
+@{
+    ViewBag.Title = "AttendanceRegularazation";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+    <form class="onlyform" style="background: #ecf0f1;">
+
+
+        <h1>Attendance Regularazation </h1>
+        <div class="container" style="background: #ecf0f1; padding-top: 20px;">
+
+            <div style="margin: 0px 100px; background: #fff; padding: 20px;">
+                <div class="contentform">
+                    <div class="leftcontact" style="font-size:20px; padding-right:200px;">
+                        <div class="form-group">
+                            <p><b> Name </b>: @Model.E_Fullname</p>
+                        </div>
+
+                        <div class="form-group">
+                            <p><b>Designation</b> : @Model.E_Designation </p>
+                        </div>
+                    </div>
+
+                    <div class="rightcontact" style="font-size:20px; padding-left:200px;">
+
+                        <div class="form-group">
+                            <p><b>Department</b> : @Model.E_Department </p>
+                        </div>
+
+                        <div class="form-group">
+                            <p><b>Reporting To</b> : Mihir Patel </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin: 20px 100px 0 100px; background: #fff;  display: flex; justify-content: center;">
+                <style>
+                    @@-moz-keyframes ripple {
+
+                        5%,
+                        100% {
+                            opacity: 0;
+                        }
+
+                        5% {
+                            opacity: 1;
+                        }
+                    }
+
+                    @@-webkit-keyframes ripple {
+
+                        5%,
+                        100% {
+                            opacity: 0;
+                        }
+
+                        5% {
+                            opacity: 1;
+                        }
+                    }
+
+                    @@keyframes ripple {
+
+                        5%,
+                        100% {
+                            opacity: 0;
+                        }
+
+                        5% {
+                            opacity: 1;
+                        }
+                    }
+
+                    * {
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                    }
+
+                    input[type="radio"] {
+                        display: none;
+                    }
+
+                        input[type="radio"] + label {
+                            position: relative;
+                            cursor: pointer;
+                            margin: 30px;
+                            padding-left: 28px;
+                        }
+
+                            input[type="radio"] + label:before,
+                            input[type="radio"] + label:after {
+                                content: "";
+                                position: absolute;
+                                border-radius: 50%;
+                                -moz-transition: all 0.3s ease;
+                                -o-transition: all 0.3s ease;
+                                -webkit-transition: all 0.3s ease;
+                                transition: all 0.3s ease;
+                            }
+
+                            input[type="radio"] + label:before {
+                                top: 0;
+                                left: 0;
+                                width: 18px;
+                                height: 18px;
+                                background: #1565C0;
+                                -moz-box-shadow: inset 0 0 0 18px #E0E0E0;
+                                -webkit-box-shadow: inset 0 0 0 18px #E0E0E0;
+                                box-shadow: inset 0 0 0 18px #E0E0E0;
+                            }
+
+                            input[type="radio"] + label:after {
+                                top: 49%;
+                                left: 9px;
+                                width: 54px;
+                                height: 54px;
+                                opacity: 0;
+                                background: rgba(255, 255, 255, 0.3);
+                                -moz-transform: translate(-50%, -50%) scale(0);
+                                -ms-transform: translate(-50%, -50%) scale(0);
+                                -webkit-transform: translate(-50%, -50%) scale(0);
+                                transform: translate(-50%, -50%) scale(0);
+                            }
+
+                        input[type="radio"]:checked + label:before {
+                            -moz-box-shadow: inset 0 0 0 4px #E0E0E0;
+                            -webkit-box-shadow: inset 0 0 0 4px #E0E0E0;
+                            box-shadow: inset 0 0 0 4px #E0E0E0;
+                        }
+
+                        input[type="radio"]:checked + label:after {
+                            -moz-transform: translate(-50%, -50%) scale(1);
+                            -ms-transform: translate(-50%, -50%) scale(1);
+                            -webkit-transform: translate(-50%, -50%) scale(1);
+                            transform: translate(-50%, -50%) scale(1);
+                            -moz-animation: ripple 1s none;
+                            -webkit-animation: ripple 1s none;
+                            animation: ripple 1s none;
+                        }
+                </style>
+                <div></div>
+                <input type="radio" id="rbtnmisspunch" name="radiocategory" value="misspunch" />
+                <label for="rbtnmisspunch">Miss Punch</label>
+
+                <input type="radio" id="rbtnar" name="radiocategory" value="ar" />
+                <label for="rbtnar">AR</label>
+            </div>
+            <div style="margin: 0px 100px; background: #fff; padding: 20px; display: flex; justify-content: center;  display: none;" id="divar">
+                <div class="form-group date">
+                    <p>Start Date and Time<span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-birthday-cake"></i></span>
+                    <input class="ggg" type="datetime-local" name="dateofbirth" id="arstartdate">
+                </div>
+                <div class="form-group date">
+                    <p>End Date and Time<span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-birthday-cake"></i></span>
+                    <input class="ggg" type="datetime-local" name="dateofbirth" id="arenddate">
+                </div>
+            </div>
+
+            <div style="margin: 0px 100px; background: #fff; padding: 20px; display: flex; justify-content: center;" id="divmp">
+                <div class="form-group date">
+                    <p>Date and Time <span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-birthday-cake"></i></span>
+                    <input class="ggg" type="datetime-local" name="dateofbirth" id="mpstartdate">
+                </div>
+            </div>
+
+            <div style="margin: 20px 100px; background: #fff; padding: 20px;">
+                <div class="contentform" style="width: 100%; justify-content: center; align-items: center;">
+                    <div class="form-group" style="width: 800px;">
+                        <p>Comment <span>*</span></p>
+                        <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                        <textarea name="message" id="taemployeecomment" style="width: 100%;" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Message' doit être renseigné."></textarea>
+                        <div class="validation"></div>
+                    </div>
+                </div>
+                <button type="button" class="bouton-contact" style="width: 200px; margin: auto; display: inherit;" id="btnsend">Submit</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('input[type="radio"]').on('click', function (e) {
+
+                    if (this.value == "misspunch") {
+                        $("#divmp").css('display', 'flex');
+                        $("#divar").css('display', 'none');
+                    }
+                    else {
+                        $("#divmp").css('display', 'none');
+                        $("#divar").css('display', 'flex');
+                    }
+                });
+
+                 $("#btnsend").click(function () {
+                     var employee = new Object();
+                     employee.employeeid = parseInt(@Model.E_Code.ToString());
+                     employee.empname = "@Model.E_Fullname.ToString()";
+                     employee.approvalid = 6;
+                     var xx = document.getElementById("divmp");
+                     var yy = document.getElementById("divar");
+                     var xxdisvalue = window.getComputedStyle(xx).display;
+                     var yydisvalue =window.getComputedStyle(yy).display;
+                     if (window.getComputedStyle(xx).display === "flex") {
+                         
+                         employee.artype = 0;
+                         employee.status = 1;
+                        employee.starttime = $("#mpstartdate").val();
+                    }
+                    if ( window.getComputedStyle(yy).display === "flex") {
+                        
+                        employee.status = 1;
+                        employee.artype = 1;
+                        employee.starttime = $("#arstartdate").val();
+                        employee.endtime = $("#arenddate").val();
+                     }
+                     employee.employeecomment =$("#taemployeecomment").val();
+                     employee.managercomment = "";
+                     debugger;
+                    $.ajax({
+                        url: 'http://192.168.1.24:8080/ar/addardetail',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: employee,
+                        success: function (data, textStatus, xhr) {
+                            alert("Success");
+                            debugger;
+                            location.href = '/ATS/ViewAllARDetails';
+                            window.location.href = "/ATS/ViewAllARDetails";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert("Error");
+                        }
+                    });
+                });
+
+
+            });
+
+        </script>
+
+    </form>
+

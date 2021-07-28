@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="df4ba4b3027041e2ab27322d6b345b2b" Name="Diagram1" DisplayType="true" ShowGrid="false" ZoomLevel="100">
+        <EntityTypeShape EntityType="ATS2019_dbModel.Attendance_Master" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Client_Master" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.DailyTarget_Master" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.HolidayList_Master" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Interview_Master" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Leave_Master" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.NewClient_Master" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Offer_Master" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Recruiter_SalarySlip_Master" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Requirement_Master" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Role_Master" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.SalesClient_Master" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.SalesClientCall_Master" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.SalesClientwiseMonthlyRevenue_Master" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.SalesMonthlyReport_Master" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Team_Master" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.User_Activity_Master" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.User_Master" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Resume_Master" PointX="0.75" PointY="10.75" Width="1.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Arche_Resume_Master" Width="1.5" PointX="11.375" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ATS2019_dbModel.Reyna_SalarySlip_Master" Width="1.5" PointX="7.375" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

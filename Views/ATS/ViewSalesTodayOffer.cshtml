@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "ViewSalesTodayOffer";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+<form class="onlyform">
+    <h1>View Offer</h1>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <div style="width:100%; padding:10px;">
+        <table class="display" id="myTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Client</th>
+                    <th>Skill</th>
+                    <th>Location</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Recruiter Name</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    @section scripts{
+
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script>
+                        $(document).ready(function () {
+                            
+                            $("#myTable").DataTable({
+                                "processing": true, // for show progress bar
+                                //"serverSide": true, // for process server side
+                                "filter": true, // this is for disable filter (search box)
+                                "orderMulti": true, // for disable multiple column at once
+
+                                "ajax": {
+                                    "url": "/ATS/LoadMonthOffer",
+                                    "type": "GET",
+                                    "datatype": "json"
+                                },
+                                "columns": [
+                                        { "data": "h.R_Name", "name": "h.R_Name", "autoWidth": true },
+                                        { "data": "i.C_Name", "name": "i.C_Name", "autoWidth": true },
+                                        { "data": "e.J_Skill", "name": "e.J_Skill", "autoWidth": true },
+                                        { "data": "e.J_Location", "name": "e.J_Location", "autoWidth": true },
+                                        { "data": "e.J_Employment_Type", "name": "e.J_Employment_Type", "autoWidth": true },
+                                        { "data": "f.O_Status", "name": "f.O_Status", "autoWidth": true },
+                                        //{// this is Actions Column
+                                        //    mRender: function (data, type, row) {
+                                        //        var offeradd = '<a class="offerdetailclass"  oid=' + row.c.O_Id  +' emptype='+ row.f.J_Employment_Type +' name="'+ row.d.R_Name +'" cn="'+row.f.C_Name+'">'+ row.c.O_Status +'</a>';
+                                        //        return offeradd;
+                                        //    }
+                                        //},
+                                        { "data": "g.E_Fullname", "name": "g.E_Fullname", "autoWidth": true },
+                                ]
+                            });
+                        });
+        </script>
+    }
+</form>
+

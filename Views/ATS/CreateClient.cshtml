@@ -1,0 +1,125 @@
+﻿@model ATS2019_2.Models.ClientModel
+@{
+    ViewBag.Title = "CreateClient";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("CreateClient", "ATS", FormMethod.Post, new { @Class = "formonly" }))
+{
+    <h1>Add New Client</h1>
+    if (ViewBag.msg != null)
+    {
+        <div id="sendmessage"> @ViewBag.msg </div>
+    }
+    <div  class="contentform">
+
+
+        <div class="leftcontact">
+            <div class="form-group">
+                <p>Client Name<span>*</span></p>
+                <span class="icon-case"><i class="fa fa-male"></i></span>
+                @Html.TextBoxFor(m => m.cname, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Address <span>*</span></p>
+                <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                @Html.TextAreaFor(m => m.caddress, new { @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Category <span>*</span></p>
+                <span class="icon-case"><i class="fab fa-artstation"></i></span>
+                @Html.DropDownListFor(m => m.ccategory, new List<SelectListItem> { new SelectListItem { Text = "IT", Value = "IT" }, new SelectListItem { Text = "Non IT", Value = "Non IT" } }, "Select", new { @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Type <span>*</span></p>
+                <span class="icon-case"><i class="fab fa-artstation"></i></span>
+                @Html.DropDownListFor(m => m.ctype, new List<SelectListItem> { new SelectListItem { Text = "Contractual", Value = "Contractual" }, new SelectListItem { Text = "Permanent", Value = "Permanent" }, new SelectListItem { Text = "C2H", Value = "C2H" } }, "Select", new { @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Segment <span>*</span></p>
+                <span class="icon-case"><i class="fab fa-bity"></i></span>
+                @Html.DropDownListFor(m => m.csegment, new List<SelectListItem> { new SelectListItem { Text = "Captative", Value = "Captative" }, new SelectListItem { Text = "Service", Value = "Service" }, new SelectListItem { Text = "Consulting", Value = "Consulting" } }, "Select", new { @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Margin Type <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-plus"></i></span>
+                @Html.DropDownListFor(m => m.cmargintype, new List<SelectListItem> { new SelectListItem { Text = "Percent", Value = "Percent" }, new SelectListItem { Text = "Rupees", Value = "Rupees" } }, "select", new { @required = "required" })
+                <div class="validation"></div>
+            </div>
+        </div>
+
+        <div class="rightcontact">
+
+            <div class="form-group">
+                <p>Contact person <span>*</span></p>
+                <span class="icon-case"><i class="far fa-user"></i></span>
+                @Html.TextBoxFor(m => m.cperson1, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Email <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-at"></i></span>
+                @Html.TextBoxFor(m => m.cemail1, new { @class = "ggg", @type = "email", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Number <span>*</span></p>
+                <span class="icon-case"><i class="fa fa-phone"></i></span>
+                @Html.TextBoxFor(m => m.ccnt1, new { @class = "ggg", @typeof = "number", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Contact person <span></span></p>
+                <span class="icon-case"><i class="far fa-user"></i></span>
+                @Html.TextBoxFor(m => m.cperson2, new { @class = "ggg" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Email <span></span></p>
+                <span class="icon-case"><i class="fas fa-at"></i></span>
+                @Html.TextBoxFor(m => m.cemail2, new { @class = "ggg", @type = "email" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Number <span></span></p>
+                <span class="icon-case"><i class="fa fa-phone"></i></span>
+                @Html.TextBoxFor(m => m.ccnt2, new { @class = "ggg", @typeof = "number" })
+                <div class="validation"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        <input type="submit" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Create">
+
+        <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        @if (TempData["msg"] != null)
+        {
+            <div style="background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline;">
+                @TempData["msg"].ToString()
+            </div>
+        }
+    </div>
+}
+

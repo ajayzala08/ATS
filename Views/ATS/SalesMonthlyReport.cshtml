@@ -1,0 +1,184 @@
+﻿@model ATS2019_2.Models.SalesMonthlyReportModel
+@{
+    ViewBag.Title = "SalesMonthlyReport";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("SalesMonthlyReport", "ATS", FormMethod.Post))
+{
+
+    <form class="onlyform">
+        <h1>Monthly Report</h1>
+        <div class="contentform">
+            @if (ViewBag.msg != null)
+            {
+                <div id="sendmessage">
+                    Record added successfully.
+                </div>
+            }
+
+
+            <div class="leftcontact">
+                <div class="form-group">
+                    <p>Select Month<span> * </span></p>
+                    <span class="icon-case"><i class="fas fa-calendar-alt"></i></span>
+                    @Html.TextBoxFor(m => m.smrtime, new { @Class = "ggg", @required = "required", @type="month" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Select Client <span> * </span></p>
+                    <span class="icon-case"><i class="fa fa-user"></i></span>
+                    @Html.DropDownListFor(m => m.client, new SelectList(ViewBag.clientlist, "text", "value"), "Select", new { @class = "ggg" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="gender">
+                    <p>Open Position <span>  </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.position, new { @class = "ggg", @type = "number", @required = "required" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>Business Received <span> </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.business, new { @class = "ggg", @type = "number", @required = "required" })
+                    
+                </div>
+
+                <div class="form-group date">
+                    <p>No. of Submission <span>  </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.submission, new { @Class = "ggg", @type = "number", @required = "required" })
+                </div>
+
+                <div class="form-group">
+                    <p>Interview Received <span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.intreceived, new { @Class = "ggg", @type = "number", @required = "required" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>Feddback Pending <span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.feedbackpending, new { @Class = "ggg", @type = "number", @required = "required" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>No Show <span></span> </p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.noshow, new { @class = "ggg", @type = "number", @required = "required" })
+                    
+                </div>
+
+                <div class="form-group">
+                    <p>Offer <span> </span> </p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.offer, new { @class = "ggg", @type = "number", @required = "required" })
+                    
+                </div>
+
+               
+
+
+            </div>
+
+            <div class="rightcontact">
+
+                <div class="form-group">
+                    <p>BD<span> </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.bd, new { @class = "ggg", @type = "number", @required = "required" })
+
+                    
+                </div>
+
+                <div class="form-group">
+                    <p>Join <span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.join, new { @Class = "ggg", @type = "number", @required = "required" })
+                    
+                </div>
+
+                <div class="form-group">
+                    <p>Passthrough <span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.passthrough, new { @Class = "ggg", @type = "number", @required = "required" })
+                    
+                </div>
+
+                <div class="form-group">
+                    <p>Bulkdeal <span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.bulkdeal, new { @Class = "ggg", @type = "number", @required = "required" })
+                    
+                </div>
+
+                <div class="form-group">
+                    <p>PO Extend <span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.poextend, new { @Class = "ggg", @type = "number", @required = "required" })
+                    
+                </div>
+
+                <div class="form-group date">
+                    <p>Attrition Saved<span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.attrition, new { @Class = "ggg", @type = "number", @required = "required" })
+                </div>
+
+                <div class="form-group date">
+                    <p>Total Revenue <span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.totrevenue, new { @Class = "ggg", @type = "number", @required = "required" })
+                </div>
+
+                <div class="form-group">
+                    <p>Remark <span></span></p>
+                    <span class="icon-case"><i class="fas fa-sticky-note"></i></span>
+                    @Html.TextBoxFor(m => m.remark, new { @Class = "ggg" })
+
+                    
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="clear-fix"></div>
+
+        <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+            <input type="submit" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Save">
+
+            <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+        </div>
+        
+        @*<script>
+
+                /*File upload*/
+                $('#file-upload').change(function () {
+                    var filepath = this.value;
+                    var m = filepath.match(/([^\/\\]+)$/);
+                    var filename = m[1];
+                    $('#filename').html(filename);
+
+                });
+
+
+            </script>*@
+    </form>
+
+
+
+    
+
+}
+

@@ -1,0 +1,699 @@
+﻿
+@{
+    ViewBag.Title = "CheckEmployeeAttendance";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+    <form class="onlyform" style="background: #ecf0f1;">
+        <h1>Attendance</h1>
+        @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+        
+       
+        <div class="contentform">
+
+            <div class="leftcontact" style="display: flex; justify-content:center; flex-wrap:wrap;">
+                <span style="color: red; position: absolute; top: 80px; display: none" id="errordays">Please select range between 90 day</span>
+                <div class="form-group" style="display: flex; justify-content:space-between; margin: 0 10px">
+
+                    <p style="margin: 5px;">Start Date : </p>
+
+                    @Html.TextBox("startdate", "{0:dd/MM/yyyy}", new { @class = "ggg form_datetime", @type = "date" })
+                    <span id="errorstartdate" style="color: red; position: absolute; top: 160px; left: 400px; display:none">Please Select Date</span>
+                </div>
+                <div class="form-group" style="display: flex; justify-content:space-between;" margin: 0 10px">
+                    <p style="margin: 5px;">End Date : </p>
+
+                    @Html.TextBox("enddate", "{0:dd/MM/yyyy}", new { @class = "ggg form_datetime", @type = "date" })
+                    <span style="color: red; position: absolute; top: 160px; left: 765px; display:none " id="errorenddate">Please Select Date</span>
+                </div>
+                @if (User.IsInRole("HR") || User.IsInRole("Admin"))
+                {
+                    <div class="form-group" style="display: flex; justify-content:space-between; margin: 0 10px">
+                        <p style="margin: 5px;">Select User : </p>
+                        @Html.DropDownList("Userlist", new SelectList(ViewBag.userlist, "text", "value"), "Select", new { @required = "required" })
+                        <span style="color: red; position: absolute; top: 160px; left: 1200px; display:none" id="erroruser">Please Select User</span>
+
+                    </div>
+                }
+
+            </div>
+            <input type="button" class="bouton-contact" id="btnsearch" style="width:150px; margin-left:10px; height: 40px; line-height: 0px !important; padding: 0;" value="Search">
+            <input type="hidden" id="empidval" />
+        </div>
+       
+        <div style="width:100%; padding:10px; display: flex; justify-content:flex-start; align-items:center; overflow: auto; position: relative; flex-wrap:wrap;">
+            <style>
+                main {
+                    padding: 1em;
+                    overflow: hidden;
+                }
+
+                table {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+                }
+
+                thead {
+                }
+
+                tbody {
+                    overflow-x: scroll;
+                    position: relative;
+                    z-index: 1;
+                }
+
+
+                tr {
+                    border-bottom: 1px solid;
+                    text-align: center;
+                }
+
+
+                th {
+                    /*background-color: #ecf0f1;*/
+                    color: #333;
+                    white-space: nowrap;
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+
+                th,
+                td {
+                    text-align: left;
+                    padding: 0.5em 1em;
+                    white-space: nowrap;
+                    width: 200px;
+                    font-size: 18px;
+                    text-align: center;
+                }
+
+                table td:nth-child(even) {
+                    background: rgba(0,0,0,.05);
+                }
+
+                table td:nth-child(odd) {
+                    background: rgba(255,255,255,.1);
+                }
+
+                table th:nth-child(odd) {
+                    background: rgba(0,0,0,.05);
+                }
+
+                table th:nth-child(even) {
+                    background: rgba(255,255,255,.1);
+                }
+
+                @@media screen and (max-width: 1140px) {
+                    table {
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                    }
+
+                    thead {
+                    }
+
+                    tbody {
+                        overflow-x: scroll;
+                        /*display: flex;
+                    position: relative;
+                    overflow-x: auto;
+                    overflow-y: hidden;
+                    max-width: 100%;
+                    background: linear-gradient(to right, white 30%, rgba(255,255,255,0)), linear-gradient(to right, rgba(255,255,255,0), white 70%) 0 100%, radial-gradient(farthest-side at 0% 50%, rgba(0,0,0,.4), rgba(0,0,0,0)), radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+                    background-repeat: no-repeat;
+                    background-color: white;
+                    background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+                    background-position: 0 0, 100%, 0 0, 100%;
+                    background-attachment: local, local, scroll, scroll;*/
+                    }
+
+                    th,
+                    td {
+                        /*display: block;*/
+                        background-color: #ecf0f1;
+                    }
+
+                    .numeric {
+                        text-align: right;
+                    }
+
+                    .text {
+                        text-align: center;
+                    }
+                }
+
+                p {
+                    text-align: right;
+                    margin-top: 1em;
+                    font-style: italic;
+                }
+
+                .btncallclass {
+                    border: none;
+                    background: #00cec9;
+                    padding: 5px 10px;
+                    color: white;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+
+                #tblinoutpunch {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                ::-webkit-scrollbar {
+                    width: 10px;
+                    background-color: #ecf0f1;
+                    position: relative;
+                    z-index: -1 !important;
+                }
+
+                ::-webkit-scrollbar-thumb {
+                    background-color: rgba(0,0,0,.08);
+                    /*border-radius:5px;*/
+                }
+
+                ::-webkit-scrollbar-button {
+                    background-color: rgba(0,0,0,.08);
+                }
+            </style>
+
+
+            <main>
+                <div class="table-wrapper" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                            </tr>
+                            <tr>
+                                <th>Day</th>
+                            </tr>
+                            <tr>
+                                <th>Shift</th>
+                            </tr>
+                            <tr>
+                                <th>In Time</th>
+                            </tr>
+                            <tr>
+                                <th>1<sup>st</sup> Half</th>
+                            </tr>
+                            <tr>
+                                <th>2<sup>nd</sup> Half</th>
+                            </tr>
+                            <tr>
+                                <th>Out Time</th>
+                            </tr>
+                            <tr>
+                                <th>Total Time</th>
+                            </tr>
+                            <tr>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="tr1">
+                            </tr>
+                            <tr id="tr9">
+                            </tr>
+                            <tr id="tr2">
+                            </tr>
+                            <tr id="tr3">
+                            </tr>
+                            <tr id="tr4">
+                            </tr>
+                            <tr id="tr5">
+                            </tr>
+                            <tr id="tr6">
+                            </tr>
+                            <tr id="tr7">
+                            </tr>
+                            <tr id="tr8">
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+        <div style="display:flex;justify-content:left; flex-wrap: wrap; margin-top:50px;font-size:22px">
+            <p style="margin:0 10px auto 30px">Total Present : <span id="tpresent"></span></p>
+            <p style="margin:0 10px">Total Absent : <span id="tabsent"></span></p>
+            <p style="margin:0 10px">Total Weekoff Days : <span id="two"></span></p>
+            <p style="margin:0 10px">Total Missing Punch : <span id="tmp"></span></p>
+        </div>
+
+        @section scripts{
+            @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                        if (document.getElementById('Userlist') == null) {
+                            $.get('getcurrentUserId', null, function (data) {
+                                $("#empidval").val(data);
+                            }, "json");
+                          
+                        }
+                        else {
+                              empid = $("#Userlist").val();
+                        }
+
+                    $('.table-wrapper td:not(:nth-child(0))').remove();
+
+                    empid = $("#Userlist").val();
+                    
+                    $.ajax({
+                        url: "/ATS/EmployeeMonthAttendanceReport",
+                        type: "GET",
+                        datatype: "json",
+                        data: { empcode: empid },
+                        success: function (result) {
+
+
+                            var tbldaterow, tblshiftrow, tblintimerow, tblfirsthalfrow, tblsecondhalfrow, tblouttimerow, tbltotaltimerow, tbllinkbtn, tblday;
+                            for (item in result.data.attendanceDate) {
+                                var intime = String(result.data.totaltime[item]).split(':');
+                                var inminute = intime[0] * 60;
+                                var totaltimerow;
+                                debugger;
+                                if (String(result.data.totaltime[item]) == "WO") {
+                                    totaltimerow += "<td style='color:black;'>" + result.data.totaltime[item] + "</td>";
+                                }
+                                else {
+                                    if (inminute >= parseInt("480")) {
+                                        totaltimerow += "<td style='color:Green;font-weight:bold;'>" + result.data.totaltime[item] + "</td>";
+                                    }
+                                    else {
+                                        totaltimerow += "<td style='color:red;font-weight:bold;'>" + result.data.totaltime[item] + "</td>";
+                                    }
+                                }
+                                if (result.data.missingpunchstatus[item] == 0) {
+                                    tbldaterow += "<td>" + result.data.attendanceDate[item] + "</td>";
+                                }
+                                else {
+                                    tbldaterow += "<td style=color:red>" + result.data.attendanceDate[item] + "</td>";
+                                }
+
+                                if (result.data.missingpunchstatus[item] == 0) {
+                                    tblshiftrow += "<td style='color: black; font-weight: bold;'>" + result.data.shiftName[item] + "</td>";
+                                }
+                                else {
+                                    tblshiftrow += "<td style='color: red; font-weight: bold;'>" + result.data.shiftName[item] + "</td>";
+                                }
+                                if (result.data.missingpunchstatus[item] == 0) {
+                                    tblintimerow += "<td >" + result.data.intime[item] + "</td>";
+                                }
+                                else {
+                                    tblintimerow += "<td style='color: red'>" + result.data.intime[item] + "</td>";
+                                }
+                                if (result.data.missingpunchstatus[item] == 0) {
+                                    tblfirsthalfrow += "<td >" + result.data.firstHalf[item] + "</td>";
+                                }
+                                else {
+                                    tblfirsthalfrow += "<td style='color: red'>" + result.data.firstHalf[item] + "</td>";
+                                }
+                                if (result.data.missingpunchstatus[item] == 0) {
+                                    tblsecondhalfrow += "<td >" + result.data.secondHalf[item] + "</td>";
+                                }
+                                else {
+                                    tblsecondhalfrow += "<td style='color: red'>" + result.data.secondHalf[item] + "</td>";
+                                }
+                                if (result.data.missingpunchstatus[item] == 0) {
+                                    tblouttimerow += "<td >" + result.data.outtime[item] + "</td>";
+                                }
+                                else {
+                                    tblouttimerow += "<td style='color:red'>" + result.data.outtime[item] + "</td>";
+                                }
+                                if (result.data.missingpunchstatus[item] == 0) {
+                                    tblday += "<td >" + result.data.daysname[item] + "</td>";
+                                }
+                                else {
+                                    tblday += "<td style='color:red'>" + result.data.daysname[item] + "</td>";
+                                }
+                                
+                                tbltotaltimerow = totaltimerow;
+                                tbllinkbtn += "<td><input type='button' date=" + result.data.attendanceDate[item] + " id='btninout' class='btncallclass' value='In-Out Punch'/></td>";
+
+                            }
+                            $("#tr1").append(tbldaterow);
+                            $("#tr9").append(tblday);
+                            $("#tr2").append(tblshiftrow);
+                            $("#tr3").append(tblintimerow);
+                            $("#tr4").append(tblfirsthalfrow);
+                            $("#tr5").append(tblsecondhalfrow);
+                            $("#tr6").append(tblouttimerow);
+                            $("#tr7").append(tbltotaltimerow);
+                            $("#tr8").append(tbllinkbtn);
+                            $("#tpresent").html(result.data.totalpresent);
+                            $("#tabsent").html(result.data.totalabsent);
+                            $("#two").html(result.data.totalweekoff);
+                            $("#tmp").html(result.data.totalMissingPunch);
+                        }
+                    });
+
+
+                    $("#btnsearch").click(function () {
+                        $('.table-wrapper td:not(:nth-child(0))').remove();
+                        
+                        var empid = "";
+                        
+                        var sdate = $("#startdate").val();
+                        var edate = $("#enddate").val();
+                        if (sdate == "") {
+                            
+                            $("#errorstartdate").css( 'display', 'block' );
+                        }
+                        else {
+                            if (edate == "") {
+                                $("#errorstartdate").css( 'display', 'none' );
+                                $("#errorenddate").css('display', 'block');
+                            }
+                            else {
+                                $("#errorstartdate").css( 'display', 'none' );
+                                if (Date.parse(edate) > Date.parse(sdate)) {
+                                        $("#errorstartdate").css( 'display', 'none' );
+                                        $("#errorenddate").css('display', 'none');
+
+                                    if (document.getElementById('Userlist') == null) {
+                                        empid = $("#empidval").val();
+                                    }
+                                    else {
+                                        empid = $("#Userlist").val();
+                                    }
+                                    var diffDays = parseInt((Date.parse(edate) - Date.parse(sdate)) / (1000 * 60 * 60 * 24), 10);
+                                    if (diffDays > 90) {
+                                        document.getElementById("errordays").textContent = "Please select date range between 90 days.";
+                                        $("#errordays").css( 'display', 'block' );
+                                        $("#startdate").val("");
+                                        $("#enddate").val("");
+                                    }
+                                    else {
+                                        $("#errordays").css( 'display', 'none' );
+                                        var sd = sdate.split('-');
+                                        var ed = edate.split('-');
+                                        var ssd = sd[2] + "/" + sd[1] + "/" + sd[0];
+                                        var eed = ed[2] + "/" + ed[1] + "/" + ed[0];
+
+                                        if ($("#Userlist").val() != "") {
+                                            
+                                            debugger;
+                                            $.ajax({
+                                                //url: "/ATS/EmployeeMonthAttendanceReport",
+
+                                                url: "http://144.48.250.235:8080/ArcheSoftHR-0.0.1-SNAPSHOT/attendance/getDateAttendance?startdate=" + ssd + "&enddate=" + eed + "&id=" + empid,
+                                                type: "GET",
+                                                datatype: "json",
+                                                success: function (result) {
+                                                    debugger;
+
+                                                    var tbldaterow, tblshiftrow, tblintimerow, tblfirsthalfrow, tblsecondhalfrow, tblouttimerow, tbltotaltimerow, tbllinkbtn, tblday;
+                                                    for (item in result.attendanceDate) {
+                                                        var intime = String(result.totaltime[item]).split(':');
+                                                        var inminute = intime[0] * 60;
+                                                        var totaltimerow;
+
+                                                        if (String(result.totaltime[item]) == "WO") {
+                                                            totaltimerow += "<td style='color:black;'>" + result.totaltime[item] + "</td>";
+                                                        }
+                                                        else {
+                                                            if (inminute >= parseInt("480")) {
+                                                                totaltimerow += "<td style='color:Green;font-weight:bold;'>" + result.totaltime[item] + "</td>";
+                                                            }
+                                                            else {
+                                                                totaltimerow += "<td style='color:red;font-weight:bold;'>" + result.totaltime[item] + "</td>";
+                                                            }
+                                                        }
+                                                        if (result.missingpunchstatus[item] == 0) {
+                                                            tbldaterow += "<td>" + result.attendanceDate[item] + "</td>";
+                                                            tblshiftrow += "<td style='color: #00cec9; font-weight: bold;'>" + result.shiftName[item] + "</td>";
+                                                        tblintimerow += "<td>" + result.intime[item] + "</td>";
+                                                        tblfirsthalfrow += "<td>" + result.firstHalf[item] + "</td>";
+                                                        tblsecondhalfrow += "<td>" + result.secondHalf[item] + "</td>";
+                                                            tblouttimerow += "<td>" + result.outtime[item] + "</td>";
+                                                            tblday += "<td>" + result.daysname[item] + "</td>";
+                                                        tbltotaltimerow = totaltimerow;
+                                                        }
+                                                        else {
+                                                            tbldaterow += "<td style=color:red>" + result.attendanceDate[item] + "</td>";
+                                                            tblshiftrow += "<td style='color: red; font-weight: bold;'>" + result.shiftName[item] + "</td>";
+                                                            tblintimerow += "<td style=color:red>" + result.intime[item] + "</td>";
+                                                            tblfirsthalfrow += "<td style=color:red>" + result.firstHalf[item] + "</td>";
+                                                            tblsecondhalfrow += "<td style=color:red>" + result.secondHalf[item] + "</td>";
+                                                            tblouttimerow += "<td style=color:red>" + result.outtime[item] + "</td>";
+                                                            tblday += "<td style=color:red>" + result.daysname[item] + "</td>";
+                                                            tbltotaltimerow = totaltimerow;
+                                                        }
+
+                                                        
+                                                        tbllinkbtn += "<td><input type='button' date=" + result.attendanceDate[item] + " id='btninout' class='btncallclass' value='In-Out Punch'/></td>";
+
+                                                    }
+                                                    $("#tr1").append(tbldaterow);
+                                                    $("#tr9").append(tblday);
+                                                    $("#tr2").append(tblshiftrow);
+                                                    $("#tr3").append(tblintimerow);
+                                                    $("#tr4").append(tblfirsthalfrow);
+                                                    $("#tr5").append(tblsecondhalfrow);
+                                                    $("#tr6").append(tblouttimerow);
+                                                    $("#tr7").append(tbltotaltimerow);
+                                                    $("#tr8").append(tbllinkbtn);
+                                                    $("#tpresent").html(result.totalpresent);
+                                                    $("#tabsent").html(result.totalabsent);
+                                                    $("#two").html(result.totalweekoff);
+                                                    $("#tmp").html(result.totalMissingPunch);
+                                                },
+                                                error: function (res) {
+                                                    debugger;
+                                                    alert("error occured");
+                                                }, fail: function (resp) {
+                                                    debugger;
+                                                    alert("Fail response");
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            $("#erroruser").css( 'display', 'block' );
+                                        }
+                                    }
+
+
+                                }
+                                else {
+                                    document.getElementById("errordays").textContent = "Select proper Enddate";
+                                    $("#errordays").css( 'display', 'block' );
+                                    $("#startdate").val("");
+                                    $("#enddate").val("");
+                                }
+                            }
+                        }
+
+                    });
+
+                    
+
+
+
+
+                    $('table').on('click', '.btncallclass', function () {
+                        var datee = $(this).attr('date');
+                        var empid = $("#Userlist").val();
+                        $("#tblinoutpunch tr").remove();
+
+                        $.ajax({
+                            url: "/ATS/GetEmployeeinoutpunch",
+                            type: "GET",
+                            datatype: "JSON",
+                            data: { empcode: empid, cdate: datee },
+                            success: function (jsondatedata) {
+                                var jd = JSON.parse(jsondatedata);
+                                var trtd;
+
+                                for (item in jd) {
+                                    trtd += "<tr><td>" + jd[item] + "</td></tr>"
+                                }
+                                $("#tblinoutpunch").append(trtd);
+                                $("#mainpopup").css('visibility', 'visible');
+                            }
+
+                        });
+
+                    });
+                    $(".close").click(function () {
+                        $("#tblinoutpunch").val('');
+                        $("#mainpopup").css('visibility', 'hidden');
+                    });
+                });
+            </script>
+        }
+        <style>
+
+
+            #pop {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 600px;
+                height: auto;
+                background: #f2f2f2;
+                box-shadow: 1px 5px 10px #aaa;
+                border-radius: 10px;
+                z-index:100000000;
+            }
+
+            #pop2 {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 600px;
+                background: #f2f2f2;
+                box-shadow: 1px 5px 10px #aaa;
+                border-radius: 10px;
+            }
+
+            #mainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #summarypopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #pop h2 {
+                margin: 0 auto;
+                color: #fff;
+                font-family: Tahoma, Arial, sans-serif;
+                text-align: center;
+                padding: 5px;
+                background: #3a4660;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            #pop .popcontent {
+                border-top: 2px solid gray;
+                height: 300px;
+                overflow-y: scroll;
+                color: #333;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                padding-left: 20px;
+                font-size: 22px;
+            }
+
+            #pop .close {
+                position: absolute;
+                top: 20px;
+                right: 100px;
+                transition: all 200ms;
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+            }
+
+            #pop2 h2 {
+                margin: 0 auto;
+                color: #fff;
+                font-family: Tahoma, Arial, sans-serif;
+                text-align: center;
+                padding: 5px;
+                background: gray;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            #pop2 .popcontent {
+                border-top: 2px solid gray;
+                overflow: auto;
+                color: #333;
+                padding: 10px;
+            }
+
+                #pop2 .popcontent div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 150px;
+                }
+
+            #pop2 p {
+                font-size: 20px;
+                font-weight: 700;
+                margin: 10px;
+                width: 200px;
+            }
+
+
+            #pop2 .close {
+                position: absolute;
+                top: 20px;
+                right: 100px;
+                transition: all 200ms;
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .tblinoutpunch__in tr{
+                    box-shadow: 3px 6px 6px rgba(0,0,0,0.1);
+                    margin: 5px auto;
+                    border:0;
+            }
+        </style>
+        <div id="mainpopup">
+            <div id="pop">
+                <h2>In-Out Punch</h2>
+
+                <div class="popcontent">
+                    <table id="tblinoutpunch" class="tblinoutpunch__in"></table>
+                </div>
+                <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        var item = document.getElementsByTagName('MAIN')[0];
+
+window.addEventListener('wheel', function(e) {
+
+  if (e.deltaY > 0) item.scrollLeft += 100;
+  else item.scrollLeft -= 100;
+});
+    </script>
+

@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "ViewBDDataList";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+    <form class="onlyform">
+        <h1> BD/Hold List</h1>
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+        @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">*@
+
+
+
+        @*<style>
+
+                    .tab {
+                      width: 100%;
+                      height: 100%;
+                      background: #fff;
+                      margin-top: -20px;
+                      overflow: scroll;
+
+                  }
+
+                  .tab table {
+                      width: 90%;
+                      margin: 0 auto;
+                      border: 1px solid #e1e3f2;
+                  }
+
+                  .tab tr {
+                      text-align: center;
+                      color: #fff;
+                      margin: 0;
+                  }
+
+                  .tab th {
+                      width: auto;
+                      height: 80px;
+                      padding: 15px 17px;
+                      font-size: 1vw;
+                      background: #ff793f;
+                      color: #fff;
+                      font-weight: lighter;
+                  }
+
+                  .tab td {
+                      width: auto;
+                      height: 70px;
+                      font-size: 1vw;
+                  }
+
+                    .tab tr:nth-child(2n) {
+                      background: rgba(255, 94, 87, 0.1);
+                      color: #333;
+                    }
+
+                  .tab td:nth-child(2n+1){
+                      background: rgba(255, 94, 87, 0.05);
+                      color: #121212;
+                  }
+
+                  .tab td:nth-child(2n) {
+                      color: #333;
+                  }
+                  .DataTables_sort_icon {
+                        color:white;
+                   }
+            .ui-icon {
+                background: none;
+            }
+            .ui-icon::before {
+                content: 'ddd';
+                color: white;
+            }
+        </style>*@
+
+
+
+
+        <div style="width:100%; padding:10px;">
+            <table class="display cell-border" id="myTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Client</th>
+                        <th>Skill</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Select Date</th>
+                        <th>Offer Date</th>
+                        <th>Start Date</th>
+                        <th>Recruiter</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+        @section scripts{
+
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+            <script scr="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+            <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+
+                    $("#myTable").DataTable({
+                        "processing": true, // for show progress bar
+                        //"serverSide": true, // for process server side
+                        "filter": true, // this is for disable filter (search box)
+                        "orderMulti": true, // for disable multiple column at once
+
+                        "ajax": {
+                            "url": "/ATS/LoadBDDataList",
+                            "type": "GET",
+                            "datatype": "json",
+                        },
+                        "columns": [
+                            { "data": "d.R_Name", "name": "d.R_Name", "autoWidth": true },
+                            { "data": "f.C_Name", "name": "f.C_Name", "autoWidth": true },
+                            { "data": "e.J_Skill", "name": "e.J_Skill", "autoWidth": true },
+                            { "data": "e.J_Location", "name": "e.J_Location", "autoWidth": true },
+                            { "data": "e.J_Employment_Type", "name": "e.J_Employment_Type", "autoWidth": true },
+                            {
+                                "data": "c.O_Sel_Date",
+                                'render': function (date) {
+                                    var date = new Date(parseInt(date.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                }
+                            },
+                            {
+                                "data": "c.O_Off_Date",
+                                'render': function (date) {
+                                    var date = new Date(parseInt(date.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                }
+                            },
+                            {
+                                "data": "c.O_Join_Date",
+                                'render': function (date) {
+                                    var date = new Date(parseInt(date.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                }
+                            },
+                            { "data": "g.E_Fullname", "name": "g.E_Fullname", "autoWidth": true },
+                            {// this is Actions Column
+                                mRender: function (data, type, row) {
+                                    var intlink = '<a class="offerclass"  oid=' + row.c.O_Id + '>' + row.c.O_Status + '</a>';
+                                    return intlink;
+                                }
+                            }
+                        ],
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'excel',
+                                 messageTop: 'BD List',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'csv',
+                                messageTop: 'BD List',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'pdf',
+                                messageTop: 'BD List',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            'colvis'
+                        ],
+                        select: true
+                    });
+
+                });
+            </script>
+        }
+
+
+    </form>

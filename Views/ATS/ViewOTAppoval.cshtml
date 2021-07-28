@@ -1,0 +1,389 @@
+﻿@model ATS2019_2.Models.ARViewModel
+@{
+    ViewBag.Title = "ViewOTAppoval";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+<form class="onlyform" style="background: #ecf0f1;">
+
+
+    <h1>Overtime Approval</h1>
+    <div class="container" style="background: #ecf0f1; padding-top: 20px;">
+
+        <div style="margin: 0px 100px; background: #fff; padding: 20px;">
+            <div class="contentform">
+                <div class="leftcontact" style="font-size:20px; padding-right:200px;">
+                    <div class="form-group">
+                        <p><b> Name </b>: @Model.EmpName</p>
+                    </div>
+
+                    <div class="form-group">
+                        <p><b>Designation</b> : @Model.EmpDesignation </p>
+                    </div>
+                </div>
+
+                <div class="rightcontact" style="font-size:20px; padding-left:200px;">
+
+                    <div class="form-group">
+                        <p><b>Department</b> : @Model.EmpDepartment </p>
+                    </div>
+
+                    <div class="form-group">
+                        <p><b>Reporting To</b> : Mihir Patel </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin: 20px 100px 0 100px; background: #fff;  display: flex; justify-content: center;">
+            <style>
+                @@-moz-keyframes ripple {
+
+                    5%,
+                    100% {
+                        opacity: 0;
+                    }
+
+                    5% {
+                        opacity: 1;
+                    }
+                }
+
+                @@-webkit-keyframes ripple {
+
+                    5%,
+                    100% {
+                        opacity: 0;
+                    }
+
+                    5% {
+                        opacity: 1;
+                    }
+                }
+
+                @@keyframes ripple {
+
+                    5%,
+                    100% {
+                        opacity: 0;
+                    }
+
+                    5% {
+                        opacity: 1;
+                    }
+                }
+
+                * {
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+
+                input[type="radio"] {
+                    display: none;
+                }
+
+                    input[type="radio"] + label {
+                        position: relative;
+                        cursor: pointer;
+                        margin: 30px;
+                        padding-left: 28px;
+                    }
+
+                        input[type="radio"] + label:before,
+                        input[type="radio"] + label:after {
+                            content: "";
+                            position: absolute;
+                            border-radius: 50%;
+                            -moz-transition: all 0.3s ease;
+                            -o-transition: all 0.3s ease;
+                            -webkit-transition: all 0.3s ease;
+                            transition: all 0.3s ease;
+                        }
+
+                        input[type="radio"] + label:before {
+                            top: 0;
+                            left: 0;
+                            width: 18px;
+                            height: 18px;
+                            background: #1565C0;
+                            -moz-box-shadow: inset 0 0 0 18px #E0E0E0;
+                            -webkit-box-shadow: inset 0 0 0 18px #E0E0E0;
+                            box-shadow: inset 0 0 0 18px #E0E0E0;
+                        }
+
+                        input[type="radio"] + label:after {
+                            top: 49%;
+                            left: 9px;
+                            width: 54px;
+                            height: 54px;
+                            opacity: 0;
+                            background: rgba(255, 255, 255, 0.3);
+                            -moz-transform: translate(-50%, -50%) scale(0);
+                            -ms-transform: translate(-50%, -50%) scale(0);
+                            -webkit-transform: translate(-50%, -50%) scale(0);
+                            transform: translate(-50%, -50%) scale(0);
+                        }
+
+                    input[type="radio"]:checked + label:before {
+                        -moz-box-shadow: inset 0 0 0 4px #E0E0E0;
+                        -webkit-box-shadow: inset 0 0 0 4px #E0E0E0;
+                        box-shadow: inset 0 0 0 4px #E0E0E0;
+                    }
+
+                    input[type="radio"]:checked + label:after {
+                        -moz-transform: translate(-50%, -50%) scale(1);
+                        -ms-transform: translate(-50%, -50%) scale(1);
+                        -webkit-transform: translate(-50%, -50%) scale(1);
+                        transform: translate(-50%, -50%) scale(1);
+                        -moz-animation: ripple 1s none;
+                        -webkit-animation: ripple 1s none;
+                        animation: ripple 1s none;
+                    }
+            </style>
+            <div></div>
+            <br />
+        </div>
+        <div style="margin: 0px 100px; background: #fff; padding: 20px; display: flex; justify-content: center;  display: flex;" id="divar">
+            <div class="form-group date">
+                <p>Start Date and Time<span>*</span></p>
+                <span class="icon-case"><i class="fa fa-calendar"></i></span>
+                <input class="ggg" name="dateofbirth" id="arstartdate" value="@Model.EmpDate.ToString()" readonly="readonly" />
+            </div>
+            <div class="form-group date">
+                <p>End Date and Time<span>*</span></p>
+                <span class="icon-case"><i class="fa fa-calendar"></i></span>
+                <input class="ggg" name="dateofbirth" id="arenddate" value="@Model.Enddate.ToString()" readonly="readonly" />
+            </div>
+        </div>
+
+        <div style="margin: 0px 100px; background: #fff; padding: 20px; display: none; justify-content: center;" id="divmp">
+            <div class="form-group date">
+                <p>Date<span>*</span></p>
+                <span class="icon-case"><i class="fa fa-calendar"></i></span>
+                <input class="ggg" name="dateofbirth" id="mpstartdate" value="@Model.EmpDate.ToShortDateString()" readonly="readonly" />
+            </div>
+        </div>
+
+        <div style="margin: 20px 100px; background: #fff; padding: 20px;">
+            <div class="contentform" style="width: 100%; justify-content: center; align-items: center;">
+                <div class="form-group" style="width: 800px;">
+                    <p>Comment <span>*</span></p>
+                    <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                    <textarea name="message" id="taemployeecomment" style="width: 100%;" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Message' doit être renseigné." readonly="readonly">@Model.EmpComment</textarea>
+                    <div class="validation"></div>
+                </div>
+            </div>
+
+            <div class="contentform" style="width: 100%; justify-content: center; align-items: center;">
+                <div class="form-group" style="width: 800px;">
+                    <p>Manager Comment <span>*</span></p>
+                    <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                    <textarea name="message" id="tamanagercomment" style="width: 100%;" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Message' doit être renseigné.">@Model.ManagerComment</textarea>
+                    <div class="validation"></div>
+                </div>
+                <input type="hidden" value="@Model.ARID" id="txtotid" />
+            </div>
+            <div style="display:flex">
+                @if (User.IsInRole("HR") || (User.IsInRole("Admin")))
+                {
+
+                    if (Model.Status == "6")
+                    {
+                    <button type="button" class="bouton-contact" style="width: 200px; margin: auto; display: inherit;" id="btnapprove">Approve</button>
+                    }
+                    if (Model.Status == "1")
+                    {
+                    <button type="button" class="bouton-contact" style="width: 200px; margin: auto; display: inherit;" id="btnpartialapporve">Partial Approve</button>
+                    }
+                    if ((Model.Status == "1") || (Model.Status == "6"))
+                    {
+                    <button type="button" class="bouton-contact" style="width: 200px; margin: auto; display: inherit;" id="btnreject">Reject</button>
+                    }
+                    if ((Model.Status == "1") || (Model.Status == "6"))
+                    {
+                    <button type="button" class="bouton-contact" style="width: 200px; margin: auto; display: inherit;" id="btnrevoke">Revoke</button>
+                    }
+                }
+                else
+                {
+
+                    <button type="button" class="bouton-contact" style="width: 200px; margin: auto; display: inherit;" id="btnwithdraw">Withdraw</button>
+                }
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                 
+
+                 $("#btnwithdraw").click(function () {
+                     var employee = new Object();
+                     employee.ot_id = @Model.ARID.ToString();
+                     employee.employeeid = parseInt(@Model.EmpCode.ToString());
+                     employee.empname = "@Model.EmpName.ToString()";
+                     employee.approvalid = 6;
+                     //var xx = document.getElementById("divmp");
+                     //var yy = document.getElementById("divar");
+                     //var xxdisvalue = window.getComputedStyle(xx).display;
+                     //var yydisvalue =window.getComputedStyle(yy).display;
+                        employee.status = 2;
+                        employee.starttime = $("#arstartdate").val();
+                        employee.endtime = $("#arenddate").val();
+                     employee.employeecomment =$("#taemployeecomment").val();
+                     employee.managercomment = $("#tamanagercomment").val();
+                     debugger;
+                    $.ajax({
+                        url: 'http://192.168.1.24:8080/ot/addotdetail',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: employee,
+                        success: function (data, textStatus, xhr) {
+                            alert("Withdraw");
+                            debugger;
+                            location.href = '/ATS/ViewOverTime';
+                            window.location.href = "/ATS/ViewOverTime";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert("Error");
+                        }
+                    });
+                 });
+
+                $("#btnapprove").click(function () {
+                     var employee = new Object();
+                     employee.ot_id = @Model.ARID.ToString();
+                     employee.employeeid = parseInt(@Model.EmpCode.ToString());
+                     employee.empname = "@Model.EmpName.ToString()";
+                     employee.approvalid = 6;
+                     //var xx = document.getElementById("divmp");
+                     //var yy = document.getElementById("divar");
+                     //var xxdisvalue = window.getComputedStyle(xx).display;
+                     //var yydisvalue =window.getComputedStyle(yy).display;
+                        employee.status = 3;
+                        employee.starttime = $("#arstartdate").val();
+                        employee.endtime = $("#arenddate").val();
+                     employee.employeecomment =$("#taemployeecomment").val();
+                     employee.managercomment = $("#tamanagercomment").val();
+                     debugger;
+                    $.ajax({
+                        url: 'http://192.168.1.24:8080/ot/addotdetail',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: employee,
+                        success: function (data, textStatus, xhr) {
+                            alert("Approve");
+                            debugger;
+                            location.href = '/ATS/ViewOverTime';
+                            window.location.href = "/ATS/ViewOverTime";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert("Error");
+                        }
+                    });
+                });
+
+                $("#btnreject").click(function () {
+                     var employee = new Object();
+                     employee.ot_id = @Model.ARID.ToString();
+                     employee.employeeid = parseInt(@Model.EmpCode.ToString());
+                     employee.empname = "@Model.EmpName.ToString()";
+                     employee.approvalid = 6;
+                     //var xx = document.getElementById("divmp");
+                     //var yy = document.getElementById("divar");
+                     //var xxdisvalue = window.getComputedStyle(xx).display;
+                     //var yydisvalue =window.getComputedStyle(yy).display;
+                        employee.status = 4;
+                        employee.starttime = $("#arstartdate").val();
+                        employee.endtime = $("#arenddate").val();
+                     employee.employeecomment =$("#taemployeecomment").val();
+                     employee.managercomment = $("#tamanagercomment").val();
+                     debugger;
+                    $.ajax({
+                        url: 'http://192.168.1.24:8080/ot/addotdetail',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: employee,
+                        success: function (data, textStatus, xhr) {
+                            alert("reject");
+                            debugger;
+                            location.href = '/ATS/ViewOverTime';
+                            window.location.href = "/ATS/ViewOverTime";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert("Error");
+                        }
+                    });
+                 });
+
+                 $("#btnrevoke").click(function () {
+                     var employee = new Object();
+                     employee.ot_id = @Model.ARID.ToString();
+                     employee.employeeid = parseInt(@Model.EmpCode.ToString());
+                     employee.empname = "@Model.EmpName.ToString()";
+                     employee.approvalid = 6;
+                     //var xx = document.getElementById("divmp");
+                     //var yy = document.getElementById("divar");
+                     //var xxdisvalue = window.getComputedStyle(xx).display;
+                     //var yydisvalue =window.getComputedStyle(yy).display;
+                     employee.status = 5;
+                     employee.starttime = $("#arstartdate").val();
+                     employee.endtime = $("#arenddate").val();
+                     employee.employeecomment =$("#taemployeecomment").val();
+                     employee.managercomment = $("#tamanagercomment").val();
+                     debugger;
+                    $.ajax({
+                        url: 'http://192.168.1.24:8080/ot/addotdetail',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: employee,
+                        success: function (data, textStatus, xhr) {
+                            alert("Revoke");
+                            debugger;
+                            location.href = '/ATS/ViewOverTime';
+                            window.location.href = "/ATS/ViewOverTime";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert("Error");
+                        }
+                    });
+                });
+
+                $("#btnpartialapporve").click(function () {
+                     var employee = new Object();
+                     employee.ot_id = @Model.ARID.ToString();
+                     employee.employeeid = parseInt(@Model.EmpCode.ToString());
+                     employee.empname = "@Model.EmpName.ToString()";
+                     employee.approvalid = 6;
+                     //var xx = document.getElementById("divmp");
+                     //var yy = document.getElementById("divar");
+                     //var xxdisvalue = window.getComputedStyle(xx).display;
+                     //var yydisvalue =window.getComputedStyle(yy).display;
+                     employee.status = 6;
+                     employee.starttime = $("#arstartdate").val();
+                     employee.endtime = $("#arenddate").val();
+                     employee.employeecomment =$("#taemployeecomment").val();
+                     employee.managercomment = $("#tamanagercomment").val();
+                     debugger;
+                    $.ajax({
+                        url: 'http://192.168.1.24:8080/ot/addotdetail',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: employee,
+                        success: function (data, textStatus, xhr) {
+                            alert("Revoke");
+                            debugger;
+                            location.href = '/ATS/ViewOverTime';
+                            window.location.href = "/ATS/ViewOverTime";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert("Error");
+                        }
+                    });
+                });
+            });
+
+    </script>
+
+</form>

@@ -1,0 +1,401 @@
+﻿
+@{
+    ViewBag.Title = "ViewDeactiveRequirementViewresume";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("UploadResume", "ATS", FormMethod.Post, new { enctype = "multipart/form-data", @class = "onlyform" }))
+{
+    <h1>View Resume</h1>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    @*<div>
+        <div class="contentform">
+            <div class="leftcontact" style="display:flex;justify-content:space-around">
+                <div class="form-group">
+                    <p>Select  Closingblock<span> * </span></p>
+                    <input type="file" name="closingblock" id="closingblock" />
+                </div>
+                <div class="form-group">
+                    <p>Select  Resume<span> * </span></p>
+
+                    <input type="file" name="resume" id="resume" />
+                </div>
+                <input type="hidden" value="@Request.QueryString["jid"]" name="jobid" id="jobid" />
+                <button type="submit" class="bouton-contact" style="width:200px;">Upload</button>
+            </div>
+        </div>
+
+    </div>*@
+
+    <div style="width:100%; padding:10px;">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Email</th>
+                    <th>Total Experience</th>
+                    <th>Notice Period</th>
+                    <th>CTC</th>
+                    <th>Upload By</th>
+                    <th>Status</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+    <div id="mainpopup">
+        <img src="~/img/loading.gif" style="position:absolute;top:40%;left:50%; transform:translate(-40,-50); height:100px; width:100px;" />
+    </div>
+
+    <div id="intmainpopup">
+        <div id="intpop">
+            <h2>Schedule Interview</h2>
+            <div class="intpopcontent">
+                <span id="sprid" hidden="hidden"></span>
+                <span id="spjid" hidden="hidden"></span>
+                <table width="100%">
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p> Interview Date : </p></td>
+                        <td width="50%">
+                            <input type="date" id="txtdate" class="ggg" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p> Interview Time : </p></td>
+                        <td width="50%">
+                            <input type="time" id="txttime" class="ggg" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p> Candidate Name : </p></td>
+                        <td width="50%">
+                            <input type="text" id="txtcname" class="ggg" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p> Interview By : </p></td>
+                        <td width="50%">
+                            <input type="text" id="txtby" class="ggg" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p> Interview Location : </p></td>
+                        <td width="50%">
+                            <input type="text" id="txtlocation" class="ggg" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p> Note : </p></td>
+                        <td width="50%">
+                            <textarea id="txtnote" class="ggg" rows="4"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p> Status : </p></td>
+                        <td width="50%">
+                            <select id="drpstatus">
+                                <option>Set</option>
+                                <option>Hold</option>
+                                <option>Interview</option>
+                                <option>Reject</option>
+                                <option>Re Schedule</option>
+                                <option>No Show</option>
+                                <option>Offer</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" colspan="2" height="100%">
+                            <center>
+                                <button type="button" id="btnschedule" class="bouton-contact" style="display: block;">Schedule Interview</button>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+        </div>
+    </div>
+
+    <style>
+        .interviewclass {
+            cursor: pointer;
+        }
+
+        .rejectclass {
+            cursor: pointer;
+        }
+
+        .acceptclass {
+            cursor: pointer;
+        }
+
+        .deleteclass {
+            cursor: pointer;
+        }
+
+
+        #mainpopup {
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+
+        #intpop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 700px;
+            height: 500px;
+            background: #f2f2f2;
+            box-shadow: 1px 5px 10px #aaa;
+            border-radius: 10px;
+        }
+
+        #intmainpopup {
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+
+        #intpop h2 {
+            margin: 0 auto;
+            color: #fff;
+            font-family: Tahoma, Arial, sans-serif;
+            text-align: center;
+            padding: 5px;
+            background: gray;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        #intpop .intpopcontent {
+            border-top: 2px solid gray;
+            overflow: auto;
+            color: #333;
+            padding: 10px;
+        }
+
+        #intpop .close {
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            transition: all 200ms;
+            font-size: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+
+
+
+    @section scripts{
+
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script>
+                        $(document).ready(function () {
+                            
+                            var editrole = @(User.IsInRole("Accept")?"true":"false");
+                            var deleterole = @(User.IsInRole("Reject")?"true":"false");
+                            var jjid = @Request.QueryString["jid"];
+            $("#myTable").DataTable({
+                "processing": true, // for show progress bar
+                //"serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": true, // for disable multiple column at once
+
+                "ajax": {
+                    "url": "/ATS/LoadResumeData",
+                    "type": "GET",
+                    "datatype": "json",
+                    "data":{"jid":jjid}
+                },
+
+                "columnDefs": [
+                    {
+                        "targets": [8], //edit column
+                        "visible": editrole
+                    },
+                    {
+
+                        "targets": [9], //edit column
+                        "visible": deleterole
+                    }
+                ],
+                "columns": [
+                        { "data": "c.R_Name", "name": "c.R_Name", "autoWidth": true },
+                        { "data": "c.R_Cnt", "name": "c.R_Cnt", "autoWidth": true },
+                        { "data": "c.R_Email", "name": "c.R_Email", "autoWidth": true },
+                        { "data": "c.R_Tot_Exp", "name": "c.R_Tot_Exp", "autoWidth": true },
+                        { "data": "c.R_NP", "name": "c.R_NP", "autoWidth": true },
+                        { "data": "c.R_Cur_CTC", "name": "c.R_Cur_CTC", "autoWidth": true },
+                        { "data": "d.E_Fullname","name":"D.E_Fullname","autoWidth":true },
+                        {// this is Actions Column
+                            mRender: function (data, type, row) {
+                                var intlink = '<a class="interviewclass"  rid=' + row.c.R_Id + ' jid='+ jjid +' cname="'+ row.c.R_Name +'" >'+row.c.R_Status+'</a>';
+                                return intlink;
+                            }
+                        }
+                        ,
+                            {
+                                mRender: function(data, type, row){
+                                    var acceptlink = '<a class="acceptclass"  rid=' + row.c.R_Id+ '><img src="/img/Accept.png" width="25px" height="25px" /></a>';
+                                    return acceptlink;
+                                }
+                            },
+                            {
+                                mRender: function(data, type, row){
+                                    var rejectlink = '<a class="rejectclass"  rid=' + row.c.R_Id+ '><img src="/img/reject.png" width="25px" height="25px" /></a>';
+                                    return rejectlink;
+                                }
+                            },
+                            {// this is Actions Column
+                                mRender: function (data, type, row) {
+                                    var deletelink = '<a class="deleteclass"  rid=' + row.c.R_Id+ '>Delete</a>';
+                                    return deletelink;
+                                }
+                            }
+                ]
+            });
+
+                            //intervieww schedule
+            $("#myTable").on('click','.interviewclass',function(){
+                
+                var status= $(this).html();
+                var jjid = $(this).attr("jid");
+                var rrid = $(this).attr("rid");
+                var rrname=$(this).attr("cname");
+                if(status=="Accept")
+                {
+                    $("#txtcname").val(rrname);
+                    $("#sprid").html(rrid);
+                    $("#spjid").html(jjid);
+                    $("#intmainpopup").css('visibility','visible');
+                }
+                else
+                {
+                    return false;
+                }
+
+            });
+                            //close popup
+            $(".close").click(function(){
+                $("#intmainpopup").css('visibility','hidden');
+            });
+
+                            //Accept Resume
+            $('#myTable').on('click', '.acceptclass', function () {
+                
+
+                var rrid = $(this).attr('rid');
+
+                $("#mainpopup").css('visibility','visible');
+                $.ajax({
+                    url:'AcceptResume',
+                    datatype:'json',
+                    type:'post',
+                    data :{resid:rrid},
+                    success:function(){
+                        window.location.reload();
+                    }
+                });
+            });
+
+                            //Reject Resume
+            $('#myTable').on('click', '.rejectclass', function () {
+                var rrid= $(this).attr('rid');
+                $("#mainpopup").css('visibility','visible');
+                $.ajax({
+                    url:'RejectResume',
+                    datatype:'json',
+                    type:'post',
+                    data:{resid:rrid},
+                    success:function(){
+                        window.location.reload();
+                    }
+                });
+            });
+
+                            //Delete Resume
+            $('#myTable').on('click', '.deleteclass', function () {
+                if (confirm("Want to delete this record ?")) {
+                    
+                    var rrid = $(this).attr("rid");
+
+                    $("#mainpopup").css('visibility','visible');
+                    $.ajax({
+                        url:'DeleteResume',
+                        datatype:'json',
+                        type:'post',
+                        data:{rid:rrid},
+                        success:function(){
+                            window.location.reload();
+                        }
+                    });
+                }
+                else {
+                    return false;
+                }
+            });
+                            //Set interview
+
+            $("#btnschedule").click(function(){
+                var rid=$("#sprid").html();
+                var jid=$("#spjid").html();
+                var cname = $("#txtcname").val();
+                var idate =$("#txtdate").val();
+                var itime= $("#txttime").val();
+                var by =$("#txtby").val();
+                var loc =$("#txtlocation").val();
+                var nt = $("#txtnote").val();
+                var sts = $("#drpstatus").val();
+                
+                $.ajax({
+                    url:'InterviewwSchedule',
+                    datatype:'json',
+                    type:'post',
+                    data:{rrid:rid,jjid:jid,ccname:cname,iidate:idate,iitime:itime,bby:by,lloc:loc,nnt:nt,ssts:sts},
+                    success:function(){
+                        alert("Interview schedule successfully.");
+                        window.location.reload();
+                    }
+
+
+                });
+
+            });
+
+                        });
+        </script>
+
+
+
+
+
+    }
+
+}
+
+
+
+
+

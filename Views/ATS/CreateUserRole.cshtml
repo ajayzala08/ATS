@@ -1,0 +1,53 @@
+﻿@model ATS2019_2.Models.userrolemodel
+@{
+    ViewBag.Title = "CreateUserRole";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+    @using (Html.BeginForm("CreateUserRole", "ATS", FormMethod.Post))
+    {
+        <h1>Assign User Role</h1>
+        <div class="contentform">
+            @if (ViewBag.msg != null)
+            {
+                <div id="sendmessage"> ViewBag.msg </div>
+            }
+
+
+            <div class="leftcontact">
+                <div class="form-group">
+                    <p>Select User <span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-unlock-alt"></i></span>
+                    @Html.DropDownListFor(m => m.uid, new SelectList(ViewBag.userlist, "text", "value"), "Select", new { @required = "required" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Select Role <span>*</span></p>
+                    <span class="icon-case"><i class="fa fa-male"></i></span>
+                    @Html.DropDownListFor(m => m.role, new List<SelectListItem> { new SelectListItem { Text = "Admin", Value = "Admin" }, new SelectListItem { Text = "Manager", Value = "Manager" }, new SelectListItem { Text = "VP", Value = "VP" }, new SelectListItem { Text = "Team Lead", Value = "Team Lead" }, new SelectListItem { Text = "Recruiter", Value = "Recruiter" }, new SelectListItem { Text = "IT", Value = "IT" }, new SelectListItem { Text = "HR", Value = "HR" }, new SelectListItem { Text = "Sales", Value = "Sales" }, new SelectListItem { Text = "Account", Value = "Account" }, new SelectListItem { Text = "Edit", Value = "Edit" }, new SelectListItem { Text = "Delete", Value = "Delete" }, new SelectListItem { Text = "Accept", Value = "Accept" }, new SelectListItem { Text = "Reject", Value = "Reject" }, new SelectListItem { Text = "Action", Value = "Action" }, new SelectListItem { Text = "Status", Value = "Status" }, new SelectListItem { Text = "Contract Salary", Value = "Contract Salary" } , new SelectListItem { Text = "Download Resume", Value = "Download Resume" }, new SelectListItem { Text = "DataEntry", Value = "DataEntry" }, new SelectListItem { Text = "ResumeUpLoadDateChange", Value = "ResumeUpLoadDateChange" }, new SelectListItem { Text = "Attendance", Value = "Attendance" }}, "Select", new { @required = "required" })
+                    <div class="validation"></div>
+                </div>
+
+
+
+                <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+                    <input type="submit" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Create">
+
+                    <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+                </div>
+                <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+                    @if (TempData["msg"] != null)
+                    {
+                        <div style="background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline;">
+                            @TempData["msg"].ToString()
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    }
+
+

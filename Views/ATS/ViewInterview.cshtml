@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Title = "ViewInterview";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+<form class="onlyform">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <h1>View Schedule Interview</h1>
+    <div style="width:100%; padding:10px;">
+        <table id="myTable" class="display cell-border">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>By</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Change Status</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div id="mainpopup">
+        <div id="pop">
+            <h2>Requirement Status</h2>
+            <div class="popcontent">
+                <table width="100%">
+                    <tr>
+                        <td width="50%">&nbsp;</td>
+                        <td width="50%"><span id="iid" hidden="hidden"></span></td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p>Select Status : </p></td>
+                        <td width="50%">
+                            <select class="ggg" id="drpstate">
+                                <option>Set</option>
+                                <option>Hold</option>
+                                <option>Interview</option>
+                                <option>Reject</option>
+                                <option>Re Schedule</option>
+                                <option>No show</option>
+                                <option>Offer</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" width="100%" height="100%">
+                      
+                            <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+                                <input type="submit" class="bouton-contact" id="btnchangestatus" style="width:200px; margin-right:10px;" value="Update">
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+        </div>
+    </div>
+    <div id="intmainpopup">
+        <img src="~/img/loading.gif" style="position:absolute;top:40%;left:50%; transform:translate(-40,-50); height:100px; width:100px;" />
+    </div>
+    <style>
+        .statusclass {
+        cursor:pointer;
+        }
+        #pop{
+           
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:400px;
+            height:250px;
+            background: #f2f2f2;
+            box-shadow:1px 5px 10px #aaa;
+            border-radius: 10px;
+            }
+        #mainpopup {
+            visibility:hidden;
+            position:fixed;
+            top:0;
+            left:0;
+            z-index:99999;
+            width:100%;
+            height:100%;
+            background: rgba(0,0,0,0.7);
+            
+            
+        }
+        #pop h2 {
+            margin: 0 auto;
+            color: #fff;
+            font-family: Tahoma, Arial, sans-serif;
+            text-align:center;
+            padding:5px;
+            background:gray;
+            border-top-left-radius:10px;
+            border-top-right-radius:10px;
+            }
+        #pop .popcontent {
+            border-top: 2px solid gray;
+            overflow: auto;
+            color: #333;
+            padding:10px;
+        }
+        #pop .close{
+        position: absolute;
+        top: 20px;
+        right: 100px;
+        transition: all 200ms;
+        font-size: 50px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #fff;
+        }
+        #intmainpopup {
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+    </style>
+    @section scripts{
+
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+    
+        <script>
+    $(document).ready(function () {
+        
+
+        var jjid = @Request.QueryString["jid"];
+        $("#myTable").DataTable({
+            "processing": true, // for show progress bar
+            //"serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": true, // for disable multiple column at once
+            "pageLength": 100,
+            "ajax": {
+                "url": "/ATS/LoadInterviewData",
+                "type": "GET",
+                "datatype": "json",
+                "data":{"jid":jjid}
+            },
+            "columns": [
+                    { "data": "d.R_Name", "name": "d.R_Name", "autoWidth": true },
+                    {
+                        "data": "c.I_Date",
+                        'render': function (date) {  
+                            var date = new Date(parseInt(date.substr(6)));  
+                            var month = date.getMonth() + 1;  
+                            return date.getDate() + "/" + month + "/" + date.getFullYear();  
+                        }  
+                    },
+                    { 
+                        "data": "c.I_Time", 
+                        "name": "c.I_Time",
+                        
+                    },
+                    { "data": "c.I_By", "name": "c.I_By", "autoWidth": true },
+                    { "data": "c.I_Location", "name": "c.I_Location", "autoWidth": true },
+                    { "data": "c.I_Status", "name": "c.I_Status", "autoWidth": true },
+                    {
+                        mRender:function(data, type, row){
+                            var rejectlink = '<a class="statusclass"  iid=' + row.c.I_Id+ '>Change Status</a>';
+                            return rejectlink;
+                        }
+                    }
+            ]
+        });
+
+        $("#myTable").on('click','.statusclass',function(){
+            
+            var intid= $(this).attr("iid");
+            $("#iid").html(intid);
+            $("#mainpopup").css('visibility','visible');
+        });
+
+
+        $(".close").click(function(){
+            $("#mainpopup").css('visibility','hidden');
+        });
+
+        $("#btnchangestatus").click(function(){
+            $("#mainpopup").css('visibility','hidden');
+            $("#intmainpopup").css('visibility','visible');
+            var intid =$("#iid").html();
+            var sts = $("#drpstate").val();
+            $.ajax({
+                url:'UpdateInterviewStatus',
+                datatype:'json',
+                type:'post',
+                data:{iid:intid,sst:sts},
+                success:function(){
+                    window.location.reload();
+                }
+            });
+
+
+        }); 
+
+    });
+        </script>
+        }
+</form>
+
+

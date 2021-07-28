@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "ViewSalesClientList";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @class = "formonly" }))
+{
+    <h1>View Client</h1>
+    @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+    if (ViewBag.msg != null)
+    {
+        <div id="sendmessage"> @ViewBag.msg </div>
+    }
+
+    <div style="width:100%; padding:10px;">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Client Name</th>
+                    <th>Contact Person Name</th>
+                    <th>Contact Email</th>
+                    <th>Contact Number</th>
+                    
+                </tr>
+            </thead>
+        </table>
+    </div>
+    @section scripts{
+        @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+        <script>
+            
+
+    $(document).ready(function () {
+
+        $("#myTable").DataTable({
+            "processing": true, // for show progress bar
+            //"serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": true, // for disable multiple column at once
+
+            "ajax": {
+                "url": "/ATS/LoadSalesClientListData",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+                    { "data": "e.C_Name", "name": "e.C_Name", "autoWidth": true },
+                    { "data": "e.C_Cont_Person1", "name": "e.C_Cont_Person1", "autoWidth": true },
+                    { "data": "e.C_Cont_Person1_Email", "name": "e.C_Cont_Person1_Email", "autoWidth": true },
+                    { "data": "e.C_Cont_Person1_No", "name": "e.C_Cont_Person1_No", "autoWidth": true }
+                    
+
+            ],
+            dom : 'Bfrtip',
+            Buttons :[
+                'copy','csv','excel','pdf','print'
+            ]
+        });
+
+
+    });
+        </script>
+    }
+}

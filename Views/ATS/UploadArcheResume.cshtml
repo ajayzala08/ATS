@@ -1,0 +1,126 @@
+﻿@model ATS2019_2.Models.ArcheResumeModel
+@{
+    ViewBag.Title = "UploadArcheResume";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+@using (Html.BeginForm("UploadArcheResume", "ATS", FormMethod.Post, new { enctype = "multipart/form-data", @class = "onlyform" }))
+{
+    <h1>Upload Resume</h1>
+    if (ViewBag.msg != null)
+    {
+        <div id="sendmessage"> @ViewBag.msg </div>
+    }
+    <div class="contentform">
+
+
+        <div class="leftcontact">
+            <div class="form-group">
+                <p>Name<span>*</span></p>
+                <span class="icon-case"><i class="fa fa-male"></i></span>
+                @Html.TextBoxFor(m => m.name, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Contact No. <span>*</span></p>
+                <span class="icon-case"><i class="fa fa-phone"></i></span>
+                @Html.TextBoxFor(m => m.contact, new { @class = "ggg", @type = "number", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Email <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-at"></i></span>
+                @Html.TextBoxFor(m => m.email, new { @class = "ggg", @type="email", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Date of Birth <span></span></p>
+                <span class="icon-case"><i class="fas fa-birthday-cake"></i></span>
+                @Html.TextBoxFor(m => m.dob, new { @class = "ggg", @type="date" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Location <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-location-arrow"></i></span>
+                @Html.TextBoxFor(m => m.location, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            @*<div class="form-group">
+            <p>Segment <span>*</span></p>
+            <span class="icon-case"><i class="fab fa-bity"></i></span>
+            @Html.DropDownListFor(m => m.csegment, new List<SelectListItem> { new SelectListItem { Text = "Captative", Value = "Captative" }, new SelectListItem { Text = "Service", Value = "Service" }, new SelectListItem { Text = "Consulting", Value = "Consulting" } }, "Select", new { @required = "required" })
+            <div class="validation"></div>
+        </div>
+
+        <div class="form-group">
+            <p>Margin Type <span>*</span></p>
+            <span class="icon-case"><i class="fas fa-plus"></i></span>
+            @Html.DropDownListFor(m => m.cmargintype, new List<SelectListItem> { new SelectListItem { Text = "Percent", Value = "Percent" }, new SelectListItem { Text = "Rupees", Value = "Rupees" } }, "select", new { @required = "required" })
+            <div class="validation"></div>
+        </div>*@
+        </div>
+
+        <div class="rightcontact">
+
+           
+
+            <div class="form-group">
+                <p>Skill <span>*</span></p>
+                <span class="icon-case"><i class="fa fa-info"></i></span>
+                @Html.TextBoxFor(m => m.skill, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Experience (In Years)<span></span></p>
+                <span class="icon-case"><i class="fa fa-info"></i></span>
+                @Html.TextBoxFor(m => m.experience, new { @class = "ggg", @type = "number"})
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Notice Period (In Days) <span></span></p>
+                <span class="icon-case"><i class="fa fa-info"></i></span>
+                @Html.TextBoxFor(m => m.noticeperiod, new { @class = "ggg", @type = "number" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>CTC <span></span></p>
+                <span class="icon-case"><i class="fa fa-info"></i></span>
+                @Html.TextBoxFor(m => m.ctc, new { @class = "ggg", @type = "number" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Select Resume <span>*</span></p>
+                
+                <input type="file" name="resume" id="resume" />
+                <div class="validation"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        <input type="submit" class="bouton-contact" id="btnupload" style="width:200px; margin-right:10px;" value="Upload">
+
+        <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        @if (TempData["msg"] != null)
+        {
+            <div style="background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline;">
+                @TempData["msg"].ToString()
+            </div>
+        }
+    </div>
+}

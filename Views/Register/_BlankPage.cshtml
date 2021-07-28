@@ -1,0 +1,263 @@
+﻿@{
+    
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ArcheSoftronix.com !</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|roboto|Playfair+Display" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <script src="https://cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
+    <link rel="stylesheet" href="~/Content/dashboard.css">
+    <link rel="stylesheet" href="~/Content/adduser.css">
+
+
+</head>
+
+<body>
+
+
+    <!-- Start Header  -->
+    <header>
+        <div class="logo">
+            <img src="~/img/arche2017-1k.png" alt="">
+
+            <nav>
+                @*<ul>
+                    <li>
+                        <a href="#">Requirements</a>
+                        <ul class="drop-down menu-1">
+                            <li><a href="#">Search Requirement</a></li>
+                            <li><a href="/ATS/CreateRequirement">Create Requirement</a></li>
+                            <li><a href="/ATS/ViewRequirement">View Requirement</a></li>
+                            <li><a href="#">Open Requirement</a></li>
+                            <li><a href="#">Closed Requirement</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Evolution</a>
+                        <ul class="drop-down menu-2">
+                            <li><a href="#">Create Evolution</a></li>
+                            <li><a href="#">View Evolution Period</a></li>
+                            <li><a href="#">Recruiter Evolution</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Daily Submission</a>
+                        <ul class="drop-down menu-3">
+                            <li><a href="#">Add Submission</a></li>
+                            <li><a href="#">View Submission</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Resume</a></li>
+                </ul>*@
+            </nav>
+
+
+            <a class="toggle"><i data-feather="align-justify"></i></a>
+            @*<div class="r-nav active">
+                <div class="r-nav-inner">
+                    <ul>
+                        <li>
+                            <h2>Requirements</h2>
+                        </li>
+                        <li><a href="#">Search Requirement</a></li>
+                        <li><a href="#">Create Requirement</a></li>
+                        <li><a href="#">View Requirement</a></li>
+                        <li><a href="#">Open Requirement</a></li>
+                        <li><a href="#">Closed Requirement</a></li>
+                    </ul>
+
+                    <ul class="">
+                        <li>
+                            <h2>Evolution</h2>
+                        </li>
+                        <li><a href="#">Create Evolution</a></li>
+                        <li><a href="#">View Evolution Period</a></li>
+                        <li><a href="#">Recruiter Evolution</a></li>
+                    </ul>
+
+                    <ul class="">
+                        <li>
+                            <h2>Daily Submission</h2>
+                        </li>
+                        <li><a href="#">Add Submission</a></li>
+                        <li><a href="#">View Submission</a></li>
+                    </ul>
+                </div>
+                <ul>
+                    <li class="hhh-2">
+                        <h2><a href="#">Resume</a></h2>
+                    </li>
+                </ul>
+            </div>*@
+        </div>
+        @*<div class="profile">
+            <a href="#" class="p_link">
+                <img src=~/UserImage/@userimgpath alt="" class="image" />
+                <img src="~/img/pexels-photo-1499327.jpeg" alt="" class="image"><img src="~/img/pexels-photo-1499327.jpeg" alt="" class="image">
+                <h5>@User.Identity.Name.Substring(0, User.Identity.Name.IndexOf('.')).ToUpper()</h5>
+            </a>
+            <ul class="hover-menu-1">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="~/ATS/ChangePassword">Change Password</a></li>
+                <li><a href="~/Login/logout">LogOut</a></li>
+            </ul>
+        </div>*@
+    </header>
+
+    <!-- /End Header  -->
+    <!-- Start Left Sidebar + content  -->
+    <section class="main">
+        @*<section class="sidebar">
+            @*<ul>
+                <li class="aa">
+                    <a href="#"><i data-feather="activity"></i></a>
+                    <ul class="hover-menu menu-1">
+                        <h2 class="heading-menu">Dashboard</h2>
+                        <li><a href="#">Chat</a></li>
+                        <li><a href="#">Daily Activity</a></li>
+                        <li><a href="#">Offer/Hire</a></li>
+                        <li><a href="#">Graph</a></li>
+                        <li><a href="#">Attandance</a></li>
+                    </ul>
+                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="ab">
+                        <a href="#"><i data-feather="user"></i></a>
+                        <ul class="hover-menu menu-2">
+                            <h2 class="heading-menu">User Master</h2>
+                            <li><a href="/ATS/CreateUser">Add User</a></li>
+                            <li><a href="/ATS/ViewUser">View User</a></li>
+                            <li><a href="/ATS/CreateUserRole">Assign Role</a></li>
+                            <li><a href="/ATS/ViewUserRole">View Role</a></li>
+                        </ul>
+                    </li>
+                }
+
+                <li class="ad">
+                    <a href="#"><i data-feather="database"></i></a>
+                    <ul class="hover-menu menu-4">
+                        <h2 class="heading-menu">Client Master</h2>
+                        <li><a href="/ATS/CreateClient">Add Client</a></li>
+                        <li><a href="/ATS/Viewclient">View Client</a></li>
+                    </ul>
+                </li>
+
+                <li class="ac">
+                    <a href="#"><i data-feather="cloud"></i></a>
+                    <ul class="hover-menu menu-3">
+                        <h2 class="heading-menu">Team Master</h2>
+                        <li><a href="/ATS/CreateTeam">Create Team</a></li>
+                        <li><a href="/ATS/ViewTeam">View Team</a></li>
+                    </ul>
+                </li>
+
+                <li class="ae">
+                    <a href="#"><i data-feather="cloud"></i></a>
+                    <ul class="hover-menu menu-5">
+                        <h2 class="heading-menu">Clienwise Tl & Sales</h2>
+                        <li><a href="#">Add List</a></li>
+                        <li><a href="#">View List</a></li>
+                    </ul>
+                </li>
+                <li class="af">
+                    <a href="#"><i data-feather="inbox"></i></a>
+                    <ul class="hover-menu menu-6">
+                        <h2 class="heading-menu">Offers</h2>
+                        <li><a href="#">View Offers</a></li>
+                        <li><a href="#">View Starts</a></li>
+                        <li><a href="#">Update Status</a></li>
+                    </ul>
+                </li>
+                <li class="ag">
+                    <a href="#"><i data-feather="package"></i></a>
+                    <ul class="hover-menu menu-7">
+                        <h2 class="heading-menu">Performance</h2>
+                        <li><a href="#">Individual</a></li>
+                        <li><a href="#">Compnies</a></li>
+                    </ul>
+                </li>
+                <li class="ah">
+                    <a href="#"><i data-feather="box"></i></a>
+                    <ul class="hover-menu menu-8">
+                        <h2 class="heading-menu">HR</h2>
+                        <li><a href="#">Sales Attandence</a></li>
+                        <li><a href="#">Add Sales Attandence</a></li>
+                    </ul>
+                </li>
+                <li class="ai">
+                    <a href="#"><i data-feather="log-out"></i></a>
+                    <ul class="hover-menu menu-9">
+                        <h2 class="heading-menu">Documents</h2>
+                        <li><a href="#">Salary Slips</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>*@
+        <!--   /End sidebar here     -->
+
+        <section class="content">
+            @RenderBody()
+        </section>
+
+
+        <!--  Chat popup  -->
+
+        @*<div id="center-text">
+        </div>*@
+        <div id="body">
+
+            @*<div id="chat-circle" class="btn_chat btn-raised">
+                <div id="chat-overlay"></div>
+                <i data-feather="message-circle"></i>
+            </div>*@
+
+            @*<div class="chat-box">
+                <div class="chat-box-header">
+                    <select name="chat" id="o-user">
+                        <option value="All">All</option>
+                        <option value="shubham">Shubham</option>
+                        <option value="shubham">veeru</option>
+                        <option value="shubham">ajay</option>
+                        <option value="shubham">shanti</option>
+                        <option value="shubham">Shukun</option>
+                    </select>
+                    <span class="chat-box-toggle"><i data-feather="x-circle"></i></span>
+                </div>
+                <div class="chat-box-body">
+                    <div class="chat-box-overlay">
+                    </div>
+                    <div class="chat-logs">
+
+                    </div>
+                   
+                </div>
+                <div class="chat-input">
+                    <form>
+                        <input type="text" id="chat-input" placeholder="Send a message..." />
+                        <button type="submit" class="chat-submit" id="chat-submit"><i data-feather="play"></i></button>
+                    </form>
+                </div>
+            </div>*@
+
+        </div>
+    </section>
+    <!--  \END Chat pop up/  -->
+    <!--  Script  -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/home.js"></script>
+
+    @RenderSection("scripts", required: false);
+</body>
+
+</html>

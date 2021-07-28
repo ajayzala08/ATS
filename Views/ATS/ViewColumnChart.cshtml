@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            animationDuration: 5000,
+            exportEnabled: true,
+            theme: "light1", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Submission/Interview"
+            },
+            axisY: {
+                title: "Submission/Interview"
+            },
+            data: [{
+                bevelEnabled: true,
+                type: "column",
+                indexLabel: "{y}",
+                showInLegend: true,
+                toolTipContent: "{label}:{y}-Submission",
+                legendText: "{x}",
+                legendText: "Submission",
+                dataPoints: @Html.Raw(ViewBag.subPoints),
+            },
+            {
+                bevelEnabled: true,
+                type: "column",
+                indexLabel: "{y}",
+                showInLegend: true,
+                toolTipContent: "{label}:{y}-Interviews",
+                legendText: "{x}",
+                legendText: "Interview",
+                dataPoints: @Html.Raw(ViewBag.intPoints),
+            },
+            {
+                bevelEnabled: true,
+                type: "column",
+                indexLabel: "{y}",
+                showInLegend: true,
+                toolTipContent: "{label}:{y}-Offer",
+                legendText: "{x}",
+                legendText: "Offer",
+                dataPoints: @Html.Raw(ViewBag.intPoints),
+            }
+            ]
+        });
+        chart.render();
+
+
+
+    }
+    </script>
+
+</head>
+<body>
+    <center> <h2 style="font-size: 24px;background: #145 none repeat scroll 0% 0%;background: #485563;background: -webkit-linear-gradient(to right, #485563, #29323c);background: linear-gradient(to right, #485563, #29323c);background: #3a4660;color: rgb(255, 255, 255);height: 70px;line-height: 70px;margin: auto;text-shadow: none;letter-spacing: 1px;text-align: center;border-radius: 0;">Month Graph</h2> </center>
+
+
+
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <div id="offerchartContainer" style="height: 300px; width: 50%;float:left;"></div>
+    <div id="hirechartContainer" style="height: 300px; width: 50%;float:left;"></div>
+
+
+
+    <div>
+        <h2>@ViewBag.showdatetime</h2>
+    </div>
+</body>
+</html>

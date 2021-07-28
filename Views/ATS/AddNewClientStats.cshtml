@@ -1,0 +1,57 @@
+﻿@model ATS2019_2.Models.ClientStatusModel
+@{
+    ViewBag.Title = "AddNewClientStats";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("AddNewClientStats", "ATS", FormMethod.Post, new {@class="formonly" }))
+{
+    <h1>Add Client Status</h1>
+    if (ViewBag.msg != null)
+    {
+        <div id="sendmessage"> @ViewBag.msg </div>
+    }
+    <div class="contentform">
+        <div class="leftcontact">
+            <div class="form-group">
+                <p>Client Name<span>*</span></p>
+                <span class="icon-case"><i class="fa fa-male"></i></span>
+                @Html.TextBoxFor(m => m.nclient, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>POC <span></span></p>
+                <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                @Html.TextBoxFor(m => m.npoc, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Status <span></span></p>
+                <span class="icon-case"><i class="fab fa-artstation"></i></span>
+                @Html.DropDownListFor(m => m.nstatus, new List<SelectListItem> { new SelectListItem { Text = "Cold", Value = "Cold" }, new SelectListItem { Text = "Warm", Value = "Warm" }, new SelectListItem { Text = "Hot", Value = "Hot" } }, "Select")
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Remark 1 <span></span></p>
+                <span class="icon-case"><i class="fab fa-artstation"></i></span>
+                @Html.TextAreaFor(m => m.nremark1)
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Remark 2 <span></span></p>
+                <span class="icon-case"><i class="fab fa-bity"></i></span>
+                @Html.TextAreaFor(m => m.nremark2)
+                <div class="validation"></div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+    <button type="submit" class="bouton-contact">Submit</button>
+}
+

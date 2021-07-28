@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "ViewAttendanceReport";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+<form class="onlyform">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <h1>Attendance Report</h1>
+    <div class="contentform">
+
+        <div class="leftcontact">
+            <div class="form-group date">
+                <p>Month <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-clock"></i></span>
+                <input class="ggg" type="month" name="SalaryMonthYear" id="txtsmy" required>
+            </div>
+        </div>
+    </div>
+    
+
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        <input type="button" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Search" >
+
+        <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+    </div>
+
+    <div style="width:100%; padding:10px;">
+
+        <table id="myTable" class="display cell-border">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>In Time</th>
+                    <th>IP</th>
+                    <th>Out Time</th>
+                    <th>IP</th>
+                    <th>Total Time</th>
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+
+    @section scripts{
+        @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+        <script type="text/javascript">
+
+
+
+            $(document).ready(function () {
+
+                $("#btnsearch").click(function () {
+                    if ($("#txtsmy").val() != "") {
+                        var dm = $("#txtsmy").val();
+                        $("#myTable").DataTable({
+                            "processing": true, // for show progress bar
+                            // "serverSide": true, // for process server side
+                            "filter": true, // this is for disable filter (search box)
+                            "orderMulti": true, // for disable multiple column at once
+
+                            "ajax": {
+                                "url": "/ATS/LoadAttendanceReport",
+                                "type": "GET",
+                                "datatype": "json",
+                                "data": { dms: dm }
+                            },
+                            "columns": [
+                                {
+                                    "data": 'aname',
+                                    "name": 'aname',
+                                    "autoWidth": true
+                                },
+                                {
+                                    "data": 'intime',
+                                    "name": 'intime',
+                                    "autoWidth": true
+                                },
+                                {
+                                    "data": 'inip',
+                                    "name": 'inip',
+                                    "autoWidth": true
+                                },
+                                {
+                                    "data": 'outtime',
+                                    "name": 'outtime',
+                                    "autoWidth": true
+                                },
+                                {
+                                    "data": 'outip',
+                                    "name": 'outip',
+                                    "autoWidth": true
+                                },
+                                { "data": "atime", "name": "atime", "autoWidth": true },
+                            ]
+                        });
+                    }
+                    else {
+                        alert("Select month and year");
+                    }
+                    });
+            
+                
+            });
+            
+        </script>
+    }
+</form>

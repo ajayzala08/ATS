@@ -1,0 +1,48 @@
+﻿@model ATS2019_2.Models.SalesClientModel
+@{
+    ViewBag.Title = "AssignClienttoSales";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("AssignClienttoSales", "ATS", FormMethod.Post))
+{
+    <h1>Assign Client To Sales</h1>
+    <div class="contentform">
+        @if (ViewBag.msg != null)
+        {
+            <div id="sendmessage"> ViewBag.msg </div>
+        }
+
+
+    <div class="leftcontact">
+        <div class="form-group">
+            <p>Select Sales User <span>*</span></p>
+            <span class="icon-case"><i class="fas fa-unlock-alt"></i></span>
+            @Html.DropDownListFor(m => m.uid, new SelectList(ViewBag.salesuserlist, "text", "value"), "Select", new { @required = "required" })
+            <div class="validation"></div>
+        </div>
+
+        <div class="form-group">
+            <p>Select Client Name <span>*</span></p>
+            <span class="icon-case"><i class="fa fa-male"></i></span>
+            @Html.DropDownListFor(m => m.cid, new SelectList(ViewBag.clientlist, "text", "value"), "select", new { @required = "required" })
+            <div class="validation"></div>
+        </div>
+
+        <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+            <input type="submit" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Create">
+
+            <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+        </div>
+        @if (TempData["msg"] != null)
+        {
+            <div style="background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline;">
+                @TempData["msg"].ToString()
+            </div>
+        }
+
+        </div>
+    </div>
+
+}
+

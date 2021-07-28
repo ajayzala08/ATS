@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "ViewSalesTodaySubmission";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+<form class="onlyform">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <div style="width:100%; padding:10px;">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Email</th>
+                    <th>Total Experience</th>
+                    <th>Notice Period</th>
+                    <th>CTC</th>
+                    <th>Recruiter Name</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+
+    @section scripts{
+
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                
+                $("#myTable").DataTable({
+                    "processing": true, // for show progress bar
+                    //"serverSide": true, // for process server side
+                    "filter": true, // this is for disable filter (search box)
+                    "orderMulti": true, // for disable multiple column at once
+
+                    "ajax": {
+                        "url": "/ATS/LoadTodaySubmission",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                            { "data": "f.R_Name", "name": "f.R_Name", "autoWidth": true },
+                            { "data": "f.R_Cnt", "name": "f.R_Cnt", "autoWidth": true },
+                            { "data": "f.R_Email", "name": "f.R_Email", "autoWidth": true },
+                            { "data": "f.R_Tot_Exp", "name": "f.R_Tot_Exp", "autoWidth": true },
+                            { "data": "f.R_NP", "name": "f.R_NP", "autoWidth": true },
+                            { "data": "f.R_Cur_CTC", "name": "f.R_Cur_CTC", "autoWidth": true },
+                            { "data": "g.E_Fullname", "name": "g.E_Fullname", "autoWidth": true }
+                    ]
+                });
+            });
+        </script>
+    }
+</form>

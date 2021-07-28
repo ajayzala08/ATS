@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "ViewSalarySlip";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("ViewSalarySlip", "ATS", FormMethod.Post, new { @class = "onlyform" }))
+{
+    <style>
+         .tab {
+                  width: 100%;
+                  height: 100%;
+                  background: #fff;
+                  margin-top: -20px;
+                  overflow: scroll;
+                  
+              }  
+              
+              .tab table {
+                  width: 90%;
+                  margin: 0 auto;
+                  border: 1px solid #e1e3f2;
+              }
+              
+              .tab tr {
+                  text-align: center;
+                  color: #fff;
+                  margin: 0;
+              }
+              
+              .tab th {
+                  width: auto;
+                  height: 80px;
+                  padding: 15px 17px;
+                  font-size: 1.5vw;
+                  background: lightgray;
+                  color: #333;
+                  font-weight: lighter;
+              }
+              
+              .tab td {
+                  width: auto;
+                  height: 70px;
+                  font-size: 1vw;
+              }
+               
+
+                .tab tr:nth-child(2n) {
+                  background-color: #f9f9f9;
+                   color: #333;
+                }
+              
+              .tab td:nth-child(2n+1){
+                // background-color : #f9f9f9;
+                  color: #333;
+              }
+                
+              .tab td:nth-child(2n) {
+                  color: #333;
+              }
+    </style>
+
+    
+    <h1>SalarySlip</h1>
+    <div class="contentform">
+        
+        <div class="leftcontact">
+            <div class="form-group date">
+                <p>Month <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-clock"></i></span>
+                <input class="ggg" type="month" name="SalaryMonthYear" id="txtsmy" required="required">
+            </div>
+        </div>
+    </div>
+    <button type="submit" id="btnsearch"  class="bouton-contact">Submit</button>
+
+    <div>
+        @if (ViewBag.ViewSalarySlipList != null)
+        {
+
+            var grid = new WebGrid(ViewBag.ViewSalarySlipList, canSort: false, canPage: false);
+                @grid.GetHtml(htmlAttributes: new
+                    {
+                        id = "myTable"
+                    },
+              tableStyle: "tab",
+            columns: grid.Columns(
+                      grid.Column("d.E_Code", "Employee Code"),
+                           grid.Column("d.E_Fullname", "Employee Name"),
+                                                     grid.Column(header: "CreatePDF", format: (item) => Html.ActionLink("Generate Salary Slip", "DownloadPDF", new { salaryid = item.c.Salary_Id }, new { @target = "_blank" }))
+
+            ));
+            
+        }
+
+    </div>
+    
+
+
+}
+
+

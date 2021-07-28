@@ -1,0 +1,165 @@
+.dash-2 {
+    width: 95%;
+    margin: 20px auto;
+    height: auto;
+    background: #fff;
+}
+
+#container {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;/* Ancho del contenedor */
+    background: #fff;
+}
+
+#container input {
+	height: 2.5em;
+	visibility: hidden;
+}
+
+#container label {
+    background: #ddd; /* Fondo de las pestañas */
+    border-radius: .25em .25em 0 0;
+    color: #888; /* Color del texto de las pestañas */
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 1em; /* Tamaño del texto de las pestañas */
+    height: 2.5em;
+    line-height: 2.5em;
+    margin-right: .25em;
+    padding: 0 1.5em;
+    text-align: center;
+    position: relative;
+    left: 30px;
+    z-index: 100;
+    margin-top: 15px;
+    
+}
+
+#container input:hover + label {
+	background: #ddd;  /* Fondo de las pestañas al pasar el cursor por encima */
+	color: #666;  /* Color del texto de las pestañas al pasar el cursor por encima */
+}
+
+#container input:checked + label {
+	background: #273c75;  /* Fondo de las pestañas al presionar */
+	color: #fff; /* Color de las pestañas al presionar */
+	position: relative;
+	z-index: 6;
+	/*
+	-webkit-transition: .1s;
+	-moz-transition: .1s;
+	-o-transition: .1s;
+	-ms-transition: .1s;
+	*/
+}
+
+#content {
+	background: #fff;  /* Fondo del contenido */
+	border-radius: 0 .25em .25em .25em;
+	height: auto;  /* Alto del contenido */
+	position: relative;
+	width: 100%;
+	z-index: 5;
+}
+
+#content .contents {
+    width: 100%;
+    height: auto;
+	opacity: 0;
+	padding: 1.5em;
+	position: absolute;
+	z-index: -100;
+    background: #fff;
+	/*
+	transition: all linear 0.1s;
+	*/
+}
+/*-- content 1 styel --*/
+.zbox {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.zbox-inner {
+    width: 200px;
+    padding: 2px;
+    height: 100px;
+    border: 1px solid #ddd;
+    color: black;
+    margin:2px;
+    border-radius: 5px;
+}
+
+.zbox-inner h4 {
+    margin: 1px 0;
+    text-align: center;
+    color: #555;
+    font-weight: 400;
+}
+
+.zbox-inner h1 {
+    font-weight: bolder;
+    text-align: center;
+    color: #888;
+    font-size: 30px;
+    margin: 5px 0;
+}
+
+/*--content 2 style --*/
+#content-2 p {
+	float: left;
+	width: 48.5%;
+}
+#content-2 p.column-right {
+	margin-left: 3%;
+}
+#content-2 p img {
+	display: block;
+	margin: 0 auto 1em auto;
+}
+
+/*--content 3 style --*/
+#content-3 p,
+#content-3 ul {
+	margin-bottom: 1em;
+}
+#content-3 ul {
+	margin-left: 2em;
+}
+
+/*--content 4 style --*/
+#content-3 p,
+#content-3 ul {
+	margin-bottom: 1em;
+}
+#content-3 ul {
+	margin-left: 2em;
+}
+
+/*--content 4 style --*/
+#content-3 p,
+#content-3 ul {
+	margin-bottom: 1em;
+}
+#content-3 ul {
+	margin-left: 2em;
+}
+
+#container input#tab-1:checked ~ #content #content-1,
+#container input#tab-2:checked ~ #content #content-2,
+#container input#tab-3:checked ~ #content #content-3,
+#container input#tab-4:checked ~ #content #content-4, 
+#container input#tab-5:checked ~ #content #content-5,
+#container input#tab-6:checked ~ #content #content-6 {
+    opacity: 1;
+    z-index: 100;
+}
+
+input.visible {
+  visibility: visible !important;
+}

@@ -1,0 +1,18 @@
+﻿@model ATS2019_2.Models.RequirementModel
+<div>
+    <p><b>Job Code :</b> @Model.jobcode</p>
+    <p><b>Client Name :</b> @Model.jclientid</p>
+    <p><b>Skill :</b> @Model.jskill</p>
+    <p><b>Position :</b> @Model.jposition</p>
+    <p><b>Location :</b> @Model.jlocation</p>
+    <p><b>End Client :</b> @Model.jendclient</p>
+    <p><b>Total Experience :</b> @Model.jtotmin.ToString()  to  @Model.jtotmax Years</p>
+    <p><b>Relavant Experience :</b> @Model.jrelmin.ToString()  to  @Model.jrelmax Years</p>
+    <p><b>Category :</b> @Model.jcategory</p>
+    <p><b>Type :</b> @Model.jtype</p>
+    <p><b>Employment Type :</b> @Model.jemployementtyp</p>
+    <p><b>POC Name :</b> @Model.jpoc</p>
+    <p><b>Assign User :</b> @Model.jassignuser</p>
+    <p><b>Job Description :</b></p>
+    @Html.Raw(@Model.jjd)
+</div>

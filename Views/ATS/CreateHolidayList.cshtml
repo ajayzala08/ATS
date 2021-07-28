@@ -1,0 +1,93 @@
+﻿@model ATS2019_2.Models.HolidayModel
+@{
+    ViewBag.Title = "CreateHolidayList";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+
+@using (Html.BeginForm("CreateHolidayList", "ATS", FormMethod.Post, new { @Class = "formonly" }))
+{
+    <h1>Create Holiday List</h1>
+    if (ViewBag.msg != null)
+    {
+        <div id="sendmessage"> @ViewBag.msg </div>
+    }
+    <div class="contentform">
+
+
+        <div class="leftcontact">
+            <div class="form-group">
+                <p>Holiday Name<span></span></p>
+                <span class="icon-case"><i class="fa fa-male"></i></span>
+                @Html.TextBoxFor(m => m.hname, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Date <span></span></p>
+                <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                @Html.TextBoxFor(m => m.date, new { @required = "required", @type = "date", @class = "ggg", @id = "txtdate" })
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Day <span></span></p>
+                <span class="icon-case"><i class="fab fa-artstation"></i></span>
+                @*<input type="text" id="dayname" class="ggg" />*@
+                @Html.TextBoxFor(m => m.day, new { @class = "ggg", @id = "dayname", @readonly = "readonly" })
+
+                @*@Html.DropDownListFor(m => m.day, new List<SelectListItem> { new SelectListItem { Text = "Monday", Value = "Monday" }, new SelectListItem { Text = "Tuesday", Value = "Tuesday" }, new SelectListItem { Text = "Wednesday", Value = "Wednesday" }, new SelectListItem { Text = "Thursday", Value = "Thursday" }, new SelectListItem { Text = "Friday", Value = "Friday" }, new SelectListItem { Text = "Saturday", Value = "Saturday" } }, "Select")*@
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Type <span></span></p>
+                <span class="icon-case"><i class="fab fa-artstation"></i></span>
+                @Html.DropDownListFor(m => m.type, new List<SelectListItem> { new SelectListItem { Text = "-", Value = "-" }, new SelectListItem { Text = "Optional", Value = "Optional" } }, "Select", new { @required = "required" })
+                <div class="validation"></div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        <input type="submit" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Submit">
+
+        <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        @if (TempData["msg"] != null)
+        {
+            <div style="background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline;">
+                @TempData["msg"].ToString()
+            </div>
+        }
+    </div>
+        }
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#txtdate").blur(function () {
+                    var sd = $(this).val();
+                    $.ajax({
+                        type: "post",
+                        datatype: "Json",
+                        url: "getDayname",
+                        data: { dd: sd },
+                        success: function (data) {
+                            var dn = data.dayName;
+                            $("#dayname").val(dn);
+                        }
+
+                    });
+
+                });
+
+
+            });
+
+
+        </script>

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "ViewATSActivity";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+<form class="onlyform">
+    <h1>View ATS Activity</h1>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <div style="width:100%; padding:10px;">
+        <table id="myTable" class="display cell-border">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Activity</th>
+                    <th>Date and Time</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+
+    @section scripts{
+
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                
+                $("#myTable").DataTable({
+                    "processing": true, // for show progress bar
+                    //"serverSide": true, // for process server side
+                    "filter": true, // this is for disable filter (search box)
+                    "orderMulti": true, // for disable multiple column at once
+                    "aaSorting": [],
+                    "pageLength": 100, 
+                    "ajax": {
+                        "url": "/ATS/LoadAtsActivity",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                            { "data": "name", "name": "name", "autoWidth": true },
+                            { "data": "activity", "name": "activity", "autoWidth": true },
+                            { "data": "activitytime", "name": "activitytime", "autoWidth": true }
+                    ]
+                });
+            });
+        </script>
+    }
+</form>
+

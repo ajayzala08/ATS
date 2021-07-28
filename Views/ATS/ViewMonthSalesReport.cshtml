@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "ViewMonthSalesReport";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+<form class="onlyform">
+    <h1>View Sales Monthly Report</h1>
+    @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+
+    <div style="width:100%; padding:10px;">
+
+        <table id="myTable" class="display cell-border">
+            <thead>
+                <tr>
+                    <th>Sales Name</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Client</th>
+                    <th>Open Position</th>
+                    <th>Business Received</th>
+                    <th>Submission</th>
+                    <th>Interview Received</th>
+                    <th>Feedback Pending</th>
+                    <th>No Show</th>
+                    <th>Offer</th>
+                    <th>BD</th>
+                    <th>Join</th>
+                    <th>Pass Through</th>
+                    <th>Bulk Deal</th>
+                    <th>PO Extended</th>
+                    <th>Attrition Save</th>
+                    <th>Total Revenue</th>
+                    <th>Remark</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    @section scripts{
+        @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+        <script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("#myTable").DataTable({
+            "processing": true, // for show progress bar
+            // "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": true, // for disable multiple column at once
+
+            "ajax": {
+                "url": "/ATS/LoadMonthSalesReportData",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+                    { "data": "d.E_Fullname", "name": "d.E_Fullname", "autoWidth": true },
+                    { "data": "c.SMR_Month", "name": "c.SMR_Month", "autoWidth": true },
+                    { "data": "c.SMR_Year", "name": "c.SMR_Year", "autoWidth": true },
+                    { "data": "c.SMR_Client", "name": "c.SMR_Client", "autoWidth": true },
+                    { "data": "c.SMR_OpenPosition", "name": "c.SMR_OpenPositiont", "autoWidth": true },
+                    { "data": "c.SMR_BusinessReceived", "name": "SMR_BusinessReceived", "autoWidth": true },
+                    { "data": "c.SMR_Submission", "name": "c.SMR_Submission", "autoWidth": true },
+                    { "data": "c.SMR_Int_received", "name": "c.SMR_Int_received", "autoWidth": true },
+                    { "data": "c.SMR_Feedback_Pending", "name": "c.SMR_Feedback_Pending", "autoWidth": true },
+                    { "data": "c.SMR_Noshow", "name": "c.SMR_Noshow", "autoWidth": true },
+                    { "data": "c.SMR_Offer", "name": "c.SMR_Offer", "autoWidth": true },
+                    { "data": "c.SMR_BD", "name": "c.SMR_BD", "autoWidth": true },
+                    { "data": "c.SMR_Join", "name": "c.SMR_Join", "autoWidth": true },
+                    { "data": "c.SMR_PassThrough", "name": "c.SMR_PassThrough", "autoWidth": true },
+                    { "data": "c.SMR_BulkDeal", "name": "c.SMR_BulkDeal", "autoWidth": true },
+                    { "data": "c.SMR_POExtended", "name": "c.SMR_POExtended", "autoWidth": true },
+                    { "data": "c.SMR_AttritionSaved", "name": "c.SMR_AttritionSaved", "autoWidth": true },
+                    { "data": "c.SMR_TotalRevenue", "name": "c.SMR_TotalRevenue", "autoWidth": true },
+                    { "data": "c.SMR_Remark", "name": "c.SMR_Remark", "autoWidth": true }
+
+
+
+            ],
+            dom : 'Bfrtip',
+            Buttons :[
+                'copy','csv','excel','pdf','print'
+            ]
+        });
+
+
+
+
+
+
+    });
+        </script>
+    }
+
+
+
+</form>
+

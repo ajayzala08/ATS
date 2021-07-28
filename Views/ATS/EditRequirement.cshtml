@@ -1,0 +1,198 @@
+﻿@model ATS2019_2.Models.RequirementModel
+@{
+    ViewBag.Title = "EditRequirement";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("EditRequirement", "ATS", FormMethod.Post, new { @class = "formonly" }))
+{
+
+    <h1>Edit Requirment</h1>
+    <div class="contentform">
+
+        <div class="leftcontact">
+            <div class="form-group">
+                <p>Client <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-user-tie"></i></span>
+                @Html.DropDownListFor(m => m.jclientid, new SelectList(ViewBag.clientlist, "text", "value"), "Select Client", new { @class = "ggg", @id = "drpclient" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Main Skill<span>*</span></p><span class="icon-case"><i class="fa fa-male"></i></span>
+                @Html.TextBoxFor(m => m.jskill, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Location<span>*</span></p>
+                <span class="icon-case"><i class="fas fa-location-arrow"></i></span>
+                @Html.TextBoxFor(m => m.jlocation, new { @class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Total Minimum Experience<span>*</span></p>
+                <span class="icon-case"><i class="fab fa-uikit"></i></span>
+                @Html.TextBoxFor(m => m.jtotmin, new { @class = "ggg", @required = "required", @type = "number" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Relvent Minimum Experience<span>*</span></p>
+                <span class="icon-case"><i class="fab fa-uikit"></i></span>
+                @Html.TextBoxFor(m => m.jrelmin, new { @class = "ggg", @required = "required", @type = "number" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Bill Rate<span>*</span></p>
+                <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                @Html.TextBoxFor(m => m.jbillrate, new { @class = "ggg", @required = "required", @type = "number" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Select Catagory <span></span></p><span class="icon-case"><i class="fas fa-bars"></i></span>
+                @Html.DropDownListFor(m => m.jcategory, new List<SelectListItem> { new SelectListItem { Text = "IT", Value = "IT" }, new SelectListItem { Text = "NON IT", Value = "NON IT" } }, "Select", new { @Class = "ggg" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Type Of Employement <span>*</span></p><span class="icon-case"><i class="fas fa-bars"></i></span>
+                @Html.DropDownListFor(m => m.jemployementtyp, new List<SelectListItem> { new SelectListItem { Text = "CONTRACTUAL", Value = "CONTRACTUAL" }, new SelectListItem { Text = "PERMANENT", Value = "PERMANENT" }, new SelectListItem { Text = "C2H", Value = "C2H" } }, "Select", new { @Class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Mandatory Skills <span>*</span></p><span class="icon-case"><i class="fas fa-bars"></i></span>
+                @Html.TextBoxFor(m => m.jmandatoryskill, new { @class = "ggg", @required = "required"})
+                <div class="validation"></div>
+            </div>
+        </div>
+
+        <div class="rightcontact">
+            <div class="form-group">
+                <p>Job Code <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-user-md"></i></span>
+                @Html.TextBoxFor(m => m.jobcode, new { @class = "ggg", @readonly = "readonly", @required = "required", @Id = "txtjc" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Number Of Position <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-list-ol"></i></span>
+                @Html.TextBoxFor(m => m.jposition, new { @class = "ggg", @type = "number", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>End Client <span>*</span></p><span class="icon-case"><i class="fa fa-info"></i></span>
+                @Html.TextBoxFor(m => m.jendclient, new { @class = "ggg" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Total Maximum Experience <span>*</span></p>
+                <span class="icon-case"><i class="fab fa-uikit"></i></span>
+                @Html.TextBoxFor(m => m.jtotmax, new { @class = "ggg", @type = "number", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Relvent Maximum Experience<span>*</span></p>
+                <span class="icon-case"><i class="fab fa-uikit"></i></span>
+                @Html.TextBoxFor(m => m.jrelmax, new { @class = "ggg", @type = "number", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Pay Rate<span>*</span></p>
+                <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                @Html.TextBoxFor(m => m.jpayrate, new { @class = "ggg", @type = "number", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>Requirments Type<span>*</span></p><span class="icon-case"><i class="fas fa-bars"></i></span>
+                @Html.DropDownListFor(m => m.jtype, new List<SelectListItem> { new SelectListItem { Text = "DRIVE", Value = "DRIVE" }, new SelectListItem { Text = "PROCESS", Value = "PROCESS" }, new SelectListItem { Text = "EXCLUSIVE", Value = "EXCLUSIVE" } }, "Select", new { @Class = "ggg", @required = "required" })
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <p>POC Name<span>*</span></p><span class="icon-case"><i class="fa fa-info"></i></span>
+                @Html.TextBoxFor(m => m.jpoc, new { @class = "ggg" })
+
+                <div class="validation"></div>
+            </div>
+            @*<div class="form-group">
+                    <p>POC<span>*</span></p><span class="icon-case"><i class="fa fa-info"></i></span>
+                    @Html.TextBoxFor(m => m.jpocno, new { @class = "ggg", @type = "number" })
+                    <input class="ggg" type="number" name="fonction" id="fonction" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Fonction' doit être renseigné." />
+                    <div class="validation"></div>
+                </div>*@
+        </div>
+    </div>
+
+
+    <div class="ckeditor">
+        <p>Job Description</p>
+        @Html.TextAreaFor(m => m.jjd, new { @id = "editor1", @name = "editor1", @rows = "10", @cols = "98", @required = "required" })
+        <script>
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('editor1');
+        </script>
+    </div>
+
+    <div class="form-group check" style="padding-left:70px;">
+        <p>Assign To <span>*</span></p><span class="icon-case"><i class="fas fa-sign-in-alt"></i></span>
+        @if (ViewBag.alllist != null)
+        {
+            <table>
+                @foreach (var item in ViewBag.alllist)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="@item.Value" name="assignlist" id="@item.Value" />
+                        </td>
+                        <td>
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        @Html.HiddenFor(m=>m.jid)
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        <input type="submit" class="bouton-contact" value="Update" style="width:200px; margin-right:10px;" />
+
+        <input type="button" id="btncancel" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+
+        @if (TempData["msg"] != null)
+        {
+            <div style="position: absolute; top: 80px; left: 40%; background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline;">
+                @TempData["msg"].ToString()
+            </div>
+        }
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#drpclient").change(function () {
+
+                // alert($(this).find('option:selected').text());
+
+                var companyid = $(this).val();
+
+                $.ajax({
+                    url: 'GenerateJobCode',
+                    datatype: 'json',
+                    type: 'post',
+                    data: { cid: companyid },
+                    success: function (data) {
+                        $("#txtjc").val(data);
+                    }
+
+                });
+
+            });
+
+            $("#btncancel").click(function () {
+                window.location.href = "welcome";
+            });
+
+
+        });
+    </script>
+
+}
+

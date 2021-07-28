@@ -1,0 +1,131 @@
+﻿@model ATS2019_2.Models.SalesClientWiseMonthlyRevenueModel
+@{
+    ViewBag.Title = "SalesClientWiseMonthlyRevenueAdd";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("SalesClientWiseMonthlyRevenueAdd", "ATS", FormMethod.Post))
+{
+
+    <form class="onlyform">
+        <h1>Add Sales Clientwise Monthly Revenue </h1>
+        <div class="contentform">
+            @if (ViewBag.msg != null)
+            {
+                <div id="sendmessage">
+                    "Record Added Successfully.";
+                </div>
+            }
+
+
+            <div class="leftcontact">
+                <div class="form-group">
+                    <p>Select Month<span> * </span></p>
+                    <span class="icon-case"><i class="fas fa-calendar-alt"></i></span>
+                    @Html.TextBoxFor(m => m.srmonth, new { @Class = "ggg", @required = "required",@type="month" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Select Client <span> * </span></p>
+                    <span class="icon-case"><i class="fa fa-user"></i></span>
+                    @Html.DropDownListFor(m => m.srclient, new SelectList(ViewBag.clientlist, "text", "value"), "Select", new { @class = "ggg" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="gender">
+                    <p>Current HC <span>  </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.srcurrenthc, new { @class = "ggg", @type = "number" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>Total GP <span> </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.srtotgp, new { @class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group date">
+                    <p>Avg GP Added <span> * </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.sravggpadded, new { @class = "ggg", @type = "number" })
+                </div>
+
+                <div class="form-group">
+                    <p>Start <span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.srstart, new { @class = "ggg", @type = "number" })
+
+                </div>
+
+
+            </div>
+
+            <div class="rightcontact">
+                <div class="form-group">
+                    <p>Attrition<span></span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.srattrition, new { @class = "ggg", @type = "number" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>BD <span></span> </p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.srbd, new { @class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Actual Start <span> </span> </p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.sractualstart, new { @class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Net Total GP<span> </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.srnettotgp, new { @class = "ggg", @type = "number" })
+
+                    <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                    <p>Net Total GP Added<span> </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.TextBoxFor(m => m.srnettotgpadded, new { @class = "ggg", @type = "number" })
+
+                    <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                    <p>Type of Employement<span> </span></p>
+                    <span class="icon-case"><i class="far fa-question-circle"></i></span>
+                    @Html.DropDownListFor(m => m.srtypeofemployement, new List<SelectListItem> { new SelectListItem { Text = "Contract", Value = "Contract" }, new SelectListItem { Text = "Permanent", Value = "Permanent" }, new SelectListItem { Text = "Contract/Permanent", Value = "Contract/Permanent" } }, "Select", new { @class = "ggg" })
+
+                    <div class="validation"></div>
+                </div>
+            </div>
+
+
+            </div>
+
+      
+        
+
+        <div class="clear-fix"></div>
+
+
+        
+        <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+            <input type="submit" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Save">
+
+            <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+        </div>
+    </form>
+
+}
+

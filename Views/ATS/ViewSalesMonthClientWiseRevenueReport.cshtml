@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "ViewSalesMonthClientWiseRevenueReport";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+<form class="onlyform">
+    <h1>View Sales Clientwise Monthly Revenue Report</h1>
+    @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+
+    <div style="width:100%; padding:10px;">
+
+        <table id="myTable" class="display cell-border">
+            <thead>
+                <tr>
+                    <th>Sales Name</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Client</th>
+                    <th>Current Hc</th>
+                    <th>Total GP</th>
+                    <th>Total Avg GP Add</th>
+                    <th>Start</th>
+                    <th>Attrition</th>
+                    <th>BD</th>
+                    <th>Actual Start</th>
+                    <th>Net Total GP</th>
+                    <th>Net Total GP Add</th>
+                    <th>Type Of Employement</th>
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+    @section scripts{
+        @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+        <script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("#myTable").DataTable({
+            "processing": true, // for show progress bar
+            // "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": true, // for disable multiple column at once
+
+            "ajax": {
+                "url": "/ATS/ViewSalesMonthClientwiseRevenuewData",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+                    { "data": "d.E_Fullname", "name": "d.E_Fullname", "autoWidth": true },
+                    { "data": "c.SRR_Month", "name": "c.SRR_Month", "autoWidth": true },
+                    { "data": "c.SRR_Year", "name": "c.SRR_Year", "autoWidth": true },
+                    { "data": "e.C_Name", "name": "e.C_Name", "autoWidth": true },
+                    { "data": "c.SRR_Current_HC", "name": "c.SRR_Current_HC", "autoWidth": true },
+                    { "data": "c.SRR_Total_GP", "name": "c.SRR_Total_GP", "autoWidth": true },
+                    { "data": "c.SRR_Avg_GP_Added", "name": "c.SRR_Avg_GP_Added", "autoWidth": true },
+                    { "data": "c.SRR_Start", "name": "c.SRR_Start", "autoWidth": true },
+                    { "data": "c.SRR_Attrition", "name": "c.SRR_Attrition", "autoWidth": true },
+                    { "data": "c.SRR_BD", "name": "c.SRR_BD", "autoWidth": true },
+                    { "data": "c.SRR_Actual_Start", "name": "c.SRR_Actual_Start", "autoWidth": true },
+                    { "data": "c.SRR_Net_Total_GP", "name": "c.SRR_Net_Total_GP", "autoWidth": true },
+                    { "data": "c.SRR_Total_GP_Added", "name": "c.SRR_Total_GP_Added", "autoWidth": true },
+                    { "data": "c.SRR_Typeof_Employement", "name": "c.SRR_Typeof_Employement", "autoWidth": true }
+                    
+                    
+
+            ],
+            dom : 'Bfrtip',
+            Buttons :[
+                'copy','csv','excel','pdf','print'
+            ]
+        });
+
+
+
+
+
+
+    });
+        </script>
+    }
+
+
+
+</form>
+

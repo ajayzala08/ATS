@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Registrationlink";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("Sendlink", "ATS", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <form class="onlyform">
+        <h1>Registration Link</h1>
+        <div class="contentform">
+            @if (ViewBag.msg != null)
+            {
+             <div>
+                 @ViewBag.msg
+             </div>   
+            }
+
+
+            <div class="leftcontact">
+                <div class="form-group">
+                    <p>Enter email id :<span> * </span></p>
+                    <span class="icon-case"><i class="fa fa-envelope"></i></span>
+                    
+                    <input type="email" class="ggg" required id="empid" name="empid" />
+                    <button type="submit" class="bouton-contact" id="btnsubmit" style="width: 49%;">Send</button>
+
+                    <div class="validation"></div>
+                </div>
+                
+
+            </div>
+            
+        </div>
+        <div id="intmainpopup">
+            <img src="~/img/loading.gif" style="position:absolute;top:40%;left:50%; transform:translate(-40,-50); height:100px; width:100px;" />
+        </div>
+        <style>
+            .statusclass {
+                cursor: pointer;
+            }
+
+            #pop {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 400px;
+                height: 250px;
+                background: #f2f2f2;
+                box-shadow: 1px 5px 10px #aaa;
+                border-radius: 10px;
+            }
+
+            #mainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #pop h2 {
+                margin: 0 auto;
+                color: #fff;
+                font-family: Tahoma, Arial, sans-serif;
+                text-align: center;
+                padding: 5px;
+                background: gray;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            #pop .popcontent {
+                border-top: 2px solid gray;
+                overflow: auto;
+                color: #333;
+                padding: 10px;
+            }
+
+            #pop .close {
+                position: absolute;
+                top: 20px;
+                right: 100px;
+                transition: all 200ms;
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+            }
+
+            #intmainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            $(function () {
+                $("#btnsubmit").click(function () {
+                    $("#intmainpopup").css('visibility', 'visible');
+                });
+
+            });
+
+        </script>
+    </form>
+}

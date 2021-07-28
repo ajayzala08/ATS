@@ -1,0 +1,297 @@
+﻿
+@{
+    ViewBag.Title = "ViewApplyLeave";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+
+@using (Html.BeginForm("UploadResume", "ATS", FormMethod.Post, new { enctype = "multipart/form-data", @class = "onlyform" }))
+{
+    <h1>View Apply Leave</h1>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+    <div style="width:100%; padding:10px;">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>No. Of Days</th>
+                    <th>Leave For Days</th>
+                    <th>Reason</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>TL Status</th>
+                    <th>Manager Status</th>
+                    <th>HR Status</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+    <div id="mainpopup">
+        <img src="~/img/loading.gif" style="position:absolute;top:40%;left:50%; transform:translate(-40,-50); height:100px; width:100px;" />
+    </div>
+
+    <div id="intmainpopup">
+        <div id="intpop">
+            <h2>Leave Approval</h2>
+            <div class="intpopcontent">
+                <span id="llid" hidden="hidden"></span>
+
+                <table width="100%">
+
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p> Status : </p></td>
+                        <td width="50%">
+                            <select id="drpstatus">
+                                <option>Approve</option>
+                                <option>Reject</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" colspan="2" height="100%">
+                            <center>
+                                <button type="button" id="btnchange" class="bouton-contact" style="display: block;">Change</button>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+        </div>
+    </div>
+
+    <style>
+        .Actionclass {
+            cursor: pointer;
+        }
+
+        .rejectclass {
+            cursor: pointer;
+        }
+
+        .acceptclass {
+            cursor: pointer;
+        }
+
+        .deleteclass {
+            cursor: pointer;
+        }
+
+
+        #mainpopup {
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+
+        #intpop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 700px;
+            height: 500px;
+            background: #f2f2f2;
+            box-shadow: 1px 5px 10px #aaa;
+            border-radius: 10px;
+        }
+
+        #intmainpopup {
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+
+        #intpop h2 {
+            margin: 0 auto;
+            color: #fff;
+            font-family: Tahoma, Arial, sans-serif;
+            text-align: center;
+            padding: 5px;
+            background: gray;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        #intpop .intpopcontent {
+            border-top: 2px solid gray;
+            overflow: auto;
+            color: #333;
+            padding: 10px;
+        }
+
+        #intpop .close {
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            transition: all 200ms;
+            font-size: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+
+
+
+    @section scripts{
+
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <script scr="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+        <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+
+        <script>
+                        $(document).ready(function () {
+
+                            var actionrole = @(User.IsInRole("Action") ? "true" : "false");
+
+
+            $("#myTable").DataTable({
+                "processing": true, // for show progress bar
+                //"serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": true, // for disable multiple column at once
+
+                "ajax": {
+                    "url": "/ATS/LoadLeaveData",
+                    "type": "GET",
+                    "datatype": "json"
+
+                },
+
+                "columnDefs": [
+                    {
+                        "targets": [10], //edit column
+                        "visible": actionrole
+                    },
+
+                ],
+
+                "columns": [
+                        { "data": "lcreateby", "name": "lcreateby", "autoWidth": true },
+                        { "data": "ltype", "name": "ltype", "autoWidth": true },
+                        { "data": "lnoofdays", "name": "lnoofdays", "autoWidth": true },
+                        { "data": "linwords", "name": "linwords", "autoWidth": true },
+                        { "data": "lreason", "name": "lreason", "autoWidth": true },
+                        {
+                            "data": "lstartdate",
+                            'render': function (date) {
+                                var date = new Date(parseInt(date.substr(6)));
+                                var month = date.getMonth() + 1;
+                                return date.getDate() + "/" + month + "/" + date.getFullYear();
+                            }
+                        },
+                        {
+                            "data": "lenddate",
+                            'render': function (date) {
+                                var date = new Date(parseInt(date.substr(6)));
+                                var month = date.getMonth() + 1;
+                                return date.getDate() + "/" + month + "/" + date.getFullYear();
+                            }
+                        },
+                        { "data": "ltlstatus", "name": "ltlstatus", "autoWidth": true },
+                        { "data": "lmstatus", "name": "lmstatus", "autoWidth": true },
+                        { "data": "ladminstatus", "name": "ladminstatus", "autoWidth": true },
+                        {// this is Actions Column
+                            mRender: function (data, type, row) {
+                                var intlink = '<a class="Actionclass"  lid=' + row.lid +'>Action</a>';
+                                return intlink;
+                            }
+                        }
+
+                ],
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'excel',
+                                messageTop: 'Apply Leave',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'csv',
+                                messageTop: 'Apply Leave',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'pdf',
+                                messageTop: 'Apply Leave',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            'colvis'
+                        ],
+                        select: true
+            });
+
+                            //intervieww schedule
+            $("#myTable").on('click','.Actionclass',function(){
+
+                var leaveid = $(this).attr("lid");
+                $("#llid").html(leaveid);
+                $("#intmainpopup").css('visibility','visible');
+             });
+
+
+            $("#btnchange").click(function(){
+                var rid=$("#llid").html();
+                var rst= $("#drpstatus").val();
+                $("#intmainpopup").css('visibility','hidden');
+                // $("#mainpopup").css('visibility','visible');
+
+                $.ajax({
+                    url:'changeleavestatus',
+                    datatype:'json',
+                    type:'post',
+                    data:{lvid:rid,st:rst},
+                    success:function(){
+                        alert("Status Change Successfully.");
+                        window.location.reload();
+                    }
+
+
+                });
+
+            });
+
+            $(".close").click(function(){
+                window.location.reload();
+            });
+
+                        });
+        </script>
+
+    }
+
+}

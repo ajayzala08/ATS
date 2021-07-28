@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewBag.Title = "ViewRequirementProgressReport";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+    <form class="onlyform">
+        <h1>Requirement Work Report </h1>
+        @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+
+        <div style="width:100%; padding:10px;">
+
+            <table id="myTable" class="display cell-border">
+                <thead>
+                    <tr>
+                        <th>Job Code</th>
+                        <th>Client Name</th>
+                        <th>Skill</th>
+                        <th>Location</th>
+                        <th>Position</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Created On</th>
+                        <th>Submission</th>
+                        <th>Interview</th>
+                        <th>Offer</th>
+                        <th>Hire</th>
+                        <th>BD</th>
+
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+        @section scripts{
+            @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+            <script scr="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+            <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+
+            <script type="text/javascript">
+
+            var deleterole = @(User.IsInRole("Delete")?"true":"false");
+            var actionrole = @(User.IsInRole("Action") ? "true" : "false");
+
+
+    $(document).ready(function () {
+
+        $("#myTable").DataTable({
+            "processing": true, // for show progress bar
+            // "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": true, // for disable multiple column at once
+            "pageLength": 100,
+            "ajax": {
+                "url": "/ATS/LoadRequirementProgressReport",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columnDefs":[
+                {
+                    "targets":[8],
+                    "visible":actionrole
+                }
+            ],
+            "columns": [
+                    { "data": "jobcode", "name": "jobcode", "autoWidth": true },
+                    { "data": "client", "name": "client", "autoWidth": true },
+                    { "data": "skill", "name": "skill", "autoWidth": true },
+                    { "data": "location", "name": "location", "autoWidth": true },
+                    { "data": "position", "name": "position", "autoWidth": true },
+                    { "data": "type", "name": "type", "autoWidth": true },
+                    { "data": "status", "name": "status", "autoWidth": true },
+                    { "data": "createdon", "name": "createdon", "autoWidth": true },
+                    { "data": "submission", "name":"submission", "autoWidth": true },
+                    { "data": "interview", "name":"intervieww", "autoWidth": true },
+                    { "data": "offer", "name":"offer", "autoWidth": true },
+                    { "data": "hire", "name":"hire", "autoWidth": true },
+                    { "data": "bd", "name":"bd", "autoWidth": true }
+
+
+            ],
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    {
+                                        extend: 'excel',
+                                        messageTop: 'Requirement Report',
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    },
+                                    {
+                                        extend: 'csv',
+                                        messageTop: 'Requirement Report',
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    },
+                                    {
+                                        extend: 'pdf',
+                                        messageTop: 'Requirement Report',
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    },
+                                    'colvis'
+                                ],
+                                select: true
+        });
+
+    });
+            </script>
+        }
+
+        <style>
+            .actionclass {
+                cursor: pointer;
+            }
+
+            #pop {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 400px;
+                height: 250px;
+                background: #f2f2f2;
+                box-shadow: 1px 5px 10px #aaa;
+                border-radius: 10px;
+            }
+
+            #mainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #pop h2 {
+                margin: 0 auto;
+                color: #fff;
+                font-family: Tahoma, Arial, sans-serif;
+                text-align: center;
+                padding: 5px;
+                background: gray;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            #pop .popcontent {
+                border-top: 2px solid gray;
+                overflow: auto;
+                color: #333;
+                padding: 10px;
+            }
+
+            #pop .close {
+                position: absolute;
+                top: 20px;
+                right: 100px;
+                transition: all 200ms;
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+            }
+        </style>
+        <div id="mainpopup">
+            <div id="pop">
+                <h2>Requirement Status</h2>
+                <div class="popcontent">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%">&nbsp;</td>
+                            <td width="50%"><span id="jobid" hidden="hidden"></span></td>
+                        </tr>
+                        <tr>
+                            <td width="50%" style="text-align:center;vertical-align:top;"><p>Select Status : </p></td>
+                            <td width="50%">
+                                <select class="ggg" id="drpstate">
+                                    <option>Active</option>
+                                    <option>Deactive</option>
+                                    <option>Hold</option>
+                                    <option>Delete</option>
+                                    <option>Close</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="100%" height="100%">
+                                <center>
+                                    <button type="button" id="btnupdatestatus" class="bouton-contact" style="display: block;">Update</button>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+            </div>
+        </div>
+
+    </form>

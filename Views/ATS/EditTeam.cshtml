@@ -1,0 +1,78 @@
+﻿@model ATS2019_2.Models.TeamMemberModel
+@{
+    ViewBag.Title = "EditTeam";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("EditTeam", "ATS", FormMethod.Post))
+{
+    <h1>Edit Team</h1>
+    <div class="contentform">
+        @if (ViewBag.msg != null)
+        {
+            <div id="sendmessage"> ViewBag.msg </div>
+        }
+
+
+        <div class="leftcontact">
+            <div class="form-group">
+                <p>Select Team Lead <span>*</span></p>
+                <span class="icon-case"><i class="fas fa-unlock-alt"></i></span>
+                @Html.DropDownListFor(m => m.teamlead, new SelectList(ViewBag.Teamleadlist, "text", "Value"), "Select")
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group">
+                <p>Select Team Member <span>*</span></p>
+                <span class="icon-case"><i class="fa fa-male"></i></span>
+                <table>
+                    @foreach (var item in ViewBag.ctm)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" value="@item.Value" name="alllist" id="@item.Value" checked="checked" />
+                            </td>
+                            <td>@item.Value</td>
+                        </tr>
+                    }
+                    @foreach (var item1 in ViewBag.uctm)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" value="@item1.Value" name="alllist" id="@item1.Value" />
+                            </td>
+                            <td>@item1.Value</td>
+                        </tr>
+                    }
+                </table>
+
+                <div class="validation"></div>
+            </div>
+            @Html.HiddenFor(m=>m.tid)
+            <input type="submit" class="bouton-contact" style="max-width: 150px; display: inline-block;" value="Update" />
+            <input type="button" id="btncancel" style="max-width: 150px; display: inline-block; background-color:#ff6a00;
+    background: #ff6a00;
+    color: #FFF;
+    text-align: center;
+    width: 100%;
+    border: 0;
+    padding: 17px 25px;
+    border-radius: 0px 0px 5px 5px;
+    cursor: pointer;
+    /* margin-top: 40px; */
+    font-size: 18px;" value="cancel" />
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btncancel").click(function () {
+                window.location.href = "ViewTeam";
+            });
+        });
+    </script>
+
+}
+
+
+

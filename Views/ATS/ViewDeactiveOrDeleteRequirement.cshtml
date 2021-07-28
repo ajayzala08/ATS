@@ -1,0 +1,261 @@
+﻿
+@{
+    ViewBag.Title = "ViewDeactiveOrDeleteRequirement";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+<form class="onlyform">
+    <h1>Deactive/Delete/Close Requirement</h1>
+    @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+
+    <div style="width:100%; padding:10px;">
+
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Job Code</th>
+                    <th>Client Name</th>
+                    <th>Skill</th>
+                    <th>Position</th>
+                    <th>Location</th>
+                    <th>End Client</th>
+                    <th>Status</th>
+                    <th>View</th>
+                    <th>Action</th>
+                    <th>Resume</th>
+                    <th>Interview</th>
+                    <th>Offer</th>
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+    @section scripts{
+        @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+        <script type="text/javascript">
+
+            var deleterole = @(User.IsInRole("Delete")?"true":"false");
+            var actionrole = @(User.IsInRole("Action") ? "true" : "false");
+
+
+    $(document).ready(function () {
+
+        $("#myTable").DataTable({
+            "processing": true, // for show progress bar
+            // "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": true, // for disable multiple column at once
+
+            "ajax": {
+                "url": "/ATS/LoadDeactiveRequirementData",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columnDefs":[
+                {
+                    "targets":[8],
+                    "visible":actionrole
+                }
+            ],
+            "columns": [
+                    { "data": "c.J_Code", "name": "c.J_Code", "autoWidth": true },
+                    { "data": "d.C_Name", "name": "d.C_Name", "autoWidth": true },
+                    { "data": "c.J_Skill", "name": "c.J_Skill", "autoWidth": true },
+                    { "data": "c.J_Position", "name": "c.J_Position", "autoWidth": true },
+                    { "data": "c.J_Location", "name": "c.J_Location", "autoWidth": true },
+                    { "data": "c.J_EndClient", "name": "c.J_EndClient", "autoWidth": true },
+                    { "data": "c.J_Status", "name": "c.J_Status", "autoWidth": true },
+                    {// this is Actions Column
+                        mRender: function (data, type, row) {
+                            var linkview = '@Html.ActionLink("View", "ViewRequirementDetail", new { @jid = -1 }, new { @Class = "viewclass" })';
+                            linkview = linkview.replace("-1", row.c.J_Id);
+                            return linkview;
+                        }
+                    },
+                    {
+                        mRender: function(data, type, row){
+
+                            var al = '<a class="actionclass"  jid=' + row.c.J_Id+ '>Action</a>';
+                            al= al.replace("-1",row.J_Id);
+                            return al;
+                        }
+                    },
+                    {
+                        mRender: function(data, type, row){
+                            var lnkresume ='@Html.ActionLink("Resume", "ViewReusme", new { @jid = -1 }, new { @target = "_blank" })';
+                            lnkresume = lnkresume.replace("-1",row.c.J_Id);
+                            return lnkresume;
+                        }
+                    },
+                    {
+                        mRender: function(data, type, row){
+                            var lnkinterview ='@Html.ActionLink("Interview", "ViewInterview", new { @jid = -1 }, new { @target = "_blank" })';
+                            lnkinterview = lnkinterview.replace("-1",row.c.J_Id);
+                            return lnkinterview;
+                        }
+                    },
+                    {
+                        mRender: function(data, type, row){
+                            var lnkoffer ='@Html.ActionLink("Offer", "ViewOffer", new { @jid = -1 }, new { @target = "_blank" })';
+                            lnkoffer = lnkoffer.replace("-1",row.c.J_Id);
+                            return lnkoffer;
+                        }
+                    }
+            ],
+            dom : 'Bfrtip',
+            Buttons :[
+                'copy','csv','excel','pdf','print'
+            ]
+        });
+
+
+        $('#myTable').on('click', '.actionclass', function () {
+            
+
+            var name = $(this).attr('jid');
+            $("#jobid").html(name);
+            $("#mainpopup").css('visibility','visible');
+
+        });
+
+        $(".close").click(function(){
+            $("#mainpopup").css('visibility','hidden');
+        });
+
+
+        $("#btnupdatestatus").click(function(){
+            var jid =$("#jobid").html();
+            var stat= $("#drpstate").val();
+            $.ajax({
+                url:'/ATS/updaterequirementstatus',
+                dataType:'json',
+                type :'post',
+                data :{rjid:jid,rstate:stat},
+                success:function(data){
+                    if(data)
+                    {
+                        alert("Requirement Status changed.");
+                        window.location.reload();
+                    }
+                    else
+                    {
+                        alert("Requirement Status not changed");
+                    }
+                }
+
+            });
+        });
+    });
+        </script>
+    }
+
+    <style>
+        .actionclass {
+            cursor: pointer;
+        }
+
+        #pop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 400px;
+            height: 250px;
+            background: #f2f2f2;
+            box-shadow: 1px 5px 10px #aaa;
+            border-radius: 10px;
+        }
+
+        #mainpopup {
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+
+        #pop h2 {
+            margin: 0 auto;
+            color: #fff;
+            font-family: Tahoma, Arial, sans-serif;
+            text-align: center;
+            padding: 5px;
+            background: gray;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        #pop .popcontent {
+            border-top: 2px solid gray;
+            overflow: auto;
+            color: #333;
+            padding: 10px;
+        }
+
+        #pop .close {
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            transition: all 200ms;
+            font-size: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+    <div id="mainpopup">
+        <div id="pop">
+            <h2>Requirement Status</h2>
+            <div class="popcontent">
+                <table width="100%">
+                    <tr>
+                        <td width="50%">&nbsp;</td>
+                        <td width="50%"><span id="jobid" hidden="hidden"></span></td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:center;vertical-align:top;"><p>Select Status : </p></td>
+                        <td width="50%">
+                            <select class="ggg" id="drpstate">
+                                <option>Active</option>
+                                <option>Deactive</option>
+                                <option>Hold</option>
+                                <option>Delete</option>
+                                <option>Close</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" width="100%" height="100%">
+                            <center>
+                                <button type="button" id="btnupdatestatus" class="bouton-contact" style="display: block;">Update</button>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+        </div>
+    </div>
+
+</form>
+

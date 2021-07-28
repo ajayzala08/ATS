@@ -1,0 +1,1599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ATS2019_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Arche_Resume_Master">
+          <Key>
+            <PropertyRef Name="AR_Id" />
+          </Key>
+          <Property Name="AR_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Contact" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Skill" Type="nvarchar(max)" />
+          <Property Name="Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="Experience" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Notice" Type="int" />
+          <Property Name="CTC" Type="float" />
+          <Property Name="Resume" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Attendance_Master">
+          <Key>
+            <PropertyRef Name="A_Id" />
+          </Key>
+          <Property Name="A_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="A_Name" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="A_InTime" Type="datetime" />
+          <Property Name="A_InIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_OutTime" Type="datetime" />
+          <Property Name="A_OutIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_Time" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Client_Master">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="C_Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="C_Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="C_Cont_Person1" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="C_Cont_Person1_No" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="C_Cont_Person1_Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="C_Cont_Person2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="C_Cont_Person2_No" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="C_Cont_Person2_Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="C_Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="C_Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="C_Segment" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="C_Margin_Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="C_Margin" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C_Is_Active" Type="int" Nullable="false" />
+          <Property Name="C_Is_Delete" Type="int" Nullable="false" />
+          <Property Name="C_Created_On" Type="datetime" />
+          <Property Name="C_Created_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="C_Updated_On" Type="datetime" />
+          <Property Name="C_Updated_By" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="DailyTarget_Master">
+          <Key>
+            <PropertyRef Name="DT_Id" />
+          </Key>
+          <Property Name="DT_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DT_AssignTo" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="DT_Target" Type="int" Nullable="false" />
+          <Property Name="DT_Achived" Type="int" Nullable="false" />
+          <Property Name="DT_CreateOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="HolidayList_Master">
+          <Key>
+            <PropertyRef Name="Hid" />
+          </Key>
+          <Property Name="Hid" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hname" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Hdate" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Hday" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Htype" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="3000" />
+        </EntityType>
+        <EntityType Name="Interview_Master">
+          <Key>
+            <PropertyRef Name="I_Id" />
+          </Key>
+          <Property Name="I_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="I_RId" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="I_JId" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="I_Date" Type="datetime" Nullable="false" />
+          <Property Name="I_Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="I_By" Type="nvarchar" MaxLength="500" />
+          <Property Name="I_Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="I_Note" Type="nvarchar(max)" />
+          <Property Name="I_Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="I_CreateBy" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="I_CreateOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Leave_Master">
+          <Key>
+            <PropertyRef Name="L_Id" />
+          </Key>
+          <Property Name="L_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="L_Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="L_Noofdays" Type="float" Nullable="false" />
+          <Property Name="L_Inwords" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="L_Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="L_StartDate" Type="datetime" Nullable="false" />
+          <Property Name="L_EndDate" Type="datetime" Nullable="false" />
+          <Property Name="L_CreateBy" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="L_CreateOn" Type="datetime" Nullable="false" />
+          <Property Name="L_TL_Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="L_TL_Datetime" Type="datetime" />
+          <Property Name="L_M_Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="L_M_Datetime" Type="datetime" />
+          <Property Name="L_Admin_Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="L_Admin_Datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NewClient_Master">
+          <Key>
+            <PropertyRef Name="NId" />
+          </Key>
+          <Property Name="NId" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NClient" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="NPoc" Type="nvarchar" MaxLength="3000" />
+          <Property Name="NStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="NRemark1" Type="nvarchar(max)" />
+          <Property Name="NRemark2" Type="nvarchar(max)" />
+          <Property Name="CreateBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Offer_Master">
+          <Key>
+            <PropertyRef Name="O_Id" />
+          </Key>
+          <Property Name="O_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="O_Iid" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="O_Rid" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="O_Jid" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="O_Fullname" Type="nvarchar" MaxLength="1000" />
+          <Property Name="O_DOB" Type="datetime" />
+          <Property Name="O_Gender" Type="varchar" MaxLength="10" />
+          <Property Name="O_MaritalStatus" Type="varchar" MaxLength="10" />
+          <Property Name="O_Cur_Add" Type="nvarchar(max)" />
+          <Property Name="O_Perm_Add" Type="nvarchar(max)" />
+          <Property Name="O_Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="O_Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="O_Cur_Des" Type="nvarchar" MaxLength="100" />
+          <Property Name="O_Off_Des" Type="nvarchar" MaxLength="100" />
+          <Property Name="O_Skill" Type="nvarchar" MaxLength="1000" />
+          <Property Name="O_Tot_Exp" Type="nvarchar" MaxLength="50" />
+          <Property Name="O_Rel_Exp" Type="nvarchar" MaxLength="50" />
+          <Property Name="O_Mobile" Type="nvarchar" MaxLength="10" />
+          <Property Name="O_Alt_Mobile" Type="nvarchar" MaxLength="10" />
+          <Property Name="O_Pan" Type="nvarchar" MaxLength="10" />
+          <Property Name="O_Client" Type="nvarchar" MaxLength="1000" />
+          <Property Name="O_Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="O_CTC" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="O_ECTC" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="O_BR" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="O_PR" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="O_GP" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="O_GPM" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="O_Sel_Date" Type="datetime" />
+          <Property Name="O_Off_Date" Type="datetime" />
+          <Property Name="O_Join_Date" Type="datetime" />
+          <Property Name="O_Exit_Date" Type="datetime" />
+          <Property Name="O_Emergency" Type="nvarchar" MaxLength="10" />
+          <Property Name="O_Account_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="O_Bank_Name" Type="nvarchar" MaxLength="1000" />
+          <Property Name="O_Branch" Type="nvarchar" MaxLength="1000" />
+          <Property Name="O_IFCI" Type="nvarchar" MaxLength="50" />
+          <Property Name="O_Aadhar" Type="numeric" Precision="12" Scale="0" />
+          <Property Name="O_Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="O_Note" Type="nvarchar(max)" />
+          <Property Name="O_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="O_Recruiter" Type="nvarchar" MaxLength="1000" />
+          <Property Name="O_Recuiter_Date" Type="datetime" />
+          <Property Name="O_Teamlead" Type="nvarchar" MaxLength="1000" />
+          <Property Name="O_Teamlead_Date" Type="datetime" />
+          <Property Name="O_AM" Type="nvarchar" MaxLength="1000" />
+          <Property Name="O_AM_Date" Type="datetime" />
+          <Property Name="O_Manager_Status" Type="nvarchar" MaxLength="10" />
+          <Property Name="O_Manager_Date" Type="datetime" />
+          <Property Name="O_Account_Status" Type="nvarchar" MaxLength="10" />
+          <Property Name="O_Account_Date" Type="datetime" />
+          <Property Name="O_Admin_Status" Type="nvarchar" MaxLength="10" />
+          <Property Name="O_Admin_Date" Type="datetime" />
+          <Property Name="O_IsActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Recruiter_SalarySlip_Master">
+          <Key>
+            <PropertyRef Name="Salary_Id" />
+          </Key>
+          <Property Name="Salary_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_Code" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Employee_Name" Type="nvarchar" MaxLength="3000" />
+          <Property Name="Employee_Pan" Type="nvarchar" MaxLength="500" />
+          <Property Name="CTC" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Basic_Salary" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_HRA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_Conveyance_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_Medical_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Additional_HRA_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Days" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Paid_Leave" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="LWP_Days" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Payable_Days" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Gross_Salary_Payable" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Basic" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="House_Rent" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Employer_Cont_To_PF" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Conveyance_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Medical_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Add_HRA_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Flexible_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Incentive_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Earning" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PF_Employer" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PF_Employee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Esic_Employer" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Esic_Employee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Advances" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Income_Tax" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Deduction" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Net_Payable" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Salary_Month" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salary_Year" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Requirement_Master">
+          <Key>
+            <PropertyRef Name="J_Id" />
+          </Key>
+          <Property Name="J_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="J_Code" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="J_Client_Id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="J_Skill" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="J_Position" Type="int" Nullable="false" />
+          <Property Name="J_Location" Type="nvarchar" MaxLength="500" />
+          <Property Name="J_EndClient" Type="nvarchar" MaxLength="1000" />
+          <Property Name="J_AssignUser" Type="nvarchar(max)" />
+          <Property Name="J_Tot_Min_Exp" Type="float" />
+          <Property Name="J_Tot_Max_Exp" Type="float" />
+          <Property Name="J_Rel_Min_Exp" Type="float" />
+          <Property Name="J_Rel_Max_Exp" Type="float" />
+          <Property Name="J_Bill_Rate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="J_Pay_Rate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="J_Category" Type="nvarchar" MaxLength="100" />
+          <Property Name="J_Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="J_Employment_Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="J_POC" Type="nvarchar" MaxLength="1000" />
+          <Property Name="J_POC_No" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="J_JD" Type="nvarchar(max)" />
+          <Property Name="J_Status" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="J_Is_Active" Type="bigint" Nullable="false" />
+          <Property Name="J_Is_Delete" Type="bigint" Nullable="false" />
+          <Property Name="J_CreatedBy" Type="nvarchar" MaxLength="1000" />
+          <Property Name="J_CreatedOn" Type="datetime" />
+          <Property Name="J_UpdatedBy" Type="nvarchar" MaxLength="1000" />
+          <Property Name="J_UpdatedOn" Type="datetime" />
+          <Property Name="J_MandatorySkill" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Resume_Master">
+          <Key>
+            <PropertyRef Name="R_Id" />
+          </Key>
+          <Property Name="R_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="R_Jid" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="R_Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="R_DOB" Type="datetime" />
+          <Property Name="R_Address" Type="nvarchar(max)" />
+          <Property Name="R_Cnt" Type="nvarchar" MaxLength="10" />
+          <Property Name="R_Alt_Cnt" Type="nvarchar" MaxLength="10" />
+          <Property Name="R_Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_Tot_Exp" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Rel_Exp" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Cur_Com" Type="nvarchar" MaxLength="1000" />
+          <Property Name="R_Cur_Des" Type="nvarchar" MaxLength="1000" />
+          <Property Name="R_NP" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Canjoin" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Cur_CTC" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_Exp_CTC" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_Reason" Type="nvarchar(max)" />
+          <Property Name="R_Any_Int_Of" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Education" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_Cur_Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_Pref_Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_Native" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_Resumename" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="R_Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="R_CreateBy" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="R_CreateOn" Type="datetime" />
+          <Property Name="R_Skills" Type="nvarchar(max)" />
+          <Property Name="R_FamilyCnt" Type="nvarchar" MaxLength="10" />
+          <Property Name="R_friendcnt" Type="nvarchar" MaxLength="10" />
+          <Property Name="R_reasongap" Type="nvarchar(max)" />
+          <Property Name="R_Currenttakehome" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Currentdrawing" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Lastsalaryhike" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_Expectedtakehome" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Expecteddrawing" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_HikeReason" Type="nvarchar(max)" />
+          <Property Name="R_Howjoinearlyreason" Type="nvarchar(max)" />
+          <Property Name="R_WhyJoinArche" Type="nvarchar(max)" />
+          <Property Name="R_HaveDocs" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_Reasonofrelocation" Type="nvarchar(max)" />
+          <Property Name="R_Pannumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="R_Telephonicinttiming" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_F2Favailibility" Type="nvarchar" MaxLength="100" />
+          <Property Name="R_updateby" Type="nvarchar" MaxLength="1000" />
+          <Property Name="R_updateon" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reyna_SalarySlip_Master">
+          <Key>
+            <PropertyRef Name="Salary_Id" />
+          </Key>
+          <Property Name="Salary_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_Code" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Employee_Name" Type="nvarchar" MaxLength="3000" />
+          <Property Name="Employee_Pan" Type="nvarchar" MaxLength="500" />
+          <Property Name="CTC" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Basic_Salary" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_HRA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_Conveyance_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_Medical_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Additional_HRA_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Days" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Paid_Leave" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="LWP_Days" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Payable_Days" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Gross_Salary_Payable" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Basic" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="House_Rent" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Employer_Cont_To_PF" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Conveyance_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Medical_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Add_HRA_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Flexible_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Incentive_Allowance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Earning" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PF_Employer" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PF_Employee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Esic_Employer" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Esic_Employee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Advances" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Income_Tax" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Deduction" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Net_Payable" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Salary_Month" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salary_Year" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Role_Master">
+          <Key>
+            <PropertyRef Name="R_id" />
+          </Key>
+          <Property Name="R_id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="R_ecode" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="R_role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesClient_Master">
+          <Key>
+            <PropertyRef Name="SC_Id" />
+          </Key>
+          <Property Name="SC_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SC_UID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SC_CID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesClientCall_Master">
+          <Key>
+            <PropertyRef Name="scr_id" />
+          </Key>
+          <Property Name="scr_id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scr_date" Type="datetime" Nullable="false" />
+          <Property Name="scr_client" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="scr_poc" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="scr_agenda" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="scr_createdby" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="scr_creaton" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesClientwiseMonthlyRevenue_Master">
+          <Key>
+            <PropertyRef Name="SRR_Id" />
+          </Key>
+          <Property Name="SRR_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SRR_Month" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SRR_Year" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SRR_Client" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SRR_Current_HC" Type="int" />
+          <Property Name="SRR_Total_GP" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SRR_Avg_GP_Added" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SRR_Start" Type="int" />
+          <Property Name="SRR_Attrition" Type="int" />
+          <Property Name="SRR_BD" Type="int" />
+          <Property Name="SRR_Actual_Start" Type="int" />
+          <Property Name="SRR_Net_Total_GP" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SRR_Total_GP_Added" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SRR_Typeof_Employement" Type="nvarchar" MaxLength="500" />
+          <Property Name="SRR_Create_On" Type="datetime" />
+          <Property Name="SRR_Create_By" Type="nvarchar" MaxLength="3000" />
+          <Property Name="SRR_Update_On" Type="datetime" />
+          <Property Name="SRR_Update_By" Type="nvarchar" MaxLength="3000" />
+        </EntityType>
+        <EntityType Name="SalesMonthlyReport_Master">
+          <Key>
+            <PropertyRef Name="SMR_Id" />
+          </Key>
+          <Property Name="SMR_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SMR_Month" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SMR_Year" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SMR_Client" Type="int" Nullable="false" />
+          <Property Name="SMR_OpenPosition" Type="int" Nullable="false" />
+          <Property Name="SMR_BusinessReceived" Type="int" Nullable="false" />
+          <Property Name="SMR_Submission" Type="int" Nullable="false" />
+          <Property Name="SMR_Int_received" Type="int" Nullable="false" />
+          <Property Name="SMR_Feedback_Pending" Type="int" Nullable="false" />
+          <Property Name="SMR_Noshow" Type="int" Nullable="false" />
+          <Property Name="SMR_Offer" Type="int" Nullable="false" />
+          <Property Name="SMR_BD" Type="int" Nullable="false" />
+          <Property Name="SMR_Join" Type="int" Nullable="false" />
+          <Property Name="SMR_PassThrough" Type="int" Nullable="false" />
+          <Property Name="SMR_BulkDeal" Type="int" Nullable="false" />
+          <Property Name="SMR_POExtended" Type="int" Nullable="false" />
+          <Property Name="SMR_AttritionSaved" Type="int" Nullable="false" />
+          <Property Name="SMR_TotalRevenue" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SMR_Remark" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="3000" />
+        </EntityType>
+        <EntityType Name="Team_Master">
+          <Key>
+            <PropertyRef Name="T_Id" />
+          </Key>
+          <Property Name="T_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="T_TeamLead" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="T_TeamMember" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="T_CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="T_CreatedOn" Type="datetime" />
+          <Property Name="T_UpdatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="T_UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_Activity_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="Activity" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ActivityOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Master">
+          <Key>
+            <PropertyRef Name="E_Id" />
+          </Key>
+          <Property Name="E_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="E_Code" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="E_Fullname" Type="nvarchar" MaxLength="1000" />
+          <Property Name="E_Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="E_Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="E_DOB" Type="datetime" />
+          <Property Name="E_ContNo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="E_EEmergencyContNo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="E_UserName" Type="nvarchar" MaxLength="500" />
+          <Property Name="E_Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="E_Address" Type="nvarchar(max)" />
+          <Property Name="E_CAddress" Type="nvarchar(max)" />
+          <Property Name="E_Postal" Type="decimal" Precision="6" Scale="0" />
+          <Property Name="E_Etype" Type="nvarchar" MaxLength="50" />
+          <Property Name="E_Company_Name" Type="nvarchar" MaxLength="3000" />
+          <Property Name="E_Department" Type="nvarchar" MaxLength="500" />
+          <Property Name="E_Designation" Type="nvarchar" MaxLength="500" />
+          <Property Name="E_Location" Type="nvarchar" MaxLength="500" />
+          <Property Name="E_OfferDate" Type="datetime" />
+          <Property Name="E_JoinDate" Type="datetime" />
+          <Property Name="E_ExitDate" Type="datetime" />
+          <Property Name="E_Role" Type="nvarchar" MaxLength="50" />
+          <Property Name="E_BloodGroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="E_BankName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="E_AccountNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="E_Branch" Type="nvarchar" MaxLength="500" />
+          <Property Name="E_IFC_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="E_PF_Account" Type="nvarchar" MaxLength="50" />
+          <Property Name="E_PAN_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="E_Aadhar_no" Type="decimal" Precision="12" Scale="0" />
+          <Property Name="E_Salary" Type="float" />
+          <Property Name="E_PF" Type="float" />
+          <Property Name="E_PT" Type="float" />
+          <Property Name="E_ESI" Type="float" />
+          <Property Name="E_PF_Apply" Type="int" />
+          <Property Name="E_PT_Apply" Type="int" />
+          <Property Name="E_ESI_Apply" Type="int" />
+          <Property Name="E_Photo" Type="nvarchar(max)" />
+          <Property Name="E_Is_Active" Type="int" />
+          <Property Name="E_Is_Delete" Type="int" />
+          <Property Name="E_Created_By" Type="nvarchar" MaxLength="1000" />
+          <Property Name="E_Created_On" Type="datetime" />
+          <Property Name="E_Updated_By" Type="nvarchar" MaxLength="1000" />
+          <Property Name="E_Updated_On" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="ATS2019_dbModelStoreContainer">
+          <EntitySet Name="Arche_Resume_Master" EntityType="Self.Arche_Resume_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendance_Master" EntityType="Self.Attendance_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client_Master" EntityType="Self.Client_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyTarget_Master" EntityType="Self.DailyTarget_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HolidayList_Master" EntityType="Self.HolidayList_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interview_Master" EntityType="Self.Interview_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leave_Master" EntityType="Self.Leave_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewClient_Master" EntityType="Self.NewClient_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offer_Master" EntityType="Self.Offer_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recruiter_SalarySlip_Master" EntityType="Self.Recruiter_SalarySlip_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requirement_Master" EntityType="Self.Requirement_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resume_Master" EntityType="Self.Resume_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reyna_SalarySlip_Master" EntityType="Self.Reyna_SalarySlip_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role_Master" EntityType="Self.Role_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesClient_Master" EntityType="Self.SalesClient_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesClientCall_Master" EntityType="Self.SalesClientCall_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesClientwiseMonthlyRevenue_Master" EntityType="Self.SalesClientwiseMonthlyRevenue_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesMonthlyReport_Master" EntityType="Self.SalesMonthlyReport_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team_Master" EntityType="Self.Team_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Activity_Master" EntityType="Self.User_Activity_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Master" EntityType="Self.User_Master" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ATS2019_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ATS2019_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendance_Master" EntityType="ATS2019_dbModel.Attendance_Master" />
+          <EntitySet Name="Client_Master" EntityType="ATS2019_dbModel.Client_Master" />
+          <EntitySet Name="DailyTarget_Master" EntityType="ATS2019_dbModel.DailyTarget_Master" />
+          <EntitySet Name="HolidayList_Master" EntityType="ATS2019_dbModel.HolidayList_Master" />
+          <EntitySet Name="Interview_Master" EntityType="ATS2019_dbModel.Interview_Master" />
+          <EntitySet Name="Leave_Master" EntityType="ATS2019_dbModel.Leave_Master" />
+          <EntitySet Name="NewClient_Master" EntityType="ATS2019_dbModel.NewClient_Master" />
+          <EntitySet Name="Offer_Master" EntityType="ATS2019_dbModel.Offer_Master" />
+          <EntitySet Name="Recruiter_SalarySlip_Master" EntityType="ATS2019_dbModel.Recruiter_SalarySlip_Master" />
+          <EntitySet Name="Requirement_Master" EntityType="ATS2019_dbModel.Requirement_Master" />
+          <EntitySet Name="Role_Master" EntityType="ATS2019_dbModel.Role_Master" />
+          <EntitySet Name="SalesClient_Master" EntityType="ATS2019_dbModel.SalesClient_Master" />
+          <EntitySet Name="SalesClientCall_Master" EntityType="ATS2019_dbModel.SalesClientCall_Master" />
+          <EntitySet Name="SalesClientwiseMonthlyRevenue_Master" EntityType="ATS2019_dbModel.SalesClientwiseMonthlyRevenue_Master" />
+          <EntitySet Name="SalesMonthlyReport_Master" EntityType="ATS2019_dbModel.SalesMonthlyReport_Master" />
+          <EntitySet Name="Team_Master" EntityType="ATS2019_dbModel.Team_Master" />
+          <EntitySet Name="User_Activity_Master" EntityType="ATS2019_dbModel.User_Activity_Master" />
+          <EntitySet Name="User_Master" EntityType="ATS2019_dbModel.User_Master" />
+          <EntitySet Name="Resume_Master" EntityType="ATS2019_dbModel.Resume_Master" />
+          <EntitySet Name="Arche_Resume_Master" EntityType="ATS2019_dbModel.Arche_Resume_Master" />
+          <EntitySet Name="Reyna_SalarySlip_Master" EntityType="ATS2019_dbModel.Reyna_SalarySlip_Master" />
+        </EntityContainer>
+        <EntityType Name="Attendance_Master">
+          <Key>
+            <PropertyRef Name="A_Id" />
+          </Key>
+          <Property Name="A_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="A_Name" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="A_InTime" Type="DateTime" Precision="3" />
+          <Property Name="A_InIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_OutTime" Type="DateTime" Precision="3" />
+          <Property Name="A_OutIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Client_Master">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="C_Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="C_Cont_Person1" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="C_Cont_Person1_No" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="C_Cont_Person1_Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="C_Cont_Person2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="C_Cont_Person2_No" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="C_Cont_Person2_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="C_Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_Segment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_Margin_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_Margin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="C_Is_Active" Type="Int32" Nullable="false" />
+          <Property Name="C_Is_Delete" Type="Int32" Nullable="false" />
+          <Property Name="C_Created_On" Type="DateTime" Precision="3" />
+          <Property Name="C_Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="C_Updated_On" Type="DateTime" Precision="3" />
+          <Property Name="C_Updated_By" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DailyTarget_Master">
+          <Key>
+            <PropertyRef Name="DT_Id" />
+          </Key>
+          <Property Name="DT_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DT_AssignTo" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="DT_Target" Type="Int32" Nullable="false" />
+          <Property Name="DT_Achived" Type="Int32" Nullable="false" />
+          <Property Name="DT_CreateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="HolidayList_Master">
+          <Key>
+            <PropertyRef Name="Hid" />
+          </Key>
+          <Property Name="Hid" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hname" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Hdate" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Hday" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Htype" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Interview_Master">
+          <Key>
+            <PropertyRef Name="I_Id" />
+          </Key>
+          <Property Name="I_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="I_RId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="I_JId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="I_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="I_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="I_By" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="I_Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="I_Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="I_Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="I_CreateBy" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="I_CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Leave_Master">
+          <Key>
+            <PropertyRef Name="L_Id" />
+          </Key>
+          <Property Name="L_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="L_Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="L_Noofdays" Type="Double" Nullable="false" />
+          <Property Name="L_Inwords" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="L_Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="L_StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="L_EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="L_CreateBy" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="L_CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="L_TL_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="L_TL_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="L_M_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="L_M_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="L_Admin_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="L_Admin_Datetime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="NewClient_Master">
+          <Key>
+            <PropertyRef Name="NId" />
+          </Key>
+          <Property Name="NId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NClient" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="NPoc" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="NStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NRemark1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NRemark2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Offer_Master">
+          <Key>
+            <PropertyRef Name="O_Id" />
+          </Key>
+          <Property Name="O_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="O_Iid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="O_Rid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="O_Jid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="O_Fullname" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="O_DOB" Type="DateTime" Precision="3" />
+          <Property Name="O_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="O_MaritalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="O_Cur_Add" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="O_Perm_Add" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="O_Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="O_Cur_Des" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="O_Off_Des" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="O_Skill" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="O_Tot_Exp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Rel_Exp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="O_Alt_Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="O_Pan" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="O_Client" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="O_Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="O_CTC" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="O_ECTC" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="O_BR" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="O_PR" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="O_GP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="O_GPM" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="O_Sel_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_Off_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_Join_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_Exit_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_Emergency" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="O_Account_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Bank_Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="O_Branch" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="O_IFCI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Aadhar" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="O_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="O_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Recruiter" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="O_Recuiter_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_Teamlead" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="O_Teamlead_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_AM" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="O_AM_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_Manager_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="O_Manager_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_Account_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="O_Account_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_Admin_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="O_Admin_Date" Type="DateTime" Precision="3" />
+          <Property Name="O_IsActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Recruiter_SalarySlip_Master">
+          <Key>
+            <PropertyRef Name="Salary_Id" />
+          </Key>
+          <Property Name="Salary_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Code" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Employee_Name" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_Pan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CTC" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Basic_Salary" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_HRA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_Conveyance_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_Medical_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Additional_HRA_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Days" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Paid_Leave" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LWP_Days" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Payable_Days" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Gross_Salary_Payable" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Basic" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="House_Rent" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Employer_Cont_To_PF" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Conveyance_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Medical_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Add_HRA_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Flexible_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Incentive_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Earning" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PF_Employer" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PF_Employee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Esic_Employer" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Esic_Employee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Advances" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Income_Tax" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Deduction" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Net_Payable" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Salary_Month" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary_Year" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Requirement_Master">
+          <Key>
+            <PropertyRef Name="J_Id" />
+          </Key>
+          <Property Name="J_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="J_Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="J_Client_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="J_Skill" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="J_Position" Type="Int32" Nullable="false" />
+          <Property Name="J_Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="J_EndClient" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="J_AssignUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="J_Tot_Min_Exp" Type="Double" />
+          <Property Name="J_Tot_Max_Exp" Type="Double" />
+          <Property Name="J_Rel_Min_Exp" Type="Double" />
+          <Property Name="J_Rel_Max_Exp" Type="Double" />
+          <Property Name="J_Bill_Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="J_Pay_Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="J_Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="J_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="J_Employment_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="J_POC" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="J_POC_No" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="J_JD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="J_Status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="J_Is_Active" Type="Int64" Nullable="false" />
+          <Property Name="J_Is_Delete" Type="Int64" Nullable="false" />
+          <Property Name="J_CreatedBy" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="J_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="J_UpdatedBy" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="J_UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="J_MandatorySkill" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Role_Master">
+          <Key>
+            <PropertyRef Name="R_id" />
+          </Key>
+          <Property Name="R_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="R_ecode" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="R_role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SalesClient_Master">
+          <Key>
+            <PropertyRef Name="SC_Id" />
+          </Key>
+          <Property Name="SC_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SC_UID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SC_CID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SalesClientCall_Master">
+          <Key>
+            <PropertyRef Name="scr_id" />
+          </Key>
+          <Property Name="scr_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scr_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="scr_client" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="scr_poc" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="scr_agenda" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="scr_createdby" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="scr_creaton" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SalesClientwiseMonthlyRevenue_Master">
+          <Key>
+            <PropertyRef Name="SRR_Id" />
+          </Key>
+          <Property Name="SRR_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SRR_Month" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SRR_Year" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SRR_Client" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SRR_Current_HC" Type="Int32" />
+          <Property Name="SRR_Total_GP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SRR_Avg_GP_Added" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SRR_Start" Type="Int32" />
+          <Property Name="SRR_Attrition" Type="Int32" />
+          <Property Name="SRR_BD" Type="Int32" />
+          <Property Name="SRR_Actual_Start" Type="Int32" />
+          <Property Name="SRR_Net_Total_GP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SRR_Total_GP_Added" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SRR_Typeof_Employement" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SRR_Create_On" Type="DateTime" Precision="3" />
+          <Property Name="SRR_Create_By" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="SRR_Update_On" Type="DateTime" Precision="3" />
+          <Property Name="SRR_Update_By" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SalesMonthlyReport_Master">
+          <Key>
+            <PropertyRef Name="SMR_Id" />
+          </Key>
+          <Property Name="SMR_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SMR_Month" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SMR_Year" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SMR_Client" Type="Int32" Nullable="false" />
+          <Property Name="SMR_OpenPosition" Type="Int32" Nullable="false" />
+          <Property Name="SMR_BusinessReceived" Type="Int32" Nullable="false" />
+          <Property Name="SMR_Submission" Type="Int32" Nullable="false" />
+          <Property Name="SMR_Int_received" Type="Int32" Nullable="false" />
+          <Property Name="SMR_Feedback_Pending" Type="Int32" Nullable="false" />
+          <Property Name="SMR_Noshow" Type="Int32" Nullable="false" />
+          <Property Name="SMR_Offer" Type="Int32" Nullable="false" />
+          <Property Name="SMR_BD" Type="Int32" Nullable="false" />
+          <Property Name="SMR_Join" Type="Int32" Nullable="false" />
+          <Property Name="SMR_PassThrough" Type="Int32" Nullable="false" />
+          <Property Name="SMR_BulkDeal" Type="Int32" Nullable="false" />
+          <Property Name="SMR_POExtended" Type="Int32" Nullable="false" />
+          <Property Name="SMR_AttritionSaved" Type="Int32" Nullable="false" />
+          <Property Name="SMR_TotalRevenue" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SMR_Remark" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Team_Master">
+          <Key>
+            <PropertyRef Name="T_Id" />
+          </Key>
+          <Property Name="T_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="T_TeamLead" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="T_TeamMember" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="T_CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="T_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="T_UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="T_UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User_Activity_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Activity" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityOn" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="User_Master">
+          <Key>
+            <PropertyRef Name="E_Id" />
+          </Key>
+          <Property Name="E_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="E_Code" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="E_Fullname" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="E_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="E_Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="E_DOB" Type="DateTime" Precision="3" />
+          <Property Name="E_ContNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="E_EEmergencyContNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="E_UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="E_Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="E_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="E_CAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="E_Postal" Type="Decimal" Precision="6" Scale="0" />
+          <Property Name="E_Etype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="E_Company_Name" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="E_Department" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="E_Designation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="E_Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="E_OfferDate" Type="DateTime" Precision="3" />
+          <Property Name="E_JoinDate" Type="DateTime" Precision="3" />
+          <Property Name="E_ExitDate" Type="DateTime" Precision="3" />
+          <Property Name="E_Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="E_BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="E_BankName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="E_AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="E_Branch" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="E_IFC_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="E_PF_Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="E_PAN_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="E_Aadhar_no" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="E_Salary" Type="Double" />
+          <Property Name="E_PF" Type="Double" />
+          <Property Name="E_PT" Type="Double" />
+          <Property Name="E_ESI" Type="Double" />
+          <Property Name="E_PF_Apply" Type="Int32" />
+          <Property Name="E_PT_Apply" Type="Int32" />
+          <Property Name="E_ESI_Apply" Type="Int32" />
+          <Property Name="E_Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="E_Is_Active" Type="Int32" />
+          <Property Name="E_Is_Delete" Type="Int32" />
+          <Property Name="E_Created_By" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="E_Created_On" Type="DateTime" Precision="3" />
+          <Property Name="E_Updated_By" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="E_Updated_On" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Resume_Master">
+          <Key>
+            <PropertyRef Name="R_Id" />
+          </Key>
+          <Property Name="R_Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" Type="Decimal" />
+          <Property Name="R_Jid" Nullable="false" Precision="18" Scale="0" Type="Decimal" />
+          <Property Name="R_Name" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_DOB" Precision="3" Type="DateTime" />
+          <Property Name="R_Address" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Cnt" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Alt_Cnt" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Email" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Tot_Exp" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Rel_Exp" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Cur_Com" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Cur_Des" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_NP" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Canjoin" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Cur_CTC" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Exp_CTC" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Reason" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Any_Int_Of" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Education" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Cur_Location" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Pref_Location" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Native" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Resumename" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_CreateBy" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_CreateOn" Precision="3" Type="DateTime" />
+          <Property Name="R_Skills" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_FamilyCnt" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_friendcnt" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_reasongap" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Currenttakehome" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Currentdrawing" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Lastsalaryhike" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Expectedtakehome" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Expecteddrawing" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_HikeReason" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Howjoinearlyreason" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_WhyJoinArche" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_HaveDocs" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Reasonofrelocation" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Pannumber" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_Telephonicinttiming" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_F2Favailibility" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_updateby" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="R_updateon" Precision="3" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="Arche_Resume_Master">
+          <Key>
+            <PropertyRef Name="AR_Id" />
+          </Key>
+          <Property Name="AR_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Skill" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Experience" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Notice" Type="Int32" />
+          <Property Name="CTC" Type="Double" />
+          <Property Name="Resume" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Reyna_SalarySlip_Master">
+          <Key>
+            <PropertyRef Name="Salary_Id" />
+          </Key>
+          <Property Name="Salary_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Code" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Employee_Name" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_Pan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CTC" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Basic_Salary" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_HRA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_Conveyance_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fixed_Medical_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Additional_HRA_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Days" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Paid_Leave" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LWP_Days" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Payable_Days" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Gross_Salary_Payable" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Basic" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="House_Rent" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Employer_Cont_To_PF" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Conveyance_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Medical_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Add_HRA_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Flexible_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Incentive_Allowance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Earning" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PF_Employer" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PF_Employee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Esic_Employer" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Esic_Employee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Advances" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Income_Tax" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Deduction" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Net_Payable" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Salary_Month" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary_Year" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ATS2019_dbModelStoreContainer" CdmEntityContainer="ATS2019_dbEntities">
+          <EntitySetMapping Name="Attendance_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Attendance_Master">
+              <MappingFragment StoreEntitySet="Attendance_Master">
+                <ScalarProperty Name="A_Time" ColumnName="A_Time" />
+                <ScalarProperty Name="A_OutIP" ColumnName="A_OutIP" />
+                <ScalarProperty Name="A_OutTime" ColumnName="A_OutTime" />
+                <ScalarProperty Name="A_InIP" ColumnName="A_InIP" />
+                <ScalarProperty Name="A_InTime" ColumnName="A_InTime" />
+                <ScalarProperty Name="A_Name" ColumnName="A_Name" />
+                <ScalarProperty Name="A_Id" ColumnName="A_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Client_Master">
+              <MappingFragment StoreEntitySet="Client_Master">
+                <ScalarProperty Name="C_Updated_By" ColumnName="C_Updated_By" />
+                <ScalarProperty Name="C_Updated_On" ColumnName="C_Updated_On" />
+                <ScalarProperty Name="C_Created_By" ColumnName="C_Created_By" />
+                <ScalarProperty Name="C_Created_On" ColumnName="C_Created_On" />
+                <ScalarProperty Name="C_Is_Delete" ColumnName="C_Is_Delete" />
+                <ScalarProperty Name="C_Is_Active" ColumnName="C_Is_Active" />
+                <ScalarProperty Name="C_Margin" ColumnName="C_Margin" />
+                <ScalarProperty Name="C_Margin_Type" ColumnName="C_Margin_Type" />
+                <ScalarProperty Name="C_Segment" ColumnName="C_Segment" />
+                <ScalarProperty Name="C_Type" ColumnName="C_Type" />
+                <ScalarProperty Name="C_Category" ColumnName="C_Category" />
+                <ScalarProperty Name="C_Cont_Person2_Email" ColumnName="C_Cont_Person2_Email" />
+                <ScalarProperty Name="C_Cont_Person2_No" ColumnName="C_Cont_Person2_No" />
+                <ScalarProperty Name="C_Cont_Person2" ColumnName="C_Cont_Person2" />
+                <ScalarProperty Name="C_Cont_Person1_Email" ColumnName="C_Cont_Person1_Email" />
+                <ScalarProperty Name="C_Cont_Person1_No" ColumnName="C_Cont_Person1_No" />
+                <ScalarProperty Name="C_Cont_Person1" ColumnName="C_Cont_Person1" />
+                <ScalarProperty Name="C_Address" ColumnName="C_Address" />
+                <ScalarProperty Name="C_Name" ColumnName="C_Name" />
+                <ScalarProperty Name="C_id" ColumnName="C_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyTarget_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.DailyTarget_Master">
+              <MappingFragment StoreEntitySet="DailyTarget_Master">
+                <ScalarProperty Name="DT_CreateOn" ColumnName="DT_CreateOn" />
+                <ScalarProperty Name="DT_Achived" ColumnName="DT_Achived" />
+                <ScalarProperty Name="DT_Target" ColumnName="DT_Target" />
+                <ScalarProperty Name="DT_AssignTo" ColumnName="DT_AssignTo" />
+                <ScalarProperty Name="DT_Id" ColumnName="DT_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HolidayList_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.HolidayList_Master">
+              <MappingFragment StoreEntitySet="HolidayList_Master">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Htype" ColumnName="Htype" />
+                <ScalarProperty Name="Hday" ColumnName="Hday" />
+                <ScalarProperty Name="Hdate" ColumnName="Hdate" />
+                <ScalarProperty Name="Hname" ColumnName="Hname" />
+                <ScalarProperty Name="Hid" ColumnName="Hid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interview_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Interview_Master">
+              <MappingFragment StoreEntitySet="Interview_Master">
+                <ScalarProperty Name="I_CreateOn" ColumnName="I_CreateOn" />
+                <ScalarProperty Name="I_CreateBy" ColumnName="I_CreateBy" />
+                <ScalarProperty Name="I_Status" ColumnName="I_Status" />
+                <ScalarProperty Name="I_Note" ColumnName="I_Note" />
+                <ScalarProperty Name="I_Location" ColumnName="I_Location" />
+                <ScalarProperty Name="I_By" ColumnName="I_By" />
+                <ScalarProperty Name="I_Time" ColumnName="I_Time" />
+                <ScalarProperty Name="I_Date" ColumnName="I_Date" />
+                <ScalarProperty Name="I_JId" ColumnName="I_JId" />
+                <ScalarProperty Name="I_RId" ColumnName="I_RId" />
+                <ScalarProperty Name="I_Id" ColumnName="I_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leave_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Leave_Master">
+              <MappingFragment StoreEntitySet="Leave_Master">
+                <ScalarProperty Name="L_Admin_Datetime" ColumnName="L_Admin_Datetime" />
+                <ScalarProperty Name="L_Admin_Status" ColumnName="L_Admin_Status" />
+                <ScalarProperty Name="L_M_Datetime" ColumnName="L_M_Datetime" />
+                <ScalarProperty Name="L_M_Status" ColumnName="L_M_Status" />
+                <ScalarProperty Name="L_TL_Datetime" ColumnName="L_TL_Datetime" />
+                <ScalarProperty Name="L_TL_Status" ColumnName="L_TL_Status" />
+                <ScalarProperty Name="L_CreateOn" ColumnName="L_CreateOn" />
+                <ScalarProperty Name="L_CreateBy" ColumnName="L_CreateBy" />
+                <ScalarProperty Name="L_EndDate" ColumnName="L_EndDate" />
+                <ScalarProperty Name="L_StartDate" ColumnName="L_StartDate" />
+                <ScalarProperty Name="L_Reason" ColumnName="L_Reason" />
+                <ScalarProperty Name="L_Inwords" ColumnName="L_Inwords" />
+                <ScalarProperty Name="L_Noofdays" ColumnName="L_Noofdays" />
+                <ScalarProperty Name="L_Type" ColumnName="L_Type" />
+                <ScalarProperty Name="L_Id" ColumnName="L_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewClient_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.NewClient_Master">
+              <MappingFragment StoreEntitySet="NewClient_Master">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="NRemark2" ColumnName="NRemark2" />
+                <ScalarProperty Name="NRemark1" ColumnName="NRemark1" />
+                <ScalarProperty Name="NStatus" ColumnName="NStatus" />
+                <ScalarProperty Name="NPoc" ColumnName="NPoc" />
+                <ScalarProperty Name="NClient" ColumnName="NClient" />
+                <ScalarProperty Name="NId" ColumnName="NId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offer_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Offer_Master">
+              <MappingFragment StoreEntitySet="Offer_Master">
+                <ScalarProperty Name="O_IsActive" ColumnName="O_IsActive" />
+                <ScalarProperty Name="O_Admin_Date" ColumnName="O_Admin_Date" />
+                <ScalarProperty Name="O_Admin_Status" ColumnName="O_Admin_Status" />
+                <ScalarProperty Name="O_Account_Date" ColumnName="O_Account_Date" />
+                <ScalarProperty Name="O_Account_Status" ColumnName="O_Account_Status" />
+                <ScalarProperty Name="O_Manager_Date" ColumnName="O_Manager_Date" />
+                <ScalarProperty Name="O_Manager_Status" ColumnName="O_Manager_Status" />
+                <ScalarProperty Name="O_AM_Date" ColumnName="O_AM_Date" />
+                <ScalarProperty Name="O_AM" ColumnName="O_AM" />
+                <ScalarProperty Name="O_Teamlead_Date" ColumnName="O_Teamlead_Date" />
+                <ScalarProperty Name="O_Teamlead" ColumnName="O_Teamlead" />
+                <ScalarProperty Name="O_Recuiter_Date" ColumnName="O_Recuiter_Date" />
+                <ScalarProperty Name="O_Recruiter" ColumnName="O_Recruiter" />
+                <ScalarProperty Name="O_Type" ColumnName="O_Type" />
+                <ScalarProperty Name="O_Note" ColumnName="O_Note" />
+                <ScalarProperty Name="O_Status" ColumnName="O_Status" />
+                <ScalarProperty Name="O_Aadhar" ColumnName="O_Aadhar" />
+                <ScalarProperty Name="O_IFCI" ColumnName="O_IFCI" />
+                <ScalarProperty Name="O_Branch" ColumnName="O_Branch" />
+                <ScalarProperty Name="O_Bank_Name" ColumnName="O_Bank_Name" />
+                <ScalarProperty Name="O_Account_No" ColumnName="O_Account_No" />
+                <ScalarProperty Name="O_Emergency" ColumnName="O_Emergency" />
+                <ScalarProperty Name="O_Exit_Date" ColumnName="O_Exit_Date" />
+                <ScalarProperty Name="O_Join_Date" ColumnName="O_Join_Date" />
+                <ScalarProperty Name="O_Off_Date" ColumnName="O_Off_Date" />
+                <ScalarProperty Name="O_Sel_Date" ColumnName="O_Sel_Date" />
+                <ScalarProperty Name="O_GPM" ColumnName="O_GPM" />
+                <ScalarProperty Name="O_GP" ColumnName="O_GP" />
+                <ScalarProperty Name="O_PR" ColumnName="O_PR" />
+                <ScalarProperty Name="O_BR" ColumnName="O_BR" />
+                <ScalarProperty Name="O_ECTC" ColumnName="O_ECTC" />
+                <ScalarProperty Name="O_CTC" ColumnName="O_CTC" />
+                <ScalarProperty Name="O_Location" ColumnName="O_Location" />
+                <ScalarProperty Name="O_Client" ColumnName="O_Client" />
+                <ScalarProperty Name="O_Pan" ColumnName="O_Pan" />
+                <ScalarProperty Name="O_Alt_Mobile" ColumnName="O_Alt_Mobile" />
+                <ScalarProperty Name="O_Mobile" ColumnName="O_Mobile" />
+                <ScalarProperty Name="O_Rel_Exp" ColumnName="O_Rel_Exp" />
+                <ScalarProperty Name="O_Tot_Exp" ColumnName="O_Tot_Exp" />
+                <ScalarProperty Name="O_Skill" ColumnName="O_Skill" />
+                <ScalarProperty Name="O_Off_Des" ColumnName="O_Off_Des" />
+                <ScalarProperty Name="O_Cur_Des" ColumnName="O_Cur_Des" />
+                <ScalarProperty Name="O_Email" ColumnName="O_Email" />
+                <ScalarProperty Name="O_Country" ColumnName="O_Country" />
+                <ScalarProperty Name="O_Perm_Add" ColumnName="O_Perm_Add" />
+                <ScalarProperty Name="O_Cur_Add" ColumnName="O_Cur_Add" />
+                <ScalarProperty Name="O_MaritalStatus" ColumnName="O_MaritalStatus" />
+                <ScalarProperty Name="O_Gender" ColumnName="O_Gender" />
+                <ScalarProperty Name="O_DOB" ColumnName="O_DOB" />
+                <ScalarProperty Name="O_Fullname" ColumnName="O_Fullname" />
+                <ScalarProperty Name="O_Jid" ColumnName="O_Jid" />
+                <ScalarProperty Name="O_Rid" ColumnName="O_Rid" />
+                <ScalarProperty Name="O_Iid" ColumnName="O_Iid" />
+                <ScalarProperty Name="O_Id" ColumnName="O_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recruiter_SalarySlip_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Recruiter_SalarySlip_Master">
+              <MappingFragment StoreEntitySet="Recruiter_SalarySlip_Master">
+                <ScalarProperty Name="Salary_Year" ColumnName="Salary_Year" />
+                <ScalarProperty Name="Salary_Month" ColumnName="Salary_Month" />
+                <ScalarProperty Name="Net_Payable" ColumnName="Net_Payable" />
+                <ScalarProperty Name="Total_Deduction" ColumnName="Total_Deduction" />
+                <ScalarProperty Name="Income_Tax" ColumnName="Income_Tax" />
+                <ScalarProperty Name="Advances" ColumnName="Advances" />
+                <ScalarProperty Name="PT" ColumnName="PT" />
+                <ScalarProperty Name="Esic_Employee" ColumnName="Esic_Employee" />
+                <ScalarProperty Name="Esic_Employer" ColumnName="Esic_Employer" />
+                <ScalarProperty Name="PF_Employee" ColumnName="PF_Employee" />
+                <ScalarProperty Name="PF_Employer" ColumnName="PF_Employer" />
+                <ScalarProperty Name="Total_Earning" ColumnName="Total_Earning" />
+                <ScalarProperty Name="Incentive_Allowance" ColumnName="Incentive_Allowance" />
+                <ScalarProperty Name="Flexible_Allowance" ColumnName="Flexible_Allowance" />
+                <ScalarProperty Name="Add_HRA_Allowance" ColumnName="Add_HRA_Allowance" />
+                <ScalarProperty Name="Medical_Allowance" ColumnName="Medical_Allowance" />
+                <ScalarProperty Name="Conveyance_Allowance" ColumnName="Conveyance_Allowance" />
+                <ScalarProperty Name="Employer_Cont_To_PF" ColumnName="Employer_Cont_To_PF" />
+                <ScalarProperty Name="House_Rent" ColumnName="House_Rent" />
+                <ScalarProperty Name="Basic" ColumnName="Basic" />
+                <ScalarProperty Name="Gross_Salary_Payable" ColumnName="Gross_Salary_Payable" />
+                <ScalarProperty Name="Total_Payable_Days" ColumnName="Total_Payable_Days" />
+                <ScalarProperty Name="LWP_Days" ColumnName="LWP_Days" />
+                <ScalarProperty Name="Paid_Leave" ColumnName="Paid_Leave" />
+                <ScalarProperty Name="Total_Days" ColumnName="Total_Days" />
+                <ScalarProperty Name="Additional_HRA_Allowance" ColumnName="Additional_HRA_Allowance" />
+                <ScalarProperty Name="Fixed_Medical_Allowance" ColumnName="Fixed_Medical_Allowance" />
+                <ScalarProperty Name="Fixed_Conveyance_Allowance" ColumnName="Fixed_Conveyance_Allowance" />
+                <ScalarProperty Name="Fixed_HRA" ColumnName="Fixed_HRA" />
+                <ScalarProperty Name="Basic_Salary" ColumnName="Basic_Salary" />
+                <ScalarProperty Name="CTC" ColumnName="CTC" />
+                <ScalarProperty Name="Employee_Pan" ColumnName="Employee_Pan" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+                <ScalarProperty Name="Employee_Code" ColumnName="Employee_Code" />
+                <ScalarProperty Name="Salary_Id" ColumnName="Salary_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requirement_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Requirement_Master">
+              <MappingFragment StoreEntitySet="Requirement_Master">
+                <ScalarProperty Name="J_MandatorySkill" ColumnName="J_MandatorySkill" />
+                <ScalarProperty Name="J_UpdatedOn" ColumnName="J_UpdatedOn" />
+                <ScalarProperty Name="J_UpdatedBy" ColumnName="J_UpdatedBy" />
+                <ScalarProperty Name="J_CreatedOn" ColumnName="J_CreatedOn" />
+                <ScalarProperty Name="J_CreatedBy" ColumnName="J_CreatedBy" />
+                <ScalarProperty Name="J_Is_Delete" ColumnName="J_Is_Delete" />
+                <ScalarProperty Name="J_Is_Active" ColumnName="J_Is_Active" />
+                <ScalarProperty Name="J_Status" ColumnName="J_Status" />
+                <ScalarProperty Name="J_JD" ColumnName="J_JD" />
+                <ScalarProperty Name="J_POC_No" ColumnName="J_POC_No" />
+                <ScalarProperty Name="J_POC" ColumnName="J_POC" />
+                <ScalarProperty Name="J_Employment_Type" ColumnName="J_Employment_Type" />
+                <ScalarProperty Name="J_Type" ColumnName="J_Type" />
+                <ScalarProperty Name="J_Category" ColumnName="J_Category" />
+                <ScalarProperty Name="J_Pay_Rate" ColumnName="J_Pay_Rate" />
+                <ScalarProperty Name="J_Bill_Rate" ColumnName="J_Bill_Rate" />
+                <ScalarProperty Name="J_Rel_Max_Exp" ColumnName="J_Rel_Max_Exp" />
+                <ScalarProperty Name="J_Rel_Min_Exp" ColumnName="J_Rel_Min_Exp" />
+                <ScalarProperty Name="J_Tot_Max_Exp" ColumnName="J_Tot_Max_Exp" />
+                <ScalarProperty Name="J_Tot_Min_Exp" ColumnName="J_Tot_Min_Exp" />
+                <ScalarProperty Name="J_AssignUser" ColumnName="J_AssignUser" />
+                <ScalarProperty Name="J_EndClient" ColumnName="J_EndClient" />
+                <ScalarProperty Name="J_Location" ColumnName="J_Location" />
+                <ScalarProperty Name="J_Position" ColumnName="J_Position" />
+                <ScalarProperty Name="J_Skill" ColumnName="J_Skill" />
+                <ScalarProperty Name="J_Client_Id" ColumnName="J_Client_Id" />
+                <ScalarProperty Name="J_Code" ColumnName="J_Code" />
+                <ScalarProperty Name="J_Id" ColumnName="J_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Role_Master">
+              <MappingFragment StoreEntitySet="Role_Master">
+                <ScalarProperty Name="R_role" ColumnName="R_role" />
+                <ScalarProperty Name="R_ecode" ColumnName="R_ecode" />
+                <ScalarProperty Name="R_id" ColumnName="R_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesClient_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.SalesClient_Master">
+              <MappingFragment StoreEntitySet="SalesClient_Master">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SC_CID" ColumnName="SC_CID" />
+                <ScalarProperty Name="SC_UID" ColumnName="SC_UID" />
+                <ScalarProperty Name="SC_Id" ColumnName="SC_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesClientCall_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.SalesClientCall_Master">
+              <MappingFragment StoreEntitySet="SalesClientCall_Master">
+                <ScalarProperty Name="scr_creaton" ColumnName="scr_creaton" />
+                <ScalarProperty Name="scr_createdby" ColumnName="scr_createdby" />
+                <ScalarProperty Name="scr_agenda" ColumnName="scr_agenda" />
+                <ScalarProperty Name="scr_poc" ColumnName="scr_poc" />
+                <ScalarProperty Name="scr_client" ColumnName="scr_client" />
+                <ScalarProperty Name="scr_date" ColumnName="scr_date" />
+                <ScalarProperty Name="scr_id" ColumnName="scr_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesClientwiseMonthlyRevenue_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.SalesClientwiseMonthlyRevenue_Master">
+              <MappingFragment StoreEntitySet="SalesClientwiseMonthlyRevenue_Master">
+                <ScalarProperty Name="SRR_Update_By" ColumnName="SRR_Update_By" />
+                <ScalarProperty Name="SRR_Update_On" ColumnName="SRR_Update_On" />
+                <ScalarProperty Name="SRR_Create_By" ColumnName="SRR_Create_By" />
+                <ScalarProperty Name="SRR_Create_On" ColumnName="SRR_Create_On" />
+                <ScalarProperty Name="SRR_Typeof_Employement" ColumnName="SRR_Typeof_Employement" />
+                <ScalarProperty Name="SRR_Total_GP_Added" ColumnName="SRR_Total_GP_Added" />
+                <ScalarProperty Name="SRR_Net_Total_GP" ColumnName="SRR_Net_Total_GP" />
+                <ScalarProperty Name="SRR_Actual_Start" ColumnName="SRR_Actual_Start" />
+                <ScalarProperty Name="SRR_BD" ColumnName="SRR_BD" />
+                <ScalarProperty Name="SRR_Attrition" ColumnName="SRR_Attrition" />
+                <ScalarProperty Name="SRR_Start" ColumnName="SRR_Start" />
+                <ScalarProperty Name="SRR_Avg_GP_Added" ColumnName="SRR_Avg_GP_Added" />
+                <ScalarProperty Name="SRR_Total_GP" ColumnName="SRR_Total_GP" />
+                <ScalarProperty Name="SRR_Current_HC" ColumnName="SRR_Current_HC" />
+                <ScalarProperty Name="SRR_Client" ColumnName="SRR_Client" />
+                <ScalarProperty Name="SRR_Year" ColumnName="SRR_Year" />
+                <ScalarProperty Name="SRR_Month" ColumnName="SRR_Month" />
+                <ScalarProperty Name="SRR_Id" ColumnName="SRR_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesMonthlyReport_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.SalesMonthlyReport_Master">
+              <MappingFragment StoreEntitySet="SalesMonthlyReport_Master">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="SMR_Remark" ColumnName="SMR_Remark" />
+                <ScalarProperty Name="SMR_TotalRevenue" ColumnName="SMR_TotalRevenue" />
+                <ScalarProperty Name="SMR_AttritionSaved" ColumnName="SMR_AttritionSaved" />
+                <ScalarProperty Name="SMR_POExtended" ColumnName="SMR_POExtended" />
+                <ScalarProperty Name="SMR_BulkDeal" ColumnName="SMR_BulkDeal" />
+                <ScalarProperty Name="SMR_PassThrough" ColumnName="SMR_PassThrough" />
+                <ScalarProperty Name="SMR_Join" ColumnName="SMR_Join" />
+                <ScalarProperty Name="SMR_BD" ColumnName="SMR_BD" />
+                <ScalarProperty Name="SMR_Offer" ColumnName="SMR_Offer" />
+                <ScalarProperty Name="SMR_Noshow" ColumnName="SMR_Noshow" />
+                <ScalarProperty Name="SMR_Feedback_Pending" ColumnName="SMR_Feedback_Pending" />
+                <ScalarProperty Name="SMR_Int_received" ColumnName="SMR_Int_received" />
+                <ScalarProperty Name="SMR_Submission" ColumnName="SMR_Submission" />
+                <ScalarProperty Name="SMR_BusinessReceived" ColumnName="SMR_BusinessReceived" />
+                <ScalarProperty Name="SMR_OpenPosition" ColumnName="SMR_OpenPosition" />
+                <ScalarProperty Name="SMR_Client" ColumnName="SMR_Client" />
+                <ScalarProperty Name="SMR_Year" ColumnName="SMR_Year" />
+                <ScalarProperty Name="SMR_Month" ColumnName="SMR_Month" />
+                <ScalarProperty Name="SMR_Id" ColumnName="SMR_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Team_Master">
+              <MappingFragment StoreEntitySet="Team_Master">
+                <ScalarProperty Name="T_UpdatedOn" ColumnName="T_UpdatedOn" />
+                <ScalarProperty Name="T_UpdatedBy" ColumnName="T_UpdatedBy" />
+                <ScalarProperty Name="T_CreatedOn" ColumnName="T_CreatedOn" />
+                <ScalarProperty Name="T_CreatedBy" ColumnName="T_CreatedBy" />
+                <ScalarProperty Name="T_TeamMember" ColumnName="T_TeamMember" />
+                <ScalarProperty Name="T_TeamLead" ColumnName="T_TeamLead" />
+                <ScalarProperty Name="T_Id" ColumnName="T_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Activity_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.User_Activity_Master">
+              <MappingFragment StoreEntitySet="User_Activity_Master">
+                <ScalarProperty Name="ActivityOn" ColumnName="ActivityOn" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.User_Master">
+              <MappingFragment StoreEntitySet="User_Master">
+                <ScalarProperty Name="E_Updated_On" ColumnName="E_Updated_On" />
+                <ScalarProperty Name="E_Updated_By" ColumnName="E_Updated_By" />
+                <ScalarProperty Name="E_Created_On" ColumnName="E_Created_On" />
+                <ScalarProperty Name="E_Created_By" ColumnName="E_Created_By" />
+                <ScalarProperty Name="E_Is_Delete" ColumnName="E_Is_Delete" />
+                <ScalarProperty Name="E_Is_Active" ColumnName="E_Is_Active" />
+                <ScalarProperty Name="E_Photo" ColumnName="E_Photo" />
+                <ScalarProperty Name="E_ESI_Apply" ColumnName="E_ESI_Apply" />
+                <ScalarProperty Name="E_PT_Apply" ColumnName="E_PT_Apply" />
+                <ScalarProperty Name="E_PF_Apply" ColumnName="E_PF_Apply" />
+                <ScalarProperty Name="E_ESI" ColumnName="E_ESI" />
+                <ScalarProperty Name="E_PT" ColumnName="E_PT" />
+                <ScalarProperty Name="E_PF" ColumnName="E_PF" />
+                <ScalarProperty Name="E_Salary" ColumnName="E_Salary" />
+                <ScalarProperty Name="E_Aadhar_no" ColumnName="E_Aadhar_no" />
+                <ScalarProperty Name="E_PAN_No" ColumnName="E_PAN_No" />
+                <ScalarProperty Name="E_PF_Account" ColumnName="E_PF_Account" />
+                <ScalarProperty Name="E_IFC_Code" ColumnName="E_IFC_Code" />
+                <ScalarProperty Name="E_Branch" ColumnName="E_Branch" />
+                <ScalarProperty Name="E_AccountNo" ColumnName="E_AccountNo" />
+                <ScalarProperty Name="E_BankName" ColumnName="E_BankName" />
+                <ScalarProperty Name="E_BloodGroup" ColumnName="E_BloodGroup" />
+                <ScalarProperty Name="E_Role" ColumnName="E_Role" />
+                <ScalarProperty Name="E_ExitDate" ColumnName="E_ExitDate" />
+                <ScalarProperty Name="E_JoinDate" ColumnName="E_JoinDate" />
+                <ScalarProperty Name="E_OfferDate" ColumnName="E_OfferDate" />
+                <ScalarProperty Name="E_Location" ColumnName="E_Location" />
+                <ScalarProperty Name="E_Designation" ColumnName="E_Designation" />
+                <ScalarProperty Name="E_Department" ColumnName="E_Department" />
+                <ScalarProperty Name="E_Company_Name" ColumnName="E_Company_Name" />
+                <ScalarProperty Name="E_Etype" ColumnName="E_Etype" />
+                <ScalarProperty Name="E_Postal" ColumnName="E_Postal" />
+                <ScalarProperty Name="E_CAddress" ColumnName="E_CAddress" />
+                <ScalarProperty Name="E_Address" ColumnName="E_Address" />
+                <ScalarProperty Name="E_Password" ColumnName="E_Password" />
+                <ScalarProperty Name="E_UserName" ColumnName="E_UserName" />
+                <ScalarProperty Name="E_EEmergencyContNo" ColumnName="E_EEmergencyContNo" />
+                <ScalarProperty Name="E_ContNo" ColumnName="E_ContNo" />
+                <ScalarProperty Name="E_DOB" ColumnName="E_DOB" />
+                <ScalarProperty Name="E_Email" ColumnName="E_Email" />
+                <ScalarProperty Name="E_Gender" ColumnName="E_Gender" />
+                <ScalarProperty Name="E_Fullname" ColumnName="E_Fullname" />
+                <ScalarProperty Name="E_Code" ColumnName="E_Code" />
+                <ScalarProperty Name="E_Id" ColumnName="E_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resume_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Resume_Master">
+              <MappingFragment StoreEntitySet="Resume_Master">
+                <ScalarProperty Name="R_updateon" ColumnName="R_updateon" />
+                <ScalarProperty Name="R_updateby" ColumnName="R_updateby" />
+                <ScalarProperty Name="R_F2Favailibility" ColumnName="R_F2Favailibility" />
+                <ScalarProperty Name="R_Telephonicinttiming" ColumnName="R_Telephonicinttiming" />
+                <ScalarProperty Name="R_Pannumber" ColumnName="R_Pannumber" />
+                <ScalarProperty Name="R_Reasonofrelocation" ColumnName="R_Reasonofrelocation" />
+                <ScalarProperty Name="R_HaveDocs" ColumnName="R_HaveDocs" />
+                <ScalarProperty Name="R_WhyJoinArche" ColumnName="R_WhyJoinArche" />
+                <ScalarProperty Name="R_Howjoinearlyreason" ColumnName="R_Howjoinearlyreason" />
+                <ScalarProperty Name="R_HikeReason" ColumnName="R_HikeReason" />
+                <ScalarProperty Name="R_Expecteddrawing" ColumnName="R_Expecteddrawing" />
+                <ScalarProperty Name="R_Expectedtakehome" ColumnName="R_Expectedtakehome" />
+                <ScalarProperty Name="R_Lastsalaryhike" ColumnName="R_Lastsalaryhike" />
+                <ScalarProperty Name="R_Currentdrawing" ColumnName="R_Currentdrawing" />
+                <ScalarProperty Name="R_Currenttakehome" ColumnName="R_Currenttakehome" />
+                <ScalarProperty Name="R_reasongap" ColumnName="R_reasongap" />
+                <ScalarProperty Name="R_friendcnt" ColumnName="R_friendcnt" />
+                <ScalarProperty Name="R_FamilyCnt" ColumnName="R_FamilyCnt" />
+                <ScalarProperty Name="R_Skills" ColumnName="R_Skills" />
+                <ScalarProperty Name="R_CreateOn" ColumnName="R_CreateOn" />
+                <ScalarProperty Name="R_CreateBy" ColumnName="R_CreateBy" />
+                <ScalarProperty Name="R_Status" ColumnName="R_Status" />
+                <ScalarProperty Name="R_Resumename" ColumnName="R_Resumename" />
+                <ScalarProperty Name="R_Native" ColumnName="R_Native" />
+                <ScalarProperty Name="R_Pref_Location" ColumnName="R_Pref_Location" />
+                <ScalarProperty Name="R_Cur_Location" ColumnName="R_Cur_Location" />
+                <ScalarProperty Name="R_Education" ColumnName="R_Education" />
+                <ScalarProperty Name="R_Any_Int_Of" ColumnName="R_Any_Int_Of" />
+                <ScalarProperty Name="R_Reason" ColumnName="R_Reason" />
+                <ScalarProperty Name="R_Exp_CTC" ColumnName="R_Exp_CTC" />
+                <ScalarProperty Name="R_Cur_CTC" ColumnName="R_Cur_CTC" />
+                <ScalarProperty Name="R_Canjoin" ColumnName="R_Canjoin" />
+                <ScalarProperty Name="R_NP" ColumnName="R_NP" />
+                <ScalarProperty Name="R_Cur_Des" ColumnName="R_Cur_Des" />
+                <ScalarProperty Name="R_Cur_Com" ColumnName="R_Cur_Com" />
+                <ScalarProperty Name="R_Rel_Exp" ColumnName="R_Rel_Exp" />
+                <ScalarProperty Name="R_Tot_Exp" ColumnName="R_Tot_Exp" />
+                <ScalarProperty Name="R_Email" ColumnName="R_Email" />
+                <ScalarProperty Name="R_Alt_Cnt" ColumnName="R_Alt_Cnt" />
+                <ScalarProperty Name="R_Cnt" ColumnName="R_Cnt" />
+                <ScalarProperty Name="R_Address" ColumnName="R_Address" />
+                <ScalarProperty Name="R_DOB" ColumnName="R_DOB" />
+                <ScalarProperty Name="R_Name" ColumnName="R_Name" />
+                <ScalarProperty Name="R_Jid" ColumnName="R_Jid" />
+                <ScalarProperty Name="R_Id" ColumnName="R_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Arche_Resume_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Arche_Resume_Master">
+              <MappingFragment StoreEntitySet="Arche_Resume_Master">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Resume" ColumnName="Resume" />
+                <ScalarProperty Name="CTC" ColumnName="CTC" />
+                <ScalarProperty Name="Notice" ColumnName="Notice" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Skill" ColumnName="Skill" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AR_Id" ColumnName="AR_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reyna_SalarySlip_Master">
+            <EntityTypeMapping TypeName="ATS2019_dbModel.Reyna_SalarySlip_Master">
+              <MappingFragment StoreEntitySet="Reyna_SalarySlip_Master">
+                <ScalarProperty Name="Salary_Year" ColumnName="Salary_Year" />
+                <ScalarProperty Name="Salary_Month" ColumnName="Salary_Month" />
+                <ScalarProperty Name="Net_Payable" ColumnName="Net_Payable" />
+                <ScalarProperty Name="Total_Deduction" ColumnName="Total_Deduction" />
+                <ScalarProperty Name="Income_Tax" ColumnName="Income_Tax" />
+                <ScalarProperty Name="Advances" ColumnName="Advances" />
+                <ScalarProperty Name="PT" ColumnName="PT" />
+                <ScalarProperty Name="Esic_Employee" ColumnName="Esic_Employee" />
+                <ScalarProperty Name="Esic_Employer" ColumnName="Esic_Employer" />
+                <ScalarProperty Name="PF_Employee" ColumnName="PF_Employee" />
+                <ScalarProperty Name="PF_Employer" ColumnName="PF_Employer" />
+                <ScalarProperty Name="Total_Earning" ColumnName="Total_Earning" />
+                <ScalarProperty Name="Incentive_Allowance" ColumnName="Incentive_Allowance" />
+                <ScalarProperty Name="Flexible_Allowance" ColumnName="Flexible_Allowance" />
+                <ScalarProperty Name="Add_HRA_Allowance" ColumnName="Add_HRA_Allowance" />
+                <ScalarProperty Name="Medical_Allowance" ColumnName="Medical_Allowance" />
+                <ScalarProperty Name="Conveyance_Allowance" ColumnName="Conveyance_Allowance" />
+                <ScalarProperty Name="Employer_Cont_To_PF" ColumnName="Employer_Cont_To_PF" />
+                <ScalarProperty Name="House_Rent" ColumnName="House_Rent" />
+                <ScalarProperty Name="Basic" ColumnName="Basic" />
+                <ScalarProperty Name="Gross_Salary_Payable" ColumnName="Gross_Salary_Payable" />
+                <ScalarProperty Name="Total_Payable_Days" ColumnName="Total_Payable_Days" />
+                <ScalarProperty Name="LWP_Days" ColumnName="LWP_Days" />
+                <ScalarProperty Name="Paid_Leave" ColumnName="Paid_Leave" />
+                <ScalarProperty Name="Total_Days" ColumnName="Total_Days" />
+                <ScalarProperty Name="Additional_HRA_Allowance" ColumnName="Additional_HRA_Allowance" />
+                <ScalarProperty Name="Fixed_Medical_Allowance" ColumnName="Fixed_Medical_Allowance" />
+                <ScalarProperty Name="Fixed_Conveyance_Allowance" ColumnName="Fixed_Conveyance_Allowance" />
+                <ScalarProperty Name="Fixed_HRA" ColumnName="Fixed_HRA" />
+                <ScalarProperty Name="Basic_Salary" ColumnName="Basic_Salary" />
+                <ScalarProperty Name="CTC" ColumnName="CTC" />
+                <ScalarProperty Name="Employee_Pan" ColumnName="Employee_Pan" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+                <ScalarProperty Name="Employee_Code" ColumnName="Employee_Code" />
+                <ScalarProperty Name="Salary_Id" ColumnName="Salary_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

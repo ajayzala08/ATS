@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ATS2019_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ATS2019_dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Attendance_Master" EntityType="ATS2019_dbModel.Attendance_Master" />
+    <EntitySet Name="Client_Master" EntityType="ATS2019_dbModel.Client_Master" />
+    <EntitySet Name="DailyTarget_Master" EntityType="ATS2019_dbModel.DailyTarget_Master" />
+    <EntitySet Name="HolidayList_Master" EntityType="ATS2019_dbModel.HolidayList_Master" />
+    <EntitySet Name="Interview_Master" EntityType="ATS2019_dbModel.Interview_Master" />
+    <EntitySet Name="Leave_Master" EntityType="ATS2019_dbModel.Leave_Master" />
+    <EntitySet Name="NewClient_Master" EntityType="ATS2019_dbModel.NewClient_Master" />
+    <EntitySet Name="Offer_Master" EntityType="ATS2019_dbModel.Offer_Master" />
+    <EntitySet Name="Recruiter_SalarySlip_Master" EntityType="ATS2019_dbModel.Recruiter_SalarySlip_Master" />
+    <EntitySet Name="Requirement_Master" EntityType="ATS2019_dbModel.Requirement_Master" />
+    <EntitySet Name="Role_Master" EntityType="ATS2019_dbModel.Role_Master" />
+    <EntitySet Name="SalesClient_Master" EntityType="ATS2019_dbModel.SalesClient_Master" />
+    <EntitySet Name="SalesClientCall_Master" EntityType="ATS2019_dbModel.SalesClientCall_Master" />
+    <EntitySet Name="SalesClientwiseMonthlyRevenue_Master" EntityType="ATS2019_dbModel.SalesClientwiseMonthlyRevenue_Master" />
+    <EntitySet Name="SalesMonthlyReport_Master" EntityType="ATS2019_dbModel.SalesMonthlyReport_Master" />
+    <EntitySet Name="Team_Master" EntityType="ATS2019_dbModel.Team_Master" />
+    <EntitySet Name="User_Activity_Master" EntityType="ATS2019_dbModel.User_Activity_Master" />
+    <EntitySet Name="User_Master" EntityType="ATS2019_dbModel.User_Master" />
+    <EntitySet Name="Resume_Master" EntityType="ATS2019_dbModel.Resume_Master" />
+    <EntitySet Name="Arche_Resume_Master" EntityType="ATS2019_dbModel.Arche_Resume_Master" />
+  </EntityContainer>
+  <EntityType Name="Attendance_Master">
+    <Key>
+      <PropertyRef Name="A_Id" />
+    </Key>
+    <Property Name="A_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="A_Name" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="A_InTime" Type="DateTime" Precision="3" />
+    <Property Name="A_InIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="A_OutTime" Type="DateTime" Precision="3" />
+    <Property Name="A_OutIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="A_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Client_Master">
+    <Key>
+      <PropertyRef Name="C_id" />
+    </Key>
+    <Property Name="C_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="C_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="C_Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="C_Cont_Person1" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="C_Cont_Person1_No" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+    <Property Name="C_Cont_Person1_Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="C_Cont_Person2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="C_Cont_Person2_No" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="C_Cont_Person2_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="C_Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_Segment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_Margin_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_Margin" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="C_Is_Active" Type="Int32" Nullable="false" />
+    <Property Name="C_Is_Delete" Type="Int32" Nullable="false" />
+    <Property Name="C_Created_On" Type="DateTime" Precision="3" />
+    <Property Name="C_Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="C_Updated_On" Type="DateTime" Precision="3" />
+    <Property Name="C_Updated_By" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DailyTarget_Master">
+    <Key>
+      <PropertyRef Name="DT_Id" />
+    </Key>
+    <Property Name="DT_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DT_AssignTo" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="DT_Target" Type="Int32" Nullable="false" />
+    <Property Name="DT_Achived" Type="Int32" Nullable="false" />
+    <Property Name="DT_CreateOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="HolidayList_Master">
+    <Key>
+      <PropertyRef Name="Hid" />
+    </Key>
+    <Property Name="Hid" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Hname" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Hdate" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Hday" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Htype" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Interview_Master">
+    <Key>
+      <PropertyRef Name="I_Id" />
+    </Key>
+    <Property Name="I_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="I_RId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="I_JId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="I_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="I_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="I_By" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="I_Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="I_Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="I_Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="I_CreateBy" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="I_CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Leave_Master">
+    <Key>
+      <PropertyRef Name="L_Id" />
+    </Key>
+    <Property Name="L_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="L_Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="L_Noofdays" Type="Double" Nullable="false" />
+    <Property Name="L_Inwords" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="L_Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="L_StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="L_EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="L_CreateBy" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="L_CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="L_TL_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="L_TL_Datetime" Type="DateTime" Precision="3" />
+    <Property Name="L_M_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="L_M_Datetime" Type="DateTime" Precision="3" />
+    <Property Name="L_Admin_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="L_Admin_Datetime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="NewClient_Master">
+    <Key>
+      <PropertyRef Name="NId" />
+    </Key>
+    <Property Name="NId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NClient" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="NPoc" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="NStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NRemark1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NRemark2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Offer_Master">
+    <Key>
+      <PropertyRef Name="O_Id" />
+    </Key>
+    <Property Name="O_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="O_Iid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="O_Rid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="O_Jid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="O_Fullname" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="O_DOB" Type="DateTime" Precision="3" />
+    <Property Name="O_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="O_MaritalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="O_Cur_Add" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="O_Perm_Add" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="O_Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="O_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="O_Cur_Des" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="O_Off_Des" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="O_Skill" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="O_Tot_Exp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="O_Rel_Exp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="O_Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="O_Alt_Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="O_Pan" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="O_Client" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="O_Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="O_CTC" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="O_ECTC" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="O_BR" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="O_PR" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="O_GP" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="O_GPM" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="O_Sel_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_Off_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_Join_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_Exit_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_Emergency" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="O_Account_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="O_Bank_Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="O_Branch" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="O_IFCI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="O_Aadhar" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="O_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="O_Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="O_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="O_Recruiter" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="O_Recuiter_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_Teamlead" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="O_Teamlead_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_AM" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="O_AM_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_Manager_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="O_Manager_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_Account_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="O_Account_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_Admin_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="O_Admin_Date" Type="DateTime" Precision="3" />
+    <Property Name="O_IsActive" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Recruiter_SalarySlip_Master">
+    <Key>
+      <PropertyRef Name="Salary_Id" />
+    </Key>
+    <Property Name="Salary_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_Code" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Employee_Name" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="Employee_Pan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CTC" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Basic_Salary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fixed_HRA" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fixed_Conveyance_Allowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fixed_Medical_Allowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Additional_HRA_Allowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Days" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Paid_Leave" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="LWP_Days" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Payable_Days" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Gross_Salary_Payable" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Basic" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="House_Rent" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Employer_Cont_To_PF" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Conveyance_Allowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Medical_Allowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Add_HRA_Allowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Flexible_Allowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Incentive_Allowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Earning" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PF_Employer" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PF_Employee" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Esic_Employer" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Esic_Employee" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Advances" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Income_Tax" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Deduction" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Net_Payable" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Salary_Month" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Salary_Year" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Requirement_Master">
+    <Key>
+      <PropertyRef Name="J_Id" />
+    </Key>
+    <Property Name="J_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="J_Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="J_Client_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="J_Skill" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="J_Position" Type="Int32" Nullable="false" />
+    <Property Name="J_Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="J_EndClient" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="J_AssignUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="J_Tot_Min_Exp" Type="Double" />
+    <Property Name="J_Tot_Max_Exp" Type="Double" />
+    <Property Name="J_Rel_Min_Exp" Type="Double" />
+    <Property Name="J_Rel_Max_Exp" Type="Double" />
+    <Property Name="J_Bill_Rate" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="J_Pay_Rate" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="J_Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="J_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="J_Employment_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="J_POC" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="J_POC_No" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="J_JD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="J_Status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="J_Is_Active" Type="Int64" Nullable="false" />
+    <Property Name="J_Is_Delete" Type="Int64" Nullable="false" />
+    <Property Name="J_CreatedBy" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="J_CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="J_UpdatedBy" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="J_UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="J_MandatorySkill" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Role_Master">
+    <Key>
+      <PropertyRef Name="R_id" />
+    </Key>
+    <Property Name="R_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="R_ecode" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="R_role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SalesClient_Master">
+    <Key>
+      <PropertyRef Name="SC_Id" />
+    </Key>
+    <Property Name="SC_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SC_UID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="SC_CID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="SalesClientCall_Master">
+    <Key>
+      <PropertyRef Name="scr_id" />
+    </Key>
+    <Property Name="scr_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="scr_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="scr_client" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="scr_poc" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="scr_agenda" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="scr_createdby" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="scr_creaton" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="SalesClientwiseMonthlyRevenue_Master">
+    <Key>
+      <PropertyRef Name="SRR_Id" />
+    </Key>
+    <Property Name="SRR_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SRR_Month" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SRR_Year" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="SRR_Client" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="SRR_Current_HC" Type="Int32" />
+    <Property Name="SRR_Total_GP" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SRR_Avg_GP_Added" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SRR_Start" Type="Int32" />
+    <Property Name="SRR_Attrition" Type="Int32" />
+    <Property Name="SRR_BD" Type="Int32" />
+    <Property Name="SRR_Actual_Start" Type="Int32" />
+    <Property Name="SRR_Net_Total_GP" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SRR_Total_GP_Added" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SRR_Typeof_Employement" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="SRR_Create_On" Type="DateTime" Precision="3" />
+    <Property Name="SRR_Create_By" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="SRR_Update_On" Type="DateTime" Precision="3" />
+    <Property Name="SRR_Update_By" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SalesMonthlyReport_Master">
+    <Key>
+      <PropertyRef Name="SMR_Id" />
+    </Key>
+    <Property Name="SMR_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SMR_Month" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SMR_Year" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SMR_Client" Type="Int32" Nullable="false" />
+    <Property Name="SMR_OpenPosition" Type="Int32" Nullable="false" />
+    <Property Name="SMR_BusinessReceived" Type="Int32" Nullable="false" />
+    <Property Name="SMR_Submission" Type="Int32" Nullable="false" />
+    <Property Name="SMR_Int_received" Type="Int32" Nullable="false" />
+    <Property Name="SMR_Feedback_Pending" Type="Int32" Nullable="false" />
+    <Property Name="SMR_Noshow" Type="Int32" Nullable="false" />
+    <Property Name="SMR_Offer" Type="Int32" Nullable="false" />
+    <Property Name="SMR_BD" Type="Int32" Nullable="false" />
+    <Property Name="SMR_Join" Type="Int32" Nullable="false" />
+    <Property Name="SMR_PassThrough" Type="Int32" Nullable="false" />
+    <Property Name="SMR_BulkDeal" Type="Int32" Nullable="false" />
+    <Property Name="SMR_POExtended" Type="Int32" Nullable="false" />
+    <Property Name="SMR_AttritionSaved" Type="Int32" Nullable="false" />
+    <Property Name="SMR_TotalRevenue" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="SMR_Remark" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Team_Master">
+    <Key>
+      <PropertyRef Name="T_Id" />
+    </Key>
+    <Property Name="T_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="T_TeamLead" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="T_TeamMember" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="T_CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="T_CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="T_UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="T_UpdatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="User_Activity_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="Activity" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ActivityOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="User_Master">
+    <Key>
+      <PropertyRef Name="E_Id" />
+    </Key>
+    <Property Name="E_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="E_Code" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="E_Fullname" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="E_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="E_Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="E_DOB" Type="DateTime" Precision="3" />
+    <Property Name="E_ContNo" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="E_EEmergencyContNo" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="E_UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="E_Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="E_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="E_CAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="E_Postal" Type="Decimal" Precision="6" Scale="0" />
+    <Property Name="E_Etype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_Company_Name" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="E_Department" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="E_Designation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="E_Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="E_OfferDate" Type="DateTime" Precision="3" />
+    <Property Name="E_JoinDate" Type="DateTime" Precision="3" />
+    <Property Name="E_ExitDate" Type="DateTime" Precision="3" />
+    <Property Name="E_Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_BankName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="E_AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_Branch" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="E_IFC_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_PF_Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_PAN_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_Aadhar_no" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="E_Salary" Type="Double" />
+    <Property Name="E_PF" Type="Double" />
+    <Property Name="E_PT" Type="Double" />
+    <Property Name="E_ESI" Type="Double" />
+    <Property Name="E_PF_Apply" Type="Int32" />
+    <Property Name="E_PT_Apply" Type="Int32" />
+    <Property Name="E_ESI_Apply" Type="Int32" />
+    <Property Name="E_Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="E_Is_Active" Type="Int32" />
+    <Property Name="E_Is_Delete" Type="Int32" />
+    <Property Name="E_Created_By" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="E_Created_On" Type="DateTime" Precision="3" />
+    <Property Name="E_Updated_By" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="E_Updated_On" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Resume_Master">
+    <Key>
+      <PropertyRef Name="R_Id" />
+    </Key>
+    <Property Name="R_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="R_Jid" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="R_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="R_DOB" Type="DateTime" Precision="3" />
+    <Property Name="R_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="R_Cnt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="R_Alt_Cnt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="R_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_Tot_Exp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Rel_Exp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Cur_Com" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="R_Cur_Des" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="R_NP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Canjoin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Cur_CTC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_Exp_CTC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="R_Any_Int_Of" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Education" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_Cur_Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_Pref_Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_Native" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_Resumename" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="R_Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_CreateBy" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="R_CreateOn" Type="DateTime" Precision="3" />
+    <Property Name="R_Skills" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="R_FamilyCnt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="R_friendcnt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="R_reasongap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="R_Currenttakehome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Currentdrawing" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Lastsalaryhike" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_Expectedtakehome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Expecteddrawing" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_HikeReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="R_Howjoinearlyreason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="R_WhyJoinArche" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="R_HaveDocs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="R_Reasonofrelocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="R_Pannumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="R_Telephonicinttiming" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_F2Favailibility" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="R_updateby" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="R_updateon" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Arche_Resume_Master">
+    <Key>
+      <PropertyRef Name="AR_Id" />
+    </Key>
+    <Property Name="AR_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Contact" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="Skill" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Experience" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Notice" Type="Int32" />
+    <Property Name="CTC" Type="Double" />
+    <Property Name="Resume" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

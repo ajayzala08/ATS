@@ -1,0 +1,162 @@
+﻿@model ATS2019_2.Models.LeaveModel
+@{
+    ViewBag.Title = "ApplyForLeave";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("ApplyForLeave", "ATS", FormMethod.Post, new { @class = "formonly" }))
+{
+    <h1>Apply For Leave</h1>
+    if (ViewBag.msg != null)
+    {
+        <div id="sendmessage"> @ViewBag.msg </div>
+    }
+<div class="contentform" style="justify-content:center">
+    <div class="leftcontact">
+
+
+        <div class="form-group">
+            <p>Leave Type <span></span></p>
+            <span class="icon-case"><i class="fab fa-artstation"></i></span>
+            @Html.DropDownListFor(m => m.ltype, new List<SelectListItem> { new SelectListItem { Text = "Sick Leave", Value = "Sick Leave" }, new SelectListItem { Text = "Casual Leave", Value = "Casual Leave" }, new SelectListItem { Text = "Earn Leave", Value = "Earn Leave" } }, "Select", new { @class = "drp", @required = "required" })
+            <div class="validation"></div>
+        </div>
+
+        <div class="form-group">
+            <p>Leave For <span></span></p>
+            <span class="icon-case"><i class="fab fa-artstation"></i></span>
+            @Html.DropDownListFor(m => m.linwords, new List<SelectListItem> { new SelectListItem { Text = "Half Day", Value = "Half Day" }, new SelectListItem { Text = "Full Day", Value = "Full Day" }, new SelectListItem { Text = "More than 1 Day", Value = "More than 1 Day" } }, "Select", new { @class = "drpfor", @required = "required" })
+            <div class="validation"></div>
+        </div>
+
+        <div class="form-group">
+            <p>Start Date <span></span></p>
+            <span class="icon-case"><i class="fab fa-bity"></i></span>
+            @Html.TextBoxFor(m => m.lstartdate, new { @class = "ggg", @type = "Date", @required = "required" })
+            <div class="validation"></div>
+        </div>
+        <div class="form-group">
+            <p>End Date <span></span></p>
+            <span class="icon-case"><i class="fab fa-bity"></i></span>
+            @Html.TextBoxFor(m => m.lenddate, new { @class = "ggg", @type = "Date", @required = "required" })
+            <div class="validation"></div>
+        </div>
+        <div class="form-group">
+            <p>Reason <span></span></p>
+            <span class="icon-case"><i class="fab fa-bity"></i></span>
+            @Html.TextAreaFor(m => m.lreason, new { @class = "ggg", @required = "required" })
+            <div class="validation"></div>
+        </div>
+        <div id="divagree">
+
+
+            <div id="casualid" style="display:none">
+                <ul style="list-style-type:disc;">
+                    <li>Note : </li>
+                    <li>
+                         Casual leave can be taken for minimum half day and maximum 4 days.
+                    </li>
+                    <li>
+                         Casual leave should be applied  one day in advance and a week in advance when it is applied for more than 2 days.
+                    </li>
+
+                </ul>
+
+            </div>
+            <div id="earnid" style="display:none">
+                <ul style="list-style-type:disc;">
+                    <li>Note : </li>
+                    <li>Leave for more than 4 days can be taken as Earned leave.</li>
+
+                    <li>Earned Leave should be applied 15 days in advance.</li>
+                </ul>
+            </div>
+            <p><input type="checkbox" id="chbcheck" /> Confirm &amp; Apply <span></span></p>
+            <div class="validation"></div>
+        </div>
+    </div>
+    
+   
+</div>
+    <style>
+        .bouton-contact[disabled] {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+    </style>
+    @*<button type="submit" class="bouton-contact" id="btnsubmit" disabled>Apply</button>*@
+
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        <input type="submit" class="bouton-contact" value="Apply" id="btnsubmit" style="width:200px; margin-right:10px;" disabled />
+
+        <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+        @if (TempData["msg"] != null)
+        {
+            <div style="background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline;">
+                @TempData["msg"].ToString()
+            </div>
+        }
+    </div>
+
+        }
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+
+            $(function () {
+
+                $(".drp").change(function () {
+                    
+                    var drpvalue = $(".drp option:selected").html();
+                    if (drpvalue == "Casual Leave") {
+                        $("#casualid").css('display', 'block');
+                        $("#earnid").css('display', 'none');
+                    }
+                    else if (drpvalue == "Earn Leave") {
+                        $("#casualid").css('display', 'none');
+                        $("#earnid").css('display', 'block');
+                    }
+                    else {
+                        $("#casualid").css('display', 'none');
+                        $("#earnid").css('display', 'none');
+                    }
+
+                });
+
+                $("#chbcheck").click(function () {
+                    if ($(this).is(":checked")) {
+                        $("#btnsubmit").prop('disabled', false);
+                    }
+                    else {
+                        $("#btnsubmit").prop('disabled', true);
+                    }
+
+                });
+
+                $("#btnsubmit").click(function () {
+
+                    if ($(".drp option:selected").html() == "Select") {
+                        alert("Select Leave Type.");
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+
+                    if ($(".drpfor option:selected").html() == "Select") {
+                        alert("Select Leave Dates.");
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+
+                });
+
+
+
+
+            });
+        </script>

@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewBag.Title = "ViewPendingApprovalList";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+    <form class="onlyform">
+        <h1>View Pending Approval</h1>
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+        <div style="width:100%; padding:10px;">
+            <table id="myTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number</th>
+                        <th>Email</th>
+                        <th>Total Experience</th>
+                        <th>Notice Period</th>
+                        <th>CTC</th>
+                        <th>Recruiter Name</th>
+                        <th>Accept</th>
+                        <th>Reject</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+        <div id="mainpopup">
+            <img src="~/img/loading.gif" style="position:absolute;top:40%;left:50%; transform:translate(-40,-50); height:100px; width:100px;" />
+        </div>
+
+        <style>
+            .interviewclass {
+                cursor: pointer;
+            }
+
+            .rejectclass {
+                cursor: pointer;
+            }
+
+            .acceptclass {
+                cursor: pointer;
+            }
+
+            .deleteclass {
+                cursor: pointer;
+            }
+
+
+            #mainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #intpop {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 700px;
+                height: 500px;
+                background: #f2f2f2;
+                box-shadow: 1px 5px 10px #aaa;
+                border-radius: 10px;
+            }
+
+            #intmainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #intpop h2 {
+                margin: 0 auto;
+                color: #fff;
+                font-family: Tahoma, Arial, sans-serif;
+                text-align: center;
+                padding: 5px;
+                background: gray;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            #intpop .intpopcontent {
+                border-top: 2px solid gray;
+                overflow: auto;
+                color: #333;
+                padding: 10px;
+            }
+
+            #intpop .close {
+                position: absolute;
+                top: 20px;
+                right: 100px;
+                transition: all 200ms;
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+            }
+        </style>
+
+        @section scripts{
+
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+            <script scr="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+            <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+
+                    $("#myTable").DataTable({
+                        "processing": true, // for show progress bar
+                        //"serverSide": true, // for process server side
+                        "filter": true, // this is for disable filter (search box)
+                        "orderMulti": true, // for disable multiple column at once
+
+                        "ajax": {
+                            "url": "/ATS/LoadPendingApprovalData",
+                            "type": "GET",
+                            "datatype": "json"
+
+                        },
+
+                        "columns": [
+
+                            { "data": "rname", "name": "rname", "autoWidth": true },
+                            { "data": "rcnt", "name": "rcnt", "autoWidth": true },
+                            { "data": "remail", "name": "remail", "autoWidth": true },
+                            { "data": "rtotexp", "name": "rtotexp", "autoWidth": true },
+                            { "data": "rnp", "name": "rnp", "autoWidth": true },
+                            { "data": "rctc", "name": "rctc", "autoWidth": true },
+                            {
+                                "data": "rcreateby", "name": "rcreateby", "autoWidth": true
+                            }
+                            ,
+                            {
+                                mRender: function (data, type, row) {
+                                    var acceptlink = '<a class="acceptclass"  rid=' + row.rid + '><img src="/img/Accept.png" width="25px" height="25px" /></a>';
+                                    return acceptlink;
+                                }
+                            },
+                            {
+                                mRender: function (data, type, row) {
+                                    var rejectlink = '<a class="rejectclass"  rid=' + row.rid + '><img src="/img/reject.png" width="25px" height="25px" /></a>';
+                                    return rejectlink;
+                                }
+                            }
+                        ],
+                            dom: 'Bfrtip',
+                            buttons: [
+                                {
+                                    extend: 'excel',
+                                    messageTop: 'Pending Apporval List',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'csv',
+                                    messageTop: 'Pending Apporval List',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'pdf',
+                                    messageTop: 'Pending Apporval List',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                'colvis'
+                            ],
+                            select: true
+                    });
+
+
+                    //Accept Resume
+                    $('#myTable').on('click', '.acceptclass', function () {
+
+
+                        var rrid = $(this).attr('rid');
+
+                        $("#mainpopup").css('visibility', 'visible');
+                        $.ajax({
+                            url: 'AcceptResume',
+                            datatype: 'json',
+                            type: 'post',
+                            data: { resid: rrid },
+                            success: function () {
+                                window.location.reload();
+                            }
+                        });
+                    });
+
+                    //Reject Resume
+                    $('#myTable').on('click', '.rejectclass', function () {
+                        var rrid = $(this).attr('rid');
+                        $("#mainpopup").css('visibility', 'visible');
+                        $.ajax({
+                            url: 'RejectResume',
+                            datatype: 'json',
+                            type: 'post',
+                            data: { resid: rrid },
+                            success: function () {
+                                window.location.reload();
+                            }
+                        });
+                    });
+                });
+            </script>
+
+
+
+
+
+        }
+
+
+
+
+    </form>
+

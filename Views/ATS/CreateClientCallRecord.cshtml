@@ -1,0 +1,83 @@
+﻿@model ATS2019_2.Models.SalesClientCallModel
+@{
+    ViewBag.Title = "CreateClientCallRecord";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("SalesClientCallRecordAdd", "ATS", FormMethod.Post))
+{
+
+    <form class="onlyform">
+        <h1>Add Sales Client Call Record </h1>
+        <div class="contentform">
+            @if (ViewBag.msg != null)
+            {
+                <div id="sendmessage">
+                    "Record Added Successfully.";
+                </div>
+            }
+
+
+            <div class="leftcontact">
+                <div class="form-group">
+                    <p>Call Date<span> * </span></p>
+                    <span class="icon-case"><i class="fas fa-calendar-alt"></i></span>
+                    @Html.TextBoxFor(m => m.dt, new { @Class = "ggg", @required = "required", @type = "date" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Select Client <span> * </span></p>
+                    <span class="icon-case"><i class="fa fa-user"></i></span>
+                    @Html.DropDownListFor(m => m.client, new SelectList(ViewBag.clientlist, "value", "value"), "Select", new { @class = "ggg", @required = "required" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="gender">
+                    <p>POC <span>  </span></p>
+                    <span class="icon-case"><i class="fa fa-user"></i></span>
+                    @Html.TextBoxFor(m => m.poc, new { @class = "ggg", @required = "required" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>Agenda <span> </span></p>
+                    <span class="icon-case"><i class="fas fa-sticky-note"></i></span>
+                    @Html.TextBoxFor(m => m.agenda, new { @class = "ggg", @required = "required" })
+                    <div class="validation"></div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="clear-fix"></div>
+
+
+        <div style="display:flex;justify-content:center;align-items:center;margin: -10px 0;">
+            <input type="submit" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Save">
+
+            <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+        
+        </div>
+        <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+            @if (TempData["msg"] != null)
+            {
+                <div style="background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline;">
+                    @TempData["msg"].ToString()
+                </div>
+            }
+        </div>
+
+
+    </form>
+
+}
+
+

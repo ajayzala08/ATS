@@ -1,0 +1,318 @@
+﻿@model ATS2019_2.Models.UserModel
+@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("CreateUser", "ATS", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <form class="onlyform">
+        <h1>Add New User</h1>
+        @if (TempData["msg"] != null)
+        {
+            <div style="background:#ff6a00;color:white;padding:5px 10px;margin-top:5px;display:inline-block;margin-left:45%;">
+                @TempData["msg"].ToString()
+                
+            </div>
+        }
+        <div class="contentform">
+
+
+
+            <div class="leftcontact">
+                <div class="form-group">
+                    <p>Employee Id<span> * </span></p>
+                    <span class="icon-case"><i class="fa fa-male"></i></span>
+                    @Html.TextBoxFor(m => m.ECode, new { @Class = "ggg", @required = "required" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Full Name <span> * </span></p>
+                    <span class="icon-case"><i class="fa fa-user"></i></span>
+                    @Html.TextBoxFor(m => m.EFullname, new { @Class = "ggg", @required = "required" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="gender">
+                    <p>Gender <span> * </span></p>
+                    <span class="icon-case"><i class="fa fa-user"></i></span>
+                    @Html.DropDownListFor(m => m.EGender, new List<SelectListItem> { new SelectListItem { Text = "Male", Value = "Male" }, new SelectListItem { Text = "Female", Value = "Female" } }, "Select", new { @class = "ggg", @required = "required" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>E-mail <span> * </span></p>
+                    <span class="icon-case"><i class="fas fa-at"></i></span>
+                    @Html.TextBoxFor(m => m.EEmail, new { @class = "ggg", @type = "email", @required = "required" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group date">
+                    <p>Date Of Birth <span> * </span></p>
+                    <span class="icon-case"><i class="fas fa-birthday-cake"></i></span>
+                    @Html.TextBoxFor(m => m.EDOB, new { @Class = "ggg", @type = "date" })
+                </div>
+
+                <div class="form-group">
+                    <p>Parmanent Address <span></span></p>
+                    <span class="icon-case"><i class="fa fa-location-arrow"></i></span>
+                    @Html.TextAreaFor(m => m.EAddress, new { @rows = "14" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>Current Address <span></span></p>
+                    <span class="icon-case"><i class="fa fa-location-arrow"></i></span>
+                    @Html.TextAreaFor(m => m.ECAddress, new { @rows = "14" })
+
+                </div>
+
+                <div class="form-group">
+                    <p>Postcode <span></span> </p>
+                    <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                    @Html.TextBoxFor(m => m.EPostal, new { @class = "ggg", @type = "number", @maxlength = "6", })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Phone number <span> </span> </p>
+                    <span class="icon-case"><i class="fa fa-phone"></i></span>
+                    @Html.TextBoxFor(m => m.EContNo, new { @class = "ggg", @type = "number", @maxlength = "10", })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Emergency Contact Number<span> </span></p>
+                    <span class="icon-case"><i class="fa fa-phone"></i></span>
+                    @Html.TextBoxFor(m => m.EEmergencyContNo, new { @class = "ggg", @type = "number", @maxlength = "10", })
+
+                    <div class="validation"></div>
+                </div>
+
+
+            </div>
+
+            <div class="rightcontact">
+
+                <div class="form-group">
+                    <p>Type <span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-unlock-alt"></i></span>
+                    @Html.DropDownListFor(m => m.EEtype, new List<SelectListItem> { new SelectListItem { Text = "Permanent", Value = "Permanent" }, new SelectListItem { Text = "Temporary", Value = "Temporary" }, new SelectListItem { Text = "Contract", Value = "Contract" } }, "Select")
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Company Name <span>*</span></p>
+                    <span class="icon-case"><i class="far fa-building"></i></span>
+                    @Html.TextBoxFor(m => m.ECompany_Name, new { @Class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Department <span>*</span></p>
+                    <span class="icon-case"><i class="fa fa-info"></i></span>
+                    @Html.TextBoxFor(m => m.EDepartment, new { @Class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Designation <span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-briefcase"></i></span>
+                    @Html.TextBoxFor(m => m.EDesignation, new { @Class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Location <span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-location-arrow"></i></span>
+                    @Html.TextBoxFor(m => m.ELocation, new { @Class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group date">
+                    <p>Offer Date<span>*</span></p>
+                    <span class="icon-case"><i class="far fa-clock"></i></span>
+                    @Html.TextBoxFor(m => m.EOfferDate, new { @Class = "ggg", @type = "date" })
+                </div>
+
+                <div class="form-group date">
+                    <p>Join Date <span>*</span></p>
+                    <span class="icon-case"><i class="far fa-clock"></i></span>
+                    @Html.TextBoxFor(m => m.EJoinDate, new { @Class = "ggg", @type = "date" })
+                </div>
+
+                <div class="form-group">
+                    <p>Role <span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-unlock-alt"></i></span>
+                    @Html.DropDownListFor(m => m.ERole, new List<SelectListItem> { new SelectListItem { Text = "Admin", Value = "Admin" }, new SelectListItem { Text = "Manager", Value = "Manager" }, new SelectListItem { Text = "Sales", Value = "Sales" }, new SelectListItem { Text = "VP", Value = "VP" }, new SelectListItem { Text = "Teamlead", Value = "Teamlead" }, new SelectListItem { Text = "Recruiter", Value = "Recruiter" }, new SelectListItem { Text = "IT", Value = "IT" }, new SelectListItem { Text = "HR", Value = "HR" }, new SelectListItem { Text = "Account", Value = "Account" }, new SelectListItem { Text = "Contract", Value = "Contract" } }, "Select Role", new { @Class = "ggg" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>User Name <span>*</span></p>
+                    <span class="icon-case"><i class="fa fa-info"></i></span>
+                    @Html.TextBoxFor(m => m.EUserName, new { @class = "ggg", @required = "required" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Password <span>*</span></p>
+                    <span class="icon-case"><i class="fas fa-unlock"></i></span>
+                    @Html.PasswordFor(m => m.EPassword, new { @class = "ggg", @required = "required" })
+
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Retype Password <span> * </span> @Html.ValidationMessageFor(m => m.ERetype)</p>
+                    <span class="icon-case"><i class="fas fa-unlock-alt"></i></span>
+                    @Html.PasswordFor(m => m.ERetype, new { @class = "ggg", @required = "required" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Blood Group <span></span></p>
+                    <span class="icon-case"><i class="fas fa-user"></i></span>
+                    @Html.TextBoxFor(m => m.EBloodGroup, new { @class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        @*</form>
+
+        <form class="onlyform">*@
+        <h1>Bank Details</h1>
+        <div class="contentform">
+            <div class="leftcontact">
+                <div class="form-group">
+                    <p>Bank Name<span></span></p>
+                    <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EBankName, new { @class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Account Number<span></span></p>
+                    <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EAccountNo, new { @class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Branch <span></span></p>
+                    <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EBranch, new { @class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>IFSC Code<span></span></p>
+                    <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EIFC_Code, new { @class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>PF Account Number <span></span></p>
+                    <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EPFAccount, new { @class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>PAN card number <span></span></p>
+                    <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EPAN_No, new { @class = "ggg" })
+                    <div class="validation"></div>
+                </div>
+
+                <div class="form-group">
+                    <p>Adhar Card Number <span></span></p>
+                    <span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EAadhar_no, new { @class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+
+            </div>
+
+            <div class="rightcontact">
+                <div class="form-group">
+                    <p>Salary <span></span></p><span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.ESalary, new { @Class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                    <p>Provident Fund <span></span></p><span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EPF, new { @Class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                    <p>Proffesional Tax (%) <span></span></p><span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EPT, new { @class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                    <p>ESI <span></span></p><span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.TextBoxFor(m => m.EESI, new { @class = "ggg", @type = "number" })
+                    <div class="validation"></div>
+                </div>
+                <div class="form-group check">
+                    <p>What Applied <span></span></p><span class="icon-case"><i class="fas fa-rupee-sign"></i></span>
+                    @Html.CheckBoxFor(m => m.EPFApply, new { @class = "ggg" }) PF Apply
+                    @Html.CheckBoxFor(m => m.EPTApply, new { @class = "ggg" })PT Apply
+                    @Html.CheckBoxFor(m => m.EESIApply, new { @class = "ggg" })ESI Apply
+
+                </div>
+
+                <div class="form-group check relative">
+                    <p>File Upload <span></span></p>
+                    <span class="icon-case"><i class="fas fa-upload"></i></span>
+                    <input type="file" name="userimage" id="userimage" />
+                </div>
+                <style>
+                    #userimage {
+                        width: 75%;
+                    }
+                </style>
+            </div>
+
+        </div>
+
+        <div class="clear-fix"></div>
+
+
+        <div style="display:flex;justify-content:center;align-items:center;margin: 20px 0;">
+            <input type="submit" class="bouton-contact" id="btnsearch" style="width:200px; margin-right:10px;" value="Save">
+
+            <input type="reset" class="bouton-contact" value="Cancel" style="width:200px; margin-left:10px;background:#e84118;" />
+        </div>
+
+
+
+        @*<script>
+
+            /*File upload*/
+            $('#file-upload').change(function () {
+                var filepath = this.value;
+                var m = filepath.match(/([^\/\\]+)$/);
+                var filename = m[1];
+                $('#filename').html(filename);
+
+            });
+
+
+        </script>*@
+    </form>
+
+}
+
+
+

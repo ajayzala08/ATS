@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "UploadReynaSalarySheet";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("UploadReynaSalarySheet", "ATS", FormMethod.Post, new { @Class = "onlyform", enctype = "multipart/form-data" }))
+{
+    <h1>Upload Salary Sheet Reyna Technologies</h1>
+    <div class="contentform">
+
+        <div class="leftcontact">
+            <div class="form-group">
+                <p>Select Salary Sheet <span>*</span> : <input type="file" value="UploadFile" name="upload" required="required"> </p>
+            </div>
+
+        </div>
+
+    </div>
+    <input type="submit" value="Upload" class="bouton-contact" />
+
+}
+

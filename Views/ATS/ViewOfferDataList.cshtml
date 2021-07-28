@@ -1,0 +1,997 @@
+﻿
+@{
+    ViewBag.Title = "ViewOfferDataList";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+
+    <form class="onlyform">
+        <h1>View Offer</h1>
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+        <div style="width:100%; padding:10px;">
+            <table class="display" id="myTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Client</th>
+                        <th>Skill</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Change Status</th>
+                        <th>Approve</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="mainpopup">
+            <div id="pop">
+                <h2>Update Offer Status</h2>
+                <div class="intpopcontent">
+                    <span id="offeerid" hidden="hidden"></span>
+                    <input type="hidden" id="txtoid" />
+                    <table width="100%">
+                        <tr>
+                            <td width="50%" style="text-align:center;vertical-align:top;"><p> Status : </p></td>
+                            <td width="50%">
+                                <select id="drpstatus">
+                                    <option>To be join</option>
+                                    <option>Hold</option>
+                                    <option>BD</option>
+                                    <option>Join</option>
+                                    <option>Reject</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%" colspan="2" height="100%">
+                                <center>
+                                    <button type="button" id="btnofferstatuse" class="bouton-contact" style="display: block;">Change Offer Status</button>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+            </div>
+        </div>
+
+        <div id="contractmainpopup">
+            <div id="contractpop">
+                <h2>Add Candidate Details</h2>
+                <div class="contractpopcontent">
+                    <span id="offeerid" hidden="hidden"></span>
+                    <div style="height:500px;overflow-y:scroll;padding-top:20px;padding-bottom:20px;">
+                        <table width="100%">
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Full Name : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtname" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Gender : </p></td>
+                                <td width="30%">
+                                    <select class="ggg" id="drpgender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Date of Birth : </p></td>
+                                <td width="30%">
+                                    <input type="date" class="ggg" id="txtdob" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Marital Status : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtmaritalstatus" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Contact Number : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtnumber" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Alternate Number : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtaltnumber" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Email : </p></td>
+                                <td width="30%">
+                                    <input type="email" class="ggg" id="txtemail" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Aadhar Number : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtaadharnumber" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Current Address : </p></td>
+                                <td width="30%">
+                                    <textarea class="ggg" id="txtcadd" rows="5"></textarea>
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Permanant Address : </p></td>
+                                <td width="30%">
+                                    <textarea class="ggg" id="txtpadd" rows="5"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Country : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtcountry" class="ggg" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Emergency Contact : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtemergencycnt" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Company Name : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtcompanyname" readonly="readonly" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Joining Location : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtjoiningloc" class="ggg" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Current Designation : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtcdes" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Offer Designation : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtodes" class="ggg" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Total Experience : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txttotexp" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Relative Experience : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtrelexp" class="ggg" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Skill : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtskill" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Selection Date  </p></td>
+                                <td width="30%">
+                                    <input type="date" class="ggg" id="txtsdate" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Offer Date : </p></td>
+                                <td width="30%">
+                                    <input type="date" class="ggg" id="txtodate" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Join Date : </p></td>
+                                <td width="30%">
+                                    <input type="date" id="txtjdate" class="ggg" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> CTC : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtctc" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> ECTC : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtectc" class="ggg" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Bill Rate (Monthly) : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtbr" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Pay Rate (Monthly) : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtpr" class="ggg" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> GP : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtgp" readonly="readonly" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> GPM : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtgpm" class="ggg" readonly="readonly" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Bank Name : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtbankname" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Account No. : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtacnumber" class="ggg" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Branch : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtbranch" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> IFCI : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtifci" class="ggg" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> PAN : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtpan" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> PF A/C No. : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtpfaccountno" class="ggg" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Status</p></td>
+                                <td width="30%">
+                                    <select class="ggg" id="drpstatus">
+                                        <option>To be join</option>
+                                        <option>Hold</option>
+                                        <option>BD</option>
+                                        <option>Join</option>
+                                        <option>Reject</option>
+                                    </select>
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Type : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtemptype" class="ggg" readonly="readonly" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Note</p></td>
+                                <td width="30%">
+                                    <textarea rows="5" id="txtnote"></textarea>
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> &nbsp; </p></td>
+                                <td width="30%">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100%" colspan="4" height="100%">
+                                    <center>
+                                        <button type="button" id="btncontract" class="bouton-contact" style="display: block;">Submit</button>
+                                    </center>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+            </div>
+        </div>
+
+        <div id="Permmainpopup">
+            <div id="Permpop">
+                <h2>Add Candidate Details</h2>
+                <div class="Permpopcontent">
+                    <span id="offeeridp" hidden="hidden"></span>
+                    <div style="height:500px;overflow-y:scroll;padding-top:20px;padding-bottom:20px;">
+                        <table width="100%">
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Full Name : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtnamep" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Gender : </p></td>
+                                <td width="30%">
+                                    <select class="ggg" id="drpgenderp">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Date of Birth : </p></td>
+                                <td width="30%">
+                                    <input type="date" class="ggg" id="txtdobp" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Marital Status : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtmaritalstatusp" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Contact Number : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtnumberp" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Alternate Number : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtaltnumberp" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Email : </p></td>
+                                <td width="30%">
+                                    <input type="email" class="ggg" id="txtemailp" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Aadhar Number : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtaadharnumberp" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Current Address : </p></td>
+                                <td width="30%">
+                                    <textarea class="ggg" id="txtcaddp" rows="5"></textarea>
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Permanant Address : </p></td>
+                                <td width="30%">
+                                    <textarea class="ggg" id="txtpaddp" rows="5"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Country : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtcountryp" class="ggg" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Emergency Contact : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtemergencycntp" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Company Name : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtcompanynamep" readonly="readonly" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Joining Location : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtjoininglocp" class="ggg" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Current Designation : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtcdesp" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Offer Designation : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtodesp" class="ggg" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Total Experience : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txttotexpp" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Relative Experience : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtrelexpp" class="ggg" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Skill : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtskillp" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Selection Date  </p></td>
+                                <td width="30%">
+                                    <input type="date" class="ggg" id="txtsdatep" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Offer Date : </p></td>
+                                <td width="30%">
+                                    <input type="date" class="ggg" id="txtodatep" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Join Date : </p></td>
+                                <td width="30%">
+                                    <input type="date" id="txtjdatep" class="ggg" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> CTC : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtctcp" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Margin(In %) : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtmarginp" class="ggg" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> GP : </p></td>
+                                <td width="30%">
+                                    <input type="number" class="ggg" id="txtgpp" readonly="readonly" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Type : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtemptypep" class="ggg" readonly="readonly" />
+                                </td>
+                            </tr>
+                            @*<tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Bank Name : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtbankname" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Account No. : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtacnumber" class="ggg" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Branch : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtbranch" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> IFCI : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtifci" class="ggg" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> PAN : </p></td>
+                                <td width="30%">
+                                    <input type="text" class="ggg" id="txtpan" />
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> PF A/C No. : </p></td>
+                                <td width="30%">
+                                    <input type="number" id="txtpfaccountno" class="ggg" />
+                                </td>
+                            </tr>*@
+                            <tr>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Status : </p></td>
+                                <td width="30%">
+                                    <select class="ggg" id="drpstatusp">
+                                        <option>To be join</option>
+                                        <option>Hold</option>
+                                        <option>BD</option>
+                                        <option>Join</option>
+                                        <option>Reject</option>
+
+                                    </select>
+                                </td>
+                                <td width="20%" style="text-align:center;vertical-align:top;"><p> Note : </p></td>
+                                <td width="30%">
+                                    <input type="text" id="txtnotep" class="ggg" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="100%" colspan="4" height="100%">
+                                    <center>
+                                        <button type="button" id="btnpermanant" class="bouton-contact" style="display: block;">Submit</button>
+                                    </center>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+            </div>
+        </div>
+
+
+        <style>
+            .offerclass {
+                cursor: pointer;
+            }
+
+            .offerdetailclass {
+                cursor: pointer;
+            }
+
+            .rejectclass {
+                cursor: pointer;
+            }
+
+            .acceptclass {
+                cursor: pointer;
+            }
+
+            .AcceptClass {
+                cursor: pointer;
+            }
+
+
+            #mainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #pop {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 700px;
+                height: 500px;
+                background: #f2f2f2;
+                box-shadow: 1px 5px 10px #aaa;
+                border-radius: 10px;
+            }
+
+            #mainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #pop h2 {
+                margin: 0 auto;
+                color: #fff;
+                font-family: Tahoma, Arial, sans-serif;
+                text-align: center;
+                padding: 5px;
+                background: gray;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            #pop .intpopcontent {
+                border-top: 2px solid gray;
+                overflow: auto;
+                color: #333;
+                padding: 10px;
+            }
+
+            #pop .close {
+                position: absolute;
+                top: 20px;
+                right: 100px;
+                transition: all 200ms;
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+            }
+
+            /*Contract Details*/
+
+            #contractmainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #contractpop {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 900px;
+                height: 550px;
+                background: #f2f2f2;
+                box-shadow: 1px 5px 10px #aaa;
+                border-radius: 10px;
+            }
+
+            #contractmainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #contractpop h2 {
+                margin: 0 auto;
+                color: #fff;
+                font-family: Tahoma, Arial, sans-serif;
+                text-align: center;
+                padding: 5px;
+                background: gray;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            #contractpop .contractpopcontent {
+                border-top: 2px solid gray;
+                color: #333;
+                padding: 10px;
+            }
+
+            #contractpop .close {
+                position: absolute;
+                top: 20px;
+                right: 100px;
+                transition: all 200ms;
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+            }
+
+            /*permanant detail popup*/
+            #Permmainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #Permpop {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 900px;
+                height: 550px;
+                background: #f2f2f2;
+                box-shadow: 1px 5px 10px #aaa;
+                border-radius: 10px;
+            }
+
+            #Permmainpopup {
+                visibility: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+            }
+
+            #Permpop h2 {
+                margin: 0 auto;
+                color: #fff;
+                font-family: Tahoma, Arial, sans-serif;
+                text-align: center;
+                padding: 5px;
+                background: gray;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            #Permpop .Permpopcontent {
+                border-top: 2px solid gray;
+                color: #333;
+                padding: 10px;
+            }
+
+            #Permpop .close {
+                position: absolute;
+                top: 20px;
+                right: 100px;
+                transition: all 200ms;
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+            }
+        </style>
+
+        @section scripts{
+
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+            <script scr="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+            <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+
+            <script>
+
+                $(document).ready(function () {
+
+
+
+                    $("#myTable").DataTable({
+                        "processing": true, // for show progress bar
+                        //"serverSide": true, // for process server side
+                        "filter": true, // this is for disable filter (search box)
+                        "orderMulti": true, // for disable multiple column at once
+
+                        "ajax": {
+                            "url": "/ATS/LoadOfferDataPendingList",
+                            "type": "GET",
+                            "datatype": "json"
+
+                        },
+                        "columns": [
+                            { "data": "name", "name": "name", "autoWidth": true },
+                            { "data": "client", "name": "client", "autoWidth": true },
+                            { "data": "skill", "name": "skill", "autoWidth": true },
+                            { "data": "location", "name": "location", "autoWidth": true },
+                            { "data": "type", "name": "type", "autoWidth": true },
+                            {// this is Actions Column
+                                mRender: function (data, type, row) {
+                                    var offeradd = '<a class="offerdetailclass"  oid=' + row.oid + ' emptype=' + row.type + ' name="' + row.name + '" cn="' + row.client + '">' + row.status + '</a>';
+                                    return offeradd;
+                                }
+                            },
+                            {// this is Actions Column
+                                mRender: function (data, type, row) {
+                                    var intlink = '<a class="offerclass"  oid=' + row.oid + '>Change Status</a>';
+                                    return intlink;
+                                }
+                            },
+                            {
+                                mRender: function (data, type, row) {
+                                    var acceptlink = '<a class="AcceptClass" oid=' + row.oid + '>Approve</a>';
+                                    return acceptlink;
+                                }
+                            }
+                        ],
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'excel',
+                                messageTop: 'Offer Detail',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'csv',
+                                messageTop: 'Offer Detail',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'pdf',
+                                messageTop: 'Offer Detail',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            'colvis'
+                        ],
+                        select: true
+                    });
+
+                    $("#myTable").on('click', '.AcceptClass', function () {
+                        var ooid = $(this).attr("oid");
+
+                        $.ajax({
+                            url: 'ApproveOfferData',
+                            type: 'post',
+                            datatype: 'json',
+                            data: { ofid: ooid },
+                            success: function () {
+                                window.location.reload();
+                            }
+
+                        });
+
+                    });
+
+                    //offer detials add
+                    $("#myTable").on('click', '.offerdetailclass', function () {
+                        var ooid = $(this).attr("oid");
+                        var etype = $(this).attr("emptype");
+                        var rname = $(this).attr("name");
+                        var cname = $(this).attr("cn");
+                        var sta = $(this).html();
+
+                        if ((etype == "CONTRACTUAL") || (etype == "C2H")) {
+                            $("#txtemptype").val(etype);
+                            $("#txtname").val(rname);
+                            $("#txtcompanyname").val(cname);
+                            $("#txtoid").val(ooid);
+                            $("#contractmainpopup").css('visibility', 'visible');
+                        }
+                        else {
+                            $("#txtoid").val(ooid);
+                            $("#txtcompanynamep").val(cname);
+                            $("#txtemptypep").val(etype);
+                            $("#txtnamep").val(rname);
+                            $("#Permmainpopup").css('visibility', 'visible');
+                        }
+                    });
+
+                    //close permdetails pop
+                    $(".close").click(function () {
+                        $("#Permmainpopup").css('visibility', 'hidden');
+                    });
+
+                    //close details pop
+                    $(".close").click(function () {
+                        $("#contractmainpopup").css('visibility', 'hidden');
+                    });
+
+                    //intervieww schedule
+                    $("#myTable").on('click', '.offerclass', function () {
+
+                        var ooid = $(this).attr("oid");
+                        $("#txtoid").val(ooid);
+                        $("#mainpopup").css('visibility', 'visible');
+                    });
+                    //close popup
+                    $(".close").click(function () {
+                        $("#mainpopup").css('visibility', 'hidden');
+                    });
+
+                    //count gp and gpm
+                    $("#txtpr").blur(function () {
+                        var br = $("#txtbr").val();
+                        var pr = $("#txtpr").val();
+                        var gp = br - pr;
+                        var gpm = (gp / br) * 100;
+                        $("#txtgp").val(gp);
+                        $("#txtgpm").val(gpm);
+                    });
+
+
+                    //button contract save click
+                    $("#btncontract").click(function () {
+                        alert("button click");
+                        $.ajax({
+                            url: 'AddOfferCandidateDetails',
+                            datatype: 'json',
+                            type: 'post',
+                            data: {
+                                oid: $("#txtoid").val(),
+                                fn: $("#txtname").val(),
+                                dobdt: $("#txtdob").val(),
+                                gen: $("#drpgender").val(),
+                                marit: $("#txtmaritalstatus").val(),
+                                cadd: $("#txtcadd").val(),
+                                padd: $("#txtpadd").val(),
+                                country: $("#txtcountry").val(),
+                                email: $("#txtemail").val(),
+                                cdes: $("#txtcdes").val(),
+                                odes: $("#txtodes").val(),
+                                skill: $("#txtskill").val(),
+                                totexp: $("#txttotexp").val(),
+                                relexp: $("#txtrelexp").val(),
+                                mo: $("#txtnumber").val(),
+                                alt: $("#txtaltnumber").val(),
+                                pan: $("#txtpan").val(),
+                                client: $("#txtcompanyname").val(),
+                                loc: $("#txtjoiningloc").val(),
+                                ctc: $("#txtctc").val(),
+                                ectc: $("#txtectc").val(),
+                                br: $("#txtbr").val(),
+                                pr: $("#txtpr").val(),
+                                gp: $("#txtgp").val(),
+                                gpm: $("#txtgpm").val(),
+                                sdt: $("#txtsdate").val(),
+                                odt: $("#txtodate").val(),
+                                jdt: $("#txtjdate").val(),
+                                emergency: $("#txtemergencycnt").val(),
+                                acc: $("#txtacnumber").val(),
+                                bank: $("#txtbankname").val(),
+                                branch: $("#txtbranch").val(),
+                                ifci: $("#txtifci").val(),
+                                aadhar: $("#txtaadharnumber").val(),
+                                stats: $("#drpstatus").val(),
+                                emptype: $("#txtemptype").val(),
+                                note: $("#txtnote").val(),
+                                success: function () {
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    });
+
+                    //button click event to add perm details
+
+                    $("#txtmarginp").blur(function () {
+                        var ctc = $("#txtctcp").val();
+                        var margin = $("#txtmarginp").val();
+                        gp = (ctc * margin) / 100;
+                        $("#txtgpp").val(gp);
+                    });
+
+                    $("#btnpermanant").click(function () {
+                        alert("perm");
+                        $.ajax({
+                            url: 'AddofferdetailsPerm',
+                            datatype: 'json',
+                            type: 'post',
+                            data: {
+                                oid: $("#txtoid").val(),
+                                fn: $("#txtnamep").val(),
+                                dobdt: $("#txtdobp").val(),
+                                gen: $("#drpgenderp").val(),
+                                marit: $("#txtmaritalstatusp").val(),
+                                cadd: $("#txtcaddp").val(),
+                                padd: $("#txtpaddp").val(),
+                                country: $("#txtcountryp").val(),
+                                email: $("#txtemailp").val(),
+                                cdes: $("#txtcdesp").val(),
+                                odes: $("#txtodesp").val(),
+                                skill: $("#txtskillp").val(),
+                                totexp: $("#txttotexpp").val(),
+                                relexp: $("#txtrelexpp").val(),
+                                mo: $("#txtnumberp").val(),
+                                alt: $("#txtaltnumberp").val(),
+                                client: $("#txtcompanynamep").val(),
+                                loc: $("#txtjoininglocp").val(),
+                                ctc: $("#txtctcp").val(),
+                                margin: $("#txtmarginp").val(),
+                                gp: $("#txtgpp").val(),
+                                sdt: $("#txtsdatep").val(),
+                                odt: $("#txtodatep").val(),
+                                jdt: $("#txtjdatep").val(),
+                                emergency: $("#txtemergencycntp").val(),
+                                aadhar: $("#txtaadharnumberp").val(),
+                                stats: $("#drpstatusp").val(),
+                                emptype: $("#txtemptypep").val(),
+                                note: $("#txtnotep").val(),
+                                success: function () {
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    });
+
+                    $("#btnofferstatuse").click(function () {
+                        var status = $("#drpstatus").val();
+                        var ofid = $("#txtoid").val();
+                        $.ajax({
+                            type: "post",
+                            datatype: "json",
+                            url: "UpdateOfferStats",
+                            data: { oid: ofid, st: status },
+                            success: function () {
+                                window.location.reload();
+                            }
+
+
+                        });
+
+
+                    });
+
+                });
+            </script>
+        }
+    </form>

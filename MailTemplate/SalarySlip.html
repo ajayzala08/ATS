@@ -1,0 +1,272 @@
+﻿<html>
+<head>
+    <title></title>
+<style>
+.Main{
+	
+	/*border:1px solid;
+	border-color:black;
+	height:100%;
+    width:100%;*/
+    margin-top :25px;
+    margin-bottom:25px;
+	
+	}
+
+
+.BasicDetails table td{font-weight:bold;}
+.BasicDetails table tr , .AmountDetails table tr{height: 35px;}
+.BasicDetails {
+    margin-top: 15px;
+}
+/*.AmountDetails{border:1px solid;margin-top:20px;border-left-width: 0px;border-bottom-width: 0px;border-top-width: 0px;border-collapse:collapse;}*/
+.AmountDetails table th{font-size:18px;}
+
+
+.AmountDetails table td:nth-child(2) {
+ text-align:right;
+ padding:10px;
+}
+
+
+.AmountDetails table td:nth-child(4) {
+ text-align:right;
+ padding:10px;
+}
+
+
+.AmountDetails table td:nth-child(1) {
+padding-left:10px;
+}
+.AmountDetails table td:nth-child(4) {
+padding-left:10px;
+}
+
+.netamt,.inwordsdisplay{margin-left:165px;}
+.inwords,.net{margin-top:20px;font-weight:bold;}
+.message{margin-top:20px;font-weight:bold;background-color:bisque;text-align:center;margin-bottom: 10px;}
+
+			
+</style>
+
+</head>
+<body>
+
+<div class="Main">
+<div class="wrapper">
+
+
+<div class="BasicDetails">
+    <table width="100%">
+        <tr>
+            <td width="25%">
+                <img src="http://www.archesoftronix.in/img/logo.png" width="250px" height="150px" />
+            </td>
+            <td colspan="3" width="75%">
+                <center>
+                    
+
+                    <h2 style="color:darkblue"> ARCHE SOFTRONIX PRIVATE LIMITED</h2>
+                    <span style="color:darkblue">401, Iscon Atria-2, Opp. GET, Gotri Road,Vadodara-390021</span>
+                </center>
+
+            </td>
+            
+        </tr>
+
+
+        <tr>
+            <td colspan="4" width="100%" style="background-color:lightgoldenrodyellow">
+                <center>
+                    Pay Slip for Month of {monthyear}
+                </center>
+            </td>
+        </tr>
+        <tr>
+
+            <td width=25%>Employee Code</td>
+
+            <td width=25%>{Employeecode}</td>
+
+            <td width=25%>PAN</td>
+
+            <td width=25%>{pan}</td>
+        </tr>
+        <tr>
+            <td width=25%>Employee Name</td>
+
+            <td width=25%>{Employeename}</td>
+
+            <td width=25%>PF No.</td>
+
+            <td width=25%>{pfno}</td>
+        </tr>
+        <tr>
+            <td width=25%>Designation</td>
+
+            <td width=25%>{designation}</td>
+
+            <td width=25%>ESI No.</td>
+
+            <td width=25%>{esino}</td>
+        </tr>
+        <tr>
+            <td width=25%>Client</td>
+
+            <td width=25%>{client}</td>
+
+            <td width=25%>Date Of Birth</td>
+
+            <td width=25%>{dob}</td>
+        </tr>
+        <tr>
+            <td width=25%>Bank Name</td>
+
+            <td width=25%>{bankname}</td>
+
+            <td width=25%>Date of Joining</td>
+
+            <td width=25%>{doj}</td>
+        </tr>
+        <tr>
+            <td width=25%>Bank A/c no.</td>
+
+            <td width=25%>{bankAc}</td>
+
+            <td width=25%>Total Days</td>
+
+            <td width=25%>{totaldays}</td>
+        </tr>
+        <tr>
+            <td width="25%">Payable Days </td>
+            <td width="25%">{payabledays}</td>
+            <td width="25%">LOP Days</td>
+            <td width="25%">{LOP}</td>
+        </tr>
+
+
+    </table>
+
+
+
+
+</div>
+    <br/>
+<div class="AmountDetails" width=100% >
+<table width=100% cellpadding="0" cellspacing="0" border="1px solid" >
+    <th width=25% style="background-color:lightgoldenrodyellow"><b>Earning</b></th>
+    <th width=25% style="background-color:lightgoldenrodyellow"><b>Amount (Rs.)</b></th>
+    <th width=25% style="background-color:lightgoldenrodyellow"><b>Deduction</b></th>
+    <th width=25% style="background-color:lightgoldenrodyellow"><b>Amount (Rs.)</b></th>
+	<tr>
+	<td width=25%>Basic</td>
+	
+	<td width=25%>{basic}</td>
+
+	<td width=25%>PF-Employee Contribution</td>
+
+	<td width=25%>{employeepf}</td>
+	</tr>
+	<tr>
+	<td width=25%>HRA</td>
+	
+	<td width=25%>{hra}</td>
+
+	<td width=25%>ESI</td>
+
+	<td width=25%>{esi}</td>
+	</tr>
+	<tr>
+	<td width=25%>Conveyence Allowance</td>
+	
+	<td width=25%>{coneyence}</td>
+
+	<td width=25%>Professional Tax</td>
+
+	<td width=25%>{pt}</td>
+	</tr>
+	<tr>
+	<td width=25%>Medical Allowance</td>
+	
+	<td width=25%>{medical}</td>
+
+	<td width=25%>Income Tax</td>
+
+	<td width=25%>{incometax}</td>
+	</tr>
+	<tr>
+	<td width=25%>Educational Allowance</td>
+	
+	<td width=25%>{educationl}</td>
+
+	<td width=25%>Advances Recovered</td>
+
+	<td width=25%>{advances}</td>
+	</tr>
+	<tr>
+	<td width=25%>Variable Pay</td>
+	
+	<td width=25%>{variablepay}</td>
+
+	<td width=25%>PF-Employer's Contribution</td>
+
+	<td width=25%>{employerpf}</td>
+	</tr>
+	<tr>
+	<td width=25%>PF-Employer's Contribution</td>
+	
+	<td width=25%>{employerpf}</td>
+
+	<td width=25%></td>
+
+	<td width=25%></td>
+	
+	</tr>
+	<tr>
+	<td width=25% style="text-align:center;background-color:lightgoldenrodyellow"><b>Total</b></td>
+	
+	<td width=25% style="text-align:right;background-color:lightgoldenrodyellow"><b>{earining}</b></td>
+
+	<td width=25% style="text-align:center;background-color:lightgoldenrodyellow"><b>Total</b></td>
+
+	<td width=25% style="text-align:right;background-color:lightgoldenrodyellow"><b>{deduction}</b></td>
+	</tr>
+	</table>
+	<table width="100%" style="border-bottom-style:none;">
+	<tr>
+		<td width="50%">
+		Gross Pay :  {fearnings}
+		</td>
+		<td width="50%" colspan="3" style="text-align:left;">
+		Net Pay : {netamt}
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" width="100%">
+			InWords : {inwords}
+		</td>
+	</tr>
+	</table>
+	<br/>
+	<br/>
+	<br/>
+	<p style="background-color:lightgoldenrodyellow"><b> Note</b> : This is a computer generated copy and no signature is required.</p>
+</div>
+
+
+
+
+    
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

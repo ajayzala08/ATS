@@ -1,0 +1,116 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewDailyActivity</title>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+    
+
+</head>
+<body>
+    <center> <h2 style="font-size: 24px;background: #145 none repeat scroll 0% 0%;background: #485563;background: -webkit-linear-gradient(to right, #485563, #29323c);background: linear-gradient(to right, #485563, #29323c);background: #3a4660;color: rgb(255, 255, 255);height: 70px;line-height: 70px;margin: auto;text-shadow: none;letter-spacing: 1px;text-align: center;border-radius: 0;">Daily Activity</h2> </center>
+    <div style="width:100%;padding:10px;">
+        
+         <div style="width:47%; padding:10px;float:left;">
+            <center><h2> Today's Target </h2></center>
+            <table id="myTable" class="display cell-border">
+                <thead>
+                    <tr>
+                        <th>Recruiter Name</th>
+                        <th>Target</th>
+                        <th>Achived</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+
+        <div style="width:47%; padding:10px;float:left;">
+            <center><h2> Today's Closure </h2></center>
+            <table id="myTableC" class="display cell-border">
+                <thead>
+                    <tr>
+                        <th>Recruiter Name</th>
+                        <th>Closure</th>
+                        
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+
+    </div>
+    
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function () {
+
+            $("#myTable").DataTable({
+                "processing": true, // for show progress bar
+                // "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": true, // for disable multiple column at once
+
+                "ajax": {
+                    "url": "/ATS/LoadDailyTargetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                        { "data": "DT_AssignTo", "name": "DT_AssignTo", "autoWidth": true },
+                        { "data": "DT_Target", "name": "DT_Target", "autoWidth": true },
+                        { "data": "DT_Achived", "name": "DT_Achived", "autoWidth": true }
+                ]
+            });
+
+            $("#myTableC").DataTable({
+                "processing": true, // for show progress bar
+                // "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": true, // for disable multiple column at once
+
+                "ajax": {
+                    "url": "/ATS/LoadDailyClosureData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                        { "data": "name", "name": "name", "autoWidth": true },
+                        { "data": "closure", "name": "closure", "autoWidth": true }
+                        
+                ]
+            });
+            setTimeout(function () {
+                location.reload();
+            }, 60000);
+        });
+    </script>
+</body>
+
+   
+    
+
+</html>

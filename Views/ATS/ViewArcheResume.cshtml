@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "ViewArcheResume";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+    <form class="onlyform">
+        <h1>Total Requirement</h1>
+        @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+
+        <div style="width:100%; padding:10px;">
+
+            <table id="myTable" class="display cell-border">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact No.</th>
+                        <th>Email</th>
+                        <th>Skill</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Download</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+        @section scripts{
+            @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+            <script type="text/javascript">
+
+            var downloadrole = @(User.IsInRole("Download Resume")?"true":"false");
+                
+
+
+
+            $(document).ready(function () {
+
+                $("#myTable").DataTable({
+                    "processing": true, // for show progress bar
+                    // "serverSide": true, // for process server side
+                    "filter": true, // this is for disable filter (search box)
+                    "orderMulti": false, // for disable multiple column at once
+                    "aaSorting": [], //disable initial sorting
+                    "ajax": {
+                        "url": "/ATS/LoadArcheResumeData",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    "columnDefs": [
+                        {
+                            "targets": [6],
+                            "visible": downloadrole
+                        },
+                        
+                    ],
+                    "columns": [
+                        { "data": "Name", "name": "Name", "autoWidth": true },
+                        { "data": "Contact", "name": "Contact", "autoWidth": true },
+                        { "data": "Email", "name": "Email", "autoWidth": true },
+                        { "data": "Skill", "name": "Skill", "autoWidth": true },
+                        { "data": "Location", "name": "Location", "autoWidth": true },
+                        {
+                            "data": "CreatedOn",
+                            'render': function (date) {
+                                var date = new Date(parseInt(date.substr(6)));
+                                var month = date.getMonth() + 1;
+                                return date.getDate() + "/" + month + "/" + date.getFullYear();
+                            }
+                        },
+                        {
+                            mRender: function (data, type, row) {
+                                var lnkresume = '@Html.ActionLink("Download", "DownloadResume", new { @resumename = -1 }, new { @target = "_blank", @Class="linkclass"})';
+                                lnkresume = lnkresume.replace("-1", row.Resume);
+                                return lnkresume;
+                            }
+                        }
+                        
+                        
+                    ],
+                    dom: 'Bfrtip',
+                    Buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+
+
+   
+
+
+
+    });
+            </script>
+        }
+
+    </form>
+

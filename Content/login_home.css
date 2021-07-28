@@ -1,0 +1,237 @@
+body {
+    background: url('../img/09.jpeg') no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: Arial, Tahoma;
+    font-size: 20px;
+    color: #343434;
+    text-align: center;
+}
+
+p {
+    color: #ffffff;
+    font-family: 'Krub', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Krub', sans-serif;
+    font-weight: bold;
+}
+
+a {
+    font-family: 'Krub', sans-serif;
+}
+
+/*-=-=-=-=-=-=-=-=-=-*/
+/* Column Grids */
+/*-=-=-=-=-=-=-=-=-= */
+
+.col_half {
+    width: 49%;
+}
+
+.col_third {
+    width: 32%;
+}
+
+.col_fourth {
+    width: 23.5%;
+}
+
+.col_fifth {
+    width: 18.4%;
+}
+
+.col_sixth {
+    width: 15%;
+}
+
+.col_three_fourth {
+    width: 74.5%;
+}
+
+.col_twothird {
+    width: 66%;
+}
+
+.col_half,
+.col_third,
+.col_twothird,
+.col_fourth,
+.col_three_fourth,
+.col_fifth {
+    width: 100%;
+    position: relative;
+    display: inline;
+    display: inline-block;
+    float: left;
+    margin: 10px 0px 10px 0px;
+}
+
+.end {
+    margin-right: 0 !important;
+}
+
+/*-=-=-=-=-=-=-=-=-=-=- */
+/* Flip Panel */
+/*-=-=-=-=-=-=-=-=-=-=- */
+
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /*    background: #02AAB0;*/
+    background: #485563;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgba(41, 50, 60, 0.3), rgba(72, 85, 99, 0.3));
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(41, 50, 60, 0.3), rgba(72, 85, 99, 0.3));
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.wrapper {
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    hoverflow: hidden;
+    padding: 20px;
+    background: rgba(238, 238, 238, 0.9);
+    border-radius: 20px;
+    border-left: 5px solid #706fd3;
+    border-bottom: 5px solid #706fd3;
+    transition: all .3s;
+    box-shadow: -5px 5px 0px #706fd3;
+}
+
+.wrapper:hover {
+    border-left: 5px solid #474787;
+    border-bottom: 5px solid #474787;
+    box-shadow: -5px 5px 0px #474787;
+}
+
+.wrapper img {
+    margin: -30px;
+    width: 200px;
+}
+
+.wrapper h3 {
+    color: #333;
+    margin-top: 10px 20px;
+    font-size: 16px;
+}
+
+.wrapper_inner {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+}
+
+.panel {
+    margin: 0 0 0 15px;
+    height: 100px;
+    position: relative;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+}
+
+.panel .front,
+.panel .back {
+    text-align: center;
+}
+
+.panel .front {
+    height: inherit;
+    position: absolute;
+    top: 0;
+    z-index: 900;
+    text-align: center;
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+    -moz-transform: rotateX(0deg) rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.panel .back {
+    height: inherit;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.panel.flip .front {
+    z-index: 900;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+}
+
+.panel.flip .back {
+    z-index: 1000;
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+    -moz-transform: rotateX(0deg) rotateY(0deg);
+}
+
+.box1 {
+    background-color: #706fd3;
+    width: 100px;
+    height: 60px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.box2 {
+    background-color: #474787;
+    width: 100px;
+    height: 60px;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    text-decoration: none;
+    line-height: 15px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.box1 h2 {
+    color: #fff;
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    line-height: 50px;
+}

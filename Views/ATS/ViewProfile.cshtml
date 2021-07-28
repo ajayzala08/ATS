@@ -1,0 +1,50 @@
+﻿@model ATS2019_2.Models.UserModel
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+@*<section class="content">*@
+<form class="onlyform">
+    <h1> @Model.EFullname </h1>
+    <div class="content-inner">
+        
+        <div class="p-photo">
+            <img src="~/UserImage/@Model.Ephoto" alt="Profile Pic">
+        </div>
+        <ul>
+            <li>
+                <h3 style="display: inline-block">Employee Code:</h3>
+                <p style="display: inline-block">@Model.ECode</p>
+            </li>
+            <li>
+                <h3 style="display: inline-block">Date Of Birth:</h3>
+                <p style="display: inline-block">@Model.EDOB.Value.ToString("dd MMMM yyyy") </p>
+            </li>
+            <li>
+                <h3 style="display: inline-block">Designation:</h3>
+                <p style="display: inline-block">@Model.EDesignation</p>
+            </li>
+            <li>
+                <h3 style="display: inline-block">Email:</h3>
+                <p style="display: inline-block">@Model.EEmail</p>
+            </li>
+            <li>
+                <h3 style="display: inline-block">Address:</h3>
+                <p style="display: inline-block">@Model.EAddress</p>
+            </li>
+            <li>
+                <h3 style="display: inline-block">Contact Number:</h3>
+                <p style="display: inline-block">@Model.EContNo</p>
+            </li>
+            <li>
+                <h3 style="display: inline-block">Blood Group:</h3>
+                <p style="display: inline-block">@Model.EBloodGroup</p>
+            </li>
+        </ul>
+        @*<a href="#">Edit Profile</a>*@
+
+    </div>
+</form>
+@*</section>*@
+

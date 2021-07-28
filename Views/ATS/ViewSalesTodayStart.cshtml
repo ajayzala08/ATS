@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "ViewSalesTodayStart";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+<form class="onlyform">
+    <h1>Start</h1>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+
+    <div style="width:100%; padding:10px;">
+        <table class="display" id="myTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Client</th>
+                    <th>Skill</th>
+                    <th>Location</th>
+                    <th>Type</th>
+                    <th>Select Date</th>
+                    <th>Offer Date</th>
+                    <th>Start Date</th>
+                    <th>Recruiter</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    @section scripts{
+
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                
+                $("#myTable").DataTable({
+                    "processing": true, // for show progress bar
+                    //"serverSide": true, // for process server side
+                    "filter": true, // this is for disable filter (search box)
+                    "orderMulti": true, // for disable multiple column at once
+
+                    "ajax": {
+                        "url": "/ATS/LoadMonthStart",
+                        "type": "GET",
+                        "datatype": "json",
+                    },
+                    "columns": [
+                            { "data": "f.O_Fullname", "name": "f.O_Fullname", "autoWidth": true },
+                            { "data": "i.C_Name", "name": "i.C_Name", "autoWidth": true },
+                            { "data": "e.J_Skill", "name": "e.J_Skill", "autoWidth": true },
+                            { "data": "e.J_Location", "name": "e.J_Location", "autoWidth": true },
+                            { "data": "e.J_Employment_Type", "name": "e.J_Employment_Type", "autoWidth": true },
+                            {
+                                "data": "f.O_Sel_Date",
+                                'render': function (date) {
+                                    var date = new Date(parseInt(date.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                }
+                            },
+                            {
+                                "data": "f.O_Off_Date",
+                                'render': function (date) {
+                                    var date = new Date(parseInt(date.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                }
+                            },
+                            {
+                                "data": "f.O_Join_Date",
+                                'render': function (date) {
+                                    var date = new Date(parseInt(date.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                }
+                            },
+                            { "data": "g.E_Fullname", "name": "g.E_Fullname", "autoWidth": true },
+                            {// this is Actions Column
+                                mRender: function (data, type, row) {
+                                    var intlink = '<a class="offerclass"  oid=' + row.f.O_Id  +'>'+ row.f.O_Status +'</a>';
+                                    return intlink;
+                                }
+                            }
+                    ]
+                });
+
+            });
+        </script>
+    }
+
+
+</form>

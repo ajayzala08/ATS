@@ -1,0 +1,825 @@
+﻿
+@{
+    ViewBag.Title = "Salesdashboardnew";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("todaychartContainer", {
+            animationEnabled: true,
+            animationDuration: 5000,
+            exportEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Submission/Interview/Offer/Hire"
+            },
+            axisY: {
+                title: "Value"
+            },
+            data: [{
+                bevelEnabled: true,
+                type: "column",
+                indexLabel: "{y}",
+                showInLegend: false,
+                toolTipContent: "{label} : {y}",
+                //legendText: "{x}",
+                //legendText: "Submission",
+                dataPoints: @Html.Raw(ViewBag.TodayChartdata),
+
+            }
+            ]
+        });
+        chart.render();
+
+        var chart = new CanvasJS.Chart("yesterdaychartContainer", {
+            animationEnabled: true,
+            animationDuration: 5000,
+            exportEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Submission/Interview/Offer/Hire"
+            },
+            axisY: {
+                title: "Value"
+            },
+            data: [{
+                bevelEnabled: true,
+                type: "column",
+                indexLabel: "{y}",
+                showInLegend: false,
+                toolTipContent: "{label} : {y}",
+                //legendText: "{x}",
+                //legendText: "Submission",
+                dataPoints: @Html.Raw(ViewBag.yesterdayChartdata),
+
+            }
+            ]
+        });
+        chart.render();
+
+        var chart = new CanvasJS.Chart("thisweekchartContainer", {
+            animationEnabled: true,
+            animationDuration: 5000,
+            exportEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Submission/Interview/Offer/Hire"
+            },
+            axisY: {
+                title: "Value"
+            },
+            data: [{
+                bevelEnabled: true,
+                type: "column",
+                indexLabel: "{y}",
+                showInLegend: false,
+                toolTipContent: "{label} : {y}",
+                //legendText: "{x}",
+                //legendText: "Submission",
+                dataPoints: @Html.Raw(ViewBag.thisweekChartdata),
+
+            }
+            ]
+        });
+        chart.render();
+
+
+        var chart = new CanvasJS.Chart("monthchartContainer", {
+            animationEnabled: true,
+            animationDuration: 5000,
+            exportEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Submission/Interview/Offer/Hire"
+            },
+            axisY: {
+                title: "Value"
+            },
+            data: [{
+                bevelEnabled: true,
+                type: "column",
+                indexLabel: "{y}",
+                showInLegend: false,
+                toolTipContent: "{label} : {y}",
+                //legendText: "{x}",
+                //legendText: "Submission",
+                dataPoints: @Html.Raw(ViewBag.monthChartdata),
+
+            }
+            ]
+        });
+        chart.render();
+
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            animationDuration: 5000,
+            exportEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Submission/Interview/Offer/Hire"
+            },
+            axisY: {
+               title: "Value"
+            },
+            data: [{
+                bevelEnabled: true,
+                type: "column",
+                indexLabel: "{y}",
+                showInLegend: false,
+                toolTipContent: "{label} : {y}",
+                //legendText: "{x}",
+                //legendText: "Submission",
+                dataPoints: @Html.Raw(ViewBag.Chartdata),
+
+            }
+            ]
+        });
+        chart.render();
+
+
+
+    }
+</script>
+
+<!--    Dash-2 Start   -->
+<div class="dash-2">
+    <!--Contenedor-->
+    <div id="container">
+        <!--Pestaña 1 activa por defecto-->
+        <input id="tab-1" type="radio" name="tab-group" checked="checked" />
+        <label for="tab-1">TODAY</label>
+        <!--Pestaña 2 inactiva por defecto-->
+        <input id="tab-2" type="radio" name="tab-group" />
+        <label for="tab-2">YESTERDAY</label>
+        <!--Pestaña 3 inactiva por defecto-->
+        <input id="tab-3" type="radio" name="tab-group" />
+        <label for="tab-3">THIS WEEK</label>
+        <!--Pestaña 3 inactiva por defecto-->
+        <input id="tab-4" type="radio" name="tab-group" />
+        <label for="tab-4">THIS MONTHS</label>
+        <!--Pestaña 3 inactiva por defecto-->
+        <input id="tab-5" type="radio" name="tab-group" />
+        <label for="tab-5">TIll DATE</label>
+        <!--Pestaña 3 inactiva por defecto-->
+        <input id="tab-6" type="radio" name="tab-group" />
+        <label for="tab-6">GENERAL</label>
+
+  
+        <!--Contenido a mostrar/ocultar-->
+        <div id="content">
+            <!--Contenido de la Pestaña 1-->
+            <div id="content-1" class="contents">
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTodaySubmission">Submission</a></h4>
+                        <h1 id="spsubcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTodayInterview">Interview</a></h4>
+                        <h1 id="spintcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTodayOffer">Offer</a></h4>
+                        <h1 id="spoffcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTodayStart">Hire</a> </h4>
+                        <h1 id="spstacnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>BD</h4>
+                        <h1 id="spbdcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                </div>
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4>% Submission to Interview</h4>
+                        <h1 id="idsti">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Offer</h4>
+                        <h1 id="idsto">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Hire</h4>
+                        <h1 id="idsth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                   <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewRequirement" style="font-family: 'roboto', serif;color:#555555;"> Total Requirement </a></h4>
+                        <h1 id="spactive">-</h1>
+                        <h4>No Rank</h4>
+                   </div>
+                    </div>
+                    @*<div class="zbox-inner">
+                            <h4><h4><a style="font-family: 'roboto', serif;color:#555555;" href="/ATS/ViewPendingApprovalList">Pending Approval</a></h4></h4>
+                            <h1 id="idpal">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4><a style="font-family: 'roboto', serif;color:#555555;" href="/ATS/ViewOfferDataList">Pending Offer Detail</a></h4>
+                            <h1 id="idod">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                </div>
+                <div class="zbox">
+                        <div class="zbox-inner">
+                            <h4>Alloted Required</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Number Of Calles</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                    </div>*@
+                <div id="border">
+                </div>
+                <div id="todaychartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+            <!--Contenido de la Pestaña 2-->
+            <div id="content-2" class="contents">
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewYesterdaySubmission">Submission</a></h4>
+                        <h1 id="spysubcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewYesterdayInterview">Interview</a></h4>
+                        <h1 id="spyintcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewYesterdayOffer">Offer</a></h4>
+                        <h1 id="spyoffcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTodayStart"> Hire</a></h4>
+                        <h1 id="spystacnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>BD</h4>
+                        <h1 id="spybdcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                </div>
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4>% Submission to Interview</h4>
+                        <h1 id="idysti">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Offer</h4>
+                        <h1 id="idysto">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Hire</h4>
+                        <h1 id="idysth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    @*<div class="zbox-inner">
+                            <h4>Pending Approval</h4>
+                            <h1 id="PendignApprovalcnt">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Offer Data</h4>
+                            <h1 id="idod">-</h1>
+                            <h4>No Rank</h4>
+                        </div>*@
+                </div>
+                @*<div class="zbox">
+                        <div class="zbox-inner">
+                            <h4>Alloted Required</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Number Of Calles</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                    </div>*@
+                <div id="border">
+                </div>
+                <div id="yesterdaychartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+            <!--Contenido de la Pestaña 3-->
+            <div id="content-3" class="contents">
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewThisweekSubmission">Submission</a></h4>
+                        <h1 id="spwsubcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewThisweekInterview">Interview</a></h4>
+                        <h1 id="spwintcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViiewThisweekOffer">Offer</a></h4>
+                        <h1 id="spwoffcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewThisweekStart">Hire</a></h4>
+                        <h1 id="spwstacnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>BD</h4>
+                        <h1 id="spwbdcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                </div>
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4>% Submission to Interview</h4>
+                        <h1 id="idwsti">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Offer</h4>
+                        <h1 id="idwsto">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Hire</h4>
+                        <h1 id="idwsth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    @*<div class="zbox-inner">
+                            <h4>Pending Approval</h4>
+                            <h1 id="PendignApprovalcnt">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Offer Data</h4>
+                            <h1 id="idod">-</h1>
+                            <h4>No Rank</h4>
+                        </div>*@
+                </div>
+                @*<div class="zbox">
+                        <div class="zbox-inner">
+                            <h4>Alloted Required</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Number Of Calles</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                    </div>*@
+                <div id="border">
+                </div>
+                <div id="thisweekchartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+
+            <div id="content-4" class="contents">
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewMonthSubmission">Submission</a></h4>
+                        <h1 id="spsubmissionmonth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewMonthIntervieww">Interview</a></h4>
+                        <h1 id="spinterviewmonth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewMonthOffer">Offer</a></h4>
+                        <h1 id="spoffermonth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewMonthStart">Hire</a></h4>
+                        <h1 id="spstartmonth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>BD</h4>
+                        <h1 id="idbdcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                </div>
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4>% Submission to Interview</h4>
+                        <h1 id="idmsti">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Offer</h4>
+                        <h1 id="idmsto">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Hire</h4>
+                        <h1 id="idmsth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    @*<div class="zbox-inner">
+                            <h4>Pending Approval</h4>
+                            <h1 id="PendignApprovalcnt">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Offer Data</h4>
+                            <h1 id="idod">-</h1>
+                            <h4>No Rank</h4>
+                        </div>*@
+                </div>
+                @*<div class="zbox">
+                        <div class="zbox-inner">
+                            <h4>Alloted Required</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Number Of Calles</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                    </div>*@
+                <div id="border">
+                </div>
+                <div id="monthchartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+            <div id="content-5" class="contents">
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTillDateSubmission">Submissionv</a></h4>
+                        <h1 id="sptdsubcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTillDateInterview">Interview</a></h4>
+                        <h1 id="sptdintcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTillDateOffer">Offer</a></h4>
+                        <h1 id="sptdoffcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a href="/ATS/ViewTillDateStart">Hire</a></h4>
+                        <h1 id="sptdstacnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>BD</h4>
+                        <h1 id="sptdbdcnt">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                </div>
+                <div class="zbox">
+                    <div class="zbox-inner">
+                        <h4>% Submission to Interview</h4>
+                        <h1 id="idtdsti">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Offer</h4>
+                        <h1 id="idtdsto">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>% Submission to Hire</h4>
+                        <h1 id="idtdsth">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    @*<div class="zbox-inner">
+                            <h4>Pending Approval</h4>
+                            <h1 id="PendignApprovalcnt">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Offer Data</h4>
+                            <h1 id="idod">-</h1>
+                            <h4>No Rank</h4>
+                        </div>*@
+                </div>
+                @*<div class="zbox">
+                        <div class="zbox-inner">
+                            <h4>Alloted Required</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Number Of Calles</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                    </div>*@
+
+                <div id="border">
+                </div>
+                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+
+
+            <div id="content-6" class="contents">
+                <div class="zbox">
+                    @*<div class="zbox-inner">
+                        <h4><a style="font-family: 'roboto', serif;color:#555555;" href="/ATS/ViewUser">User</a></h4>
+                        <h1 id="spuser">-</h1>
+                        <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4><a style="font-family: 'roboto', serif;color:#555555;" href="/ATS/Viewclient">Client</a></h4>
+                            <h1 id="spclient">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4><a style="font-family: 'roboto', serif;color:#555555;" href="/ATS/ViewPendingApprovalList">Pending Approval</a></h4>
+                            <h1 id="PendignApprovalcnt">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4><a style="font-family: 'roboto', serif;color:#555555;" href="/ATS/ViewOfferDataList">Pending Offer Detail</a></h4>
+                            <h1 id="spgofd">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4><a style="font-family: 'roboto', serif;color:#555555;" href="/ATS/ViewToBeJoinList">To Be Join</a></h4>
+                            <h1 id="idtbj">-</h1>
+                            <h4>No Rank</h4>
+                        </div>*@
+                </div>
+                <div class="zbox">
+                    @*<div class="zbox-inner">
+                        <h4>Total Requirement</h4>
+                        <h1 id="spactive">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4><a style="font-family: 'roboto', serif;color:#555555;" href="/ATS/ViewActiveRequirement">Active Requirement</a></h4>
+                        <h1 id="idactreq">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                        <h4>Deactive Requirement</h4>
+                        <h1 id="iddeactreq">-</h1>
+                        <h4>No Rank</h4>
+                    </div>
+                    <div class="zbox-inner">
+                            <h4>Pending Approval</h4>
+                            <h1 id="PendignApprovalcnt">-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Offer Data</h4>
+                            <h1 id="idod">-</h1>
+                            <h4>No Rank</h4>
+                        </div>*@
+                </div>
+                @*<div class="zbox">
+                        <div class="zbox-inner">
+                            <h4>Alloted Required</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                        <div class="zbox-inner">
+                            <h4>Number Of Calles</h4>
+                            <h1>-</h1>
+                            <h4>No Rank</h4>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--    Dash-2 End   -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.get('getclientcount', null, function (data) {
+            $("#spclient").html(data.clientcnt);
+        }, "json");
+        //month count
+        $.get('getusercount', null, function (data) {
+            $("#spuser").html(data.usercnt);
+        }, "json");
+
+        $.get('getactiverequirementcount', null, function (data) {
+            $("#spactive").html(data.reqcont);
+        }, "json");
+
+        $.get('gettodaysubmissioncount', null, function (data) {
+            $("#spsubcnt").html(data.val);
+        }, "json");
+
+        $.get('gettodayinterviewcount', null, function (data) {
+            $("#spintcnt").html(data.val);
+        }, "json");
+
+        $.get('gettodayoffercount', null, function (data) {
+            $("#spoffcnt").html(data.val);
+        }, "json");
+
+        $.get('gettodaystartcount', null, function (data) {
+            $("#spstacnt").html(data.val);
+        }, "json");
+
+        $.get('gettodayBDcount', null, function (data) {
+            $("#spbdcnt").html(data.val);
+        }, "json");
+
+        $.get('getmonthsubmissioncount', null, function (data) {
+            $("#spsubmissionmonth").html(data.val);
+        }, "json");
+
+        $.get('getmonthinterviewcount', null, function (data) {
+            $("#spinterviewmonth").html(data.val);
+        }, "json");
+
+        $.get('getmonthoffercount', null, function (data) {
+            $("#spoffermonth").html(data.val);
+        }, "json");
+
+        $.get('getmonthstartcount', null, function (data) {
+            $("#spstartmonth").html(data.val);
+        }, "json");
+
+        //Pending Accept Reject Count
+        $.get('getAcceptRejectCountTeam', null, function (data) {
+            $("#PendignApprovalcnt").html(data.val);
+            $("#idpal").html(data.val);
+        }, "json");
+
+        $.get('getoffereddataaddcount', null, function (data) {
+            $("#idod").html(data.val);
+            $("#spgofd").html(data.val);
+        }, "json");
+
+        //To be join count data
+        $.get('gettobejoincount', null, function (data) {
+            $("#idtbj").html(data.tbjc);
+        }, "json");
+
+        $.get('getonlyactiverequirementcount', null, function (data) {
+            $("#idactreq").html(data.actreqcont);
+        }, "json");
+
+        $.get('getnotactiverequirementcount', null, function (data) {
+            $("#iddeactreq").html(data.deactreqcont);
+        }, "json");
+
+        //today %  of Submission to Interview, Offer, Hire
+        $.get('gettodaysubmissiontointerviewpercet', null, function (data) {
+            $("#idsti").html(data.val);
+        }, "json");
+
+        $.get('gettodaysubmissiontoofferpercet', null, function (data) {
+            $("#idsto").html(data.val);
+        }, "json");
+
+        $.get('gettodaysubmissiontohirepercet', null, function (data) {
+            $("#idsth").html(data.val);
+        }, "json");
+
+        //Yesterday Count Data
+
+        $.get('getyesterdaysubmissioncount', null, function (data) {
+            $("#spysubcnt").html(data.val);
+        }, "json");
+
+        $.get('getyesterdayinterviewcount', null, function (data) {
+            $("#spyintcnt").html(data.val);
+        }, "json");
+
+        $.get('getyesterdayoffercount', null, function (data) {
+            $("#spyoffcnt").html(data.val);
+        }, "json");
+
+        $.get('getyesterdaystartcount', null, function (data) {
+            $("#spystacnt").html(data.val);
+        }, "json");
+
+        $.get('getyesterdayBDcount', null, function (data) {
+            $("#spybdcnt").html(data.val);
+        }, "json");
+
+        $.get('getyesterdaysubmissiontointerviewpercet', null, function (data) {
+            $("#idysti").html(data.val);
+        }, "json");
+
+        $.get('getyesterdaysubmissiontoofferpercet', null, function (data) {
+            $("#idysto").html(data.val);
+        }, "json");
+
+        $.get('getyesterdaysubmissiontohirepercet', null, function (data) {
+            $("#idysth").html(data.val);
+        }, "json");
+
+        //week count data
+        $.get('getweeksubmissioncount', null, function (data) {
+            $("#spwsubcnt").html(data.val);
+        }, "json");
+
+        $.get('getweekinterviewcount', null, function (data) {
+            $("#spwintcnt").html(data.val);
+        }, "json");
+
+        $.get('getweekoffercount', null, function (data) {
+            $("#spwoffcnt").html(data.val);
+        }, "json");
+
+        $.get('getweekstartcount', null, function (data) {
+            $("#spwstacnt").html(data.val);
+        }, "json");
+
+        $.get('getweekBDcount', null, function (data) {
+            $("#spwbdcnt").html(data.val);
+        }, "json");
+
+        $.get('getweeksubmissiontointerviewpercet', null, function (data) {
+            $("#idwsti").html(data.val);
+        }, "json");
+
+        $.get('getweeksubmissiontoofferpercet', null, function (data) {
+            $("#idwsto").html(data.val);
+        }, "json");
+
+        $.get('getweeksubmissiontohirepercet', null, function (data) {
+            $("#idwsth").html(data.val);
+        }, "json");
+
+        //month % data getmonthBDcount
+
+        $.get('getmonthBDcount', null, function (data) {
+            $("#idbdcnt").html(data.val);
+        }, "json");
+
+        $.get('getmonthsubmissiontointerviewpercet', null, function (data) {
+            $("#idmsti").html(data.val);
+        }, "json");
+
+        $.get('getmonthsubmissiontoofferpercet', null, function (data) {
+            $("#idmsto").html(data.val);
+        }, "json");
+
+        $.get('getmonthsubmissiontohirepercet', null, function (data) {
+            $("#idmsth").html(data.val);
+        }, "json");
+
+        //till date count data
+        $.get('gettdsubmissioncount', null, function (data) {
+            $("#sptdsubcnt").html(data.val
+                );
+        }, "json");
+
+        $.get('gettdinterviewcount', null, function (data) {
+            $("#sptdintcnt").html(data.val);
+        }, "json");
+
+        $.get('gettdoffercount', null, function (data) {
+            $("#sptdoffcnt").html(data.val);
+        }, "json");
+
+        $.get('gettdstartcount', null, function (data) {
+            $("#sptdstacnt").html(data.val);
+        }, "json");
+
+        $.get('gettdBDcount', null, function (data) {
+            $("#sptdbdcnt").html(data.val);
+        }, "json");
+
+        $.get('gettdsubmissiontointerviewpercet', null, function (data) {
+            $("#idtdsti").html(data.val);
+        }, "json");
+
+        $.get('gettdsubmissiontoofferpercet', null, function (data) {
+            $("#idtdsto").html(data.val);
+        }, "json");
+
+        $.get('gettdsubmissiontohirepercet', null, function (data) {
+            $("#idtdsth").html(data.val);
+        }, "json");
+
+    });
+
+</script>
+

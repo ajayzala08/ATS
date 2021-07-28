@@ -1,0 +1,491 @@
+﻿@{
+    HttpCookie cookie = Request.Cookies["authcookie"];
+    var userimgpath = cookie["imgsrc"].ToString();
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Arche Softronix Pvt. Ltd.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|roboto|Playfair+Display" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <script src="https://cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
+
+    @using System.Web.Optimization
+    @Styles.Render("~/Content/mastercss")
+    <!--
+      <link rel="stylesheet" href="~/Content/dashboard.css">
+      <link rel="stylesheet" href="~/Content/adduser.css">
+      <link href="~/Content/profile.css" rel="stylesheet" />
+      <link href="~/Content/dash2.css" rel="stylesheet" />
+
+        -->
+</head>
+
+<body>
+
+
+    <!-- Start Header  -->
+    <header>
+        <div class="logo">
+            <img src="~/img/arche2017-1k.png" alt="">
+
+            <nav>
+                <ul>
+                    @**@
+                    @if(!User.IsInRole("IT"))
+                    {
+                    <li>
+
+                        <a href="#">Requirements</a>
+                        <ul class="drop-down menu-1">
+                            @*<li><a href="#">Search Requirement</a></li>*@
+                            @if ((User.IsInRole("Admin")) || (User.IsInRole("Team Lead")) || (User.IsInRole("Manager")) || (User.IsInRole("Sales")))
+                            {
+                                <li><a href="/ATS/CreateRequirement">Create Requirement</a></li>
+                            }
+                            @if ((User.IsInRole("Admin")) || (User.IsInRole("Team Lead")) || (User.IsInRole("Manager")) || (User.IsInRole("Sales")) || (User.IsInRole("Recruiter")))
+                            {
+                                <li><a href="/ATS/ViewRequirement">View Requirement</a></li>
+                            }
+                            @if ((User.IsInRole("Admin")) || (User.IsInRole("Team Lead")) || (User.IsInRole("Manager")) || (User.IsInRole("Sales")) || (User.IsInRole("Recruiter")))
+                            {
+                                 <li><a href="/ATS/ViewCriticalRequirement">Critical Requirement</a></li>
+                            }
+                                @*<li><a href="#">Open Requirement</a></li>
+            <li><a href="#">Closed Requirement</a></li>*@
+                            </ul>
+                    </li>
+                    }
+                    @if (User.IsInRole("DataEntry"))
+                    {
+                    <li>
+                        <a href="#">Arche Resume</a>
+                        <ul class="drop-down menu-1">
+                                <li><a href="/ATS/UploadArcheResume">Upload Resume</a></li>
+                                <li><a href="/ATS/ViewArcheResume">View Resume</a></li>
+                        </ul>
+                    </li>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Sales"))
+                    {
+                        <li>
+                            <a href="#">List</a>
+                            <ul class="drop-down menu-2">
+                                <li><a href="/ATS/ViewOfferList">View Offer</a></li>
+                                <li><a href="/ATS/ViewToBeJoinList">View To Be Join</a></li>
+                                <li><a href="/ATS/ViewJoinDataList">View Join</a></li>
+                                <li><a href="/ATS/ViewBDDataList">View BD</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    <li>
+                        <a href="#">Attendance</a>
+                        <ul class="drop-down menu-1">
+                            <li><a style="width: 100%;" href="/ATS/ViewAttendance">Attendance</a></li>
+                            <li><a style="width: 100%;" href="/ATS/CheckEmployeeAttendance">Machine Attendance</a></li>
+                            <li><a style="width: 100%;" href="/ATS/ViewAllARDetails">Attendance Regularazation</a></li>
+                            <li><a style="width: 100%;" href="/ATS/ViewOverTime">OverTime</a></li>
+                        </ul>
+                    </li>
+                    <li><a target="_blank" href="~/Policy/hrpolicy.html">HR Policy</a></li>
+                    <li><a style="width: 125px;" target="_blank" href="~/EmployeeHandBook.pdf">Employee HandBook</a></li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("HR") || User.IsInRole("Manager"))
+                    {
+                        <li><a href="/ATS/Registrationlink">Registration Link</a></li>
+                    }
+                </ul>
+            </nav>
+
+
+            <a class="toggle"><i data-feather="align-justify"></i></a>
+            <div class="r-nav active">
+                <div class="r-nav-inner">
+                    <ul>
+                        <li>
+                            <h2>Requirements</h2>
+                        </li>
+                        @if ((User.IsInRole("Admin")) || (User.IsInRole("Team Lead")) || (User.IsInRole("Sales")))
+                        { 
+                        <li><a href="#">Search Requirement</a></li>
+                        <li><a href="/ATS/CreateRequirement">Create Requirement</a></li>
+                        }
+                        <li><a href="#">View Requirement</a></li>
+                        @if ((User.IsInRole("Admin")) || (User.IsInRole("Team Lead")) || (User.IsInRole("Sales")))
+                        {
+                        <li><a href="#">Open Requirement</a></li>
+                        <li><a href="#">Closed Requirement</a></li>
+                        }
+                    </ul>
+
+                    <ul class="">
+                        <li>
+                            <h2>Evolution</h2>
+                        </li>
+                        <li><a href="#">Create Evolution</a></li>
+                        <li><a href="#">View Evolution Period</a></li>
+                        <li><a href="#">Recruiter Evolution</a></li>
+                    </ul>
+
+                    <ul class="">
+                        <li>
+                            <h2>Daily Submission</h2>
+                        </li>
+                        <li><a href="#">Add Submission</a></li>
+                        <li><a href="#">View Submission</a></li>
+                    </ul>
+                </div>
+                <ul>
+                    <li class="hhh-2">
+                        <h2><a href="#">Resume</a></h2>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="profile">
+            <a href="#" class="p_link">
+                <img src=~/UserImage/@userimgpath alt="" class="image" />
+                @*<img src="~/img/pexels-photo-1499327.jpeg" alt="" class="image">*@
+                <h5>@User.Identity.Name.Substring(0,User.Identity.Name.IndexOf('.')).ToUpper()</h5>
+            </a>
+            <ul class="hover-menu-1">
+                <li><a href="~/ATS/ViewProfile">Profile</a></li>
+                <li><a href="~/ATS/ChangePassword">Change Password</a></li>
+                <li><a href="~/Login/logout">LogOut</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- /End Header  -->
+    <!-- Start Left Sidebar + content  -->
+    <section class="main">
+        <section class="sidebar">
+            <ul>
+                <li class="ai">
+                    <a href="#"><i data-feather="monitor"></i></a>
+                    <ul class="hover-menu menu-9">
+                        <h2 class="heading-menu">Dashboard</h2>
+                        @if (User.IsInRole("Recruiter"))
+                        {
+                            <li><a href="/ATS/Recruiterdashboardnew">Dashboard</a></li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="/ATS/Admindashboardnew">Dashboard</a></li>
+                        }
+                        @if (User.IsInRole("Team Lead"))
+                        {
+                            <li><a href="/ATS/Teamleaddashboardnew">Dashboard</a></li>
+                        }
+                        @if (User.IsInRole("Sales"))
+                        {
+                            <li><a href="/ATS/Salesdashboardnew">Dashboard</a></li>
+                        }
+                        @if (User.IsInRole("Manager") || User.IsInRole("DataEntry"))
+                        {
+                            <li><a href="/ATS/Managerdashboardnew">Dashboard</a></li>
+                        }
+                    </ul>
+                </li>
+
+                <li class="aa">
+                    <a href="#"><i data-feather="activity"></i></a>
+                    <ul class="hover-menu menu-1">
+                        <h2 class="heading-menu">Activity</h2>
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <li><a target="_blank" href="/ATS/ViewDailyActivity">Target/Submission</a></li>
+                            <li><a target="_blank" href="/ATS/ViewMonthIOST">Offer/Hire</a></li>
+                            <li><a target="_blank" href="/ATS/ViewColumnChart">Graph</a></li>
+                            <li><a href="/ATS/ViewATSActivity">ATS Activity</a></li>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Recruiter"))
+                        {
+                            <li><a href="/ATS/SearchResume">Search Resume</a></li>
+                        }
+                    </ul>
+                </li>
+                <li class="ah">
+                    <a href="#"><i data-feather="box"></i></a>
+                    <ul class="hover-menu menu-8">
+                        <h2 class="heading-menu">HR</h2>
+                        @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+                        {
+                            <li><a href="/ATS/ViewAttendanceReport">Attandence Report</a></li>
+                            <li><a href="/ATS/CreateHolidayList">Create Holidaylist</a></li>
+                        }
+                        <li><a href="/ATS/ViewHolidayList">View Holidaylist</a></li>
+                        <li><a href="/ATS/ApplyForLeave">Apply For Leave</a></li>
+                        <li><a href="/ATS/ViewApplyLeave">View Leave</a></li>
+                        <li><a href="/ATS/ViewLeaveBalance">Leave Balance</a></li>
+
+                    </ul>
+                </li>
+                @if ((User.IsInRole("Admin")) || (User.IsInRole("HR")))
+                {
+                    <li class="ab">
+                        <a href="#"><i data-feather="user"></i></a>
+                        <ul class="hover-menu menu-2">
+                            <h2 class="heading-menu">User Master</h2>
+                            <li><a href="/ATS/CreateUser">Add User</a></li>
+                            <li><a href="/ATS/ViewUser">View User</a></li>
+                            <li><a href="/ATS/CreateUserRole">Assign Role</a></li>
+                            <li><a href="/ATS/ViewUserRole">View Role</a></li>
+                        </ul>
+                    </li>
+                }
+                @if ((User.IsInRole("Admin")) || (User.IsInRole("Manager")) || (User.IsInRole("Sales")))
+                {
+                    <li class="ad">
+                        <a href="#"><i data-feather="users"></i></a>
+                        <ul class="hover-menu menu-4">
+                            <h2 class="heading-menu">Client Master</h2>
+                            <li><a href="/ATS/CreateClient">Add Client</a></li>
+                            <li><a href="/ATS/Viewclient">View Client</a></li>
+                        </ul>
+                    </li>
+                }
+                @if ((User.IsInRole("Admin")) || (User.IsInRole("Manager")))
+                {
+                    <li class="ac">
+                        <a href="#"><i data-feather="user-plus"></i></a>
+                        <ul class="hover-menu menu-3">
+                            <h2 class="heading-menu">Team Master</h2>
+                            <li><a href="/ATS/CreateTeam">Create Team</a></li>
+                            <li><a href="/ATS/ViewTeam">View Team</a></li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="ae">
+                        <a href="#"><i data-feather="user-check"></i></a>
+                        <ul class="hover-menu menu-5">
+                            <h2 class="heading-menu">Clienwise Sales</h2>
+                            <li><a href="/ATS/AssignClienttoSales">Assign</a></li>
+                            <li><a href="/ATS/ViewSalesClient">View</a></li>
+                        </ul>
+                    </li>
+                }
+                <li class="af">
+                    <a href="#"><i data-feather="file"></i></a>
+                    <ul class="hover-menu menu-6">
+                        <h2 class="heading-menu">Report</h2>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <li><a href="/ATS/ViewlDatewiseTeamLeadCountReport">Datewise Count Report</a></li>
+                        }
+                        @if ((User.IsInRole("Admin")) || (User.IsInRole("Manager")) || (User.IsInRole("Sales")) || (User.IsInRole("Recruiter")))
+                        {
+                            <li><a href="/ATS/DateWiseCountReport">Datewise Count Report</a></li>
+                            <li><a href="/ATS/ViewMonthReport">Month Count Report</a></li>
+                            <li><a href="/ATS/ViewTodayReport">Today Count Report</a></li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="/ATS/ViewRevenuewReportDatewise">Revenue Report</a></li>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <li><a href="/ATS/ViewRequirementProgressReport">Requirement Report</a></li>
+                        }
+                    </ul>
+                </li>
+                @if (User.IsInRole("Temp"))
+                {
+                    <li class="ag">
+                        <a href="#"><i data-feather="shield"></i></a>
+                        <ul class="hover-menu menu-7">
+                            <h2 class="heading-menu">Performance</h2>
+                            <li><a href="#">Individual</a></li>
+                            <li><a href="#">Compnies</a></li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole("Sales") || User.IsInRole("Admin"))
+                {
+                    <li class="ag">
+                        <a href="#"><i data-feather="shield"></i></a>
+                        <ul class="hover-menu menu-7">
+                            <li><a href="/ATS/SalesClientWiseMonthlyRevenueAdd">Add Revenue</a></li>
+                            <li><a href="/ATS/ViewSalesMonthClientWiseRevenueReport">View Revenue</a></li>
+                            <li><a href="/ATS/SalesMonthlyReport">Add MonthReport</a></li>
+                            <li><a href="/ATS/ViewMonthSalesReport">View MonthReport</a></li>
+                            <li><a href="/ATS/CreateClientCallRecord">Add Call Report</a> </li>
+                            <li><a href="/ATS/ViewClientCallRecord">View Call Report</a> </li>
+                        </ul>
+                    </li>
+                }
+
+
+                <li class="ai">
+                    <a href="#"><i data-feather="download"></i></a>
+                    <ul class="hover-menu menu-9">
+                        <h2 class="heading-menu">ASPL</h2>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="/ATS/UploadRecruiterSalarySheet">Upload Salary Sheet</a></li>
+                        }
+                        <li><a href="/ATS/ViewRecuiterSalarySlip">View Salary Slip</a></li>
+
+                    </ul>
+                </li>
+                <li class="ai">
+                    <a href="#"><i data-feather="download"></i></a>
+                    <ul class="hover-menu menu-9">
+                        <h2 class="heading-menu">RT</h2>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="/ATS/UploadReynaSalarySheet">Upload Salary Sheet</a></li>
+                        }
+                        <li><a href="/ATS/ViewReynaSalarySlip">View Salary Slip</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <!--   /End sidebar here     -->
+
+        <section class="content">
+            @RenderBody()
+        </section>
+        
+
+        <!--  Chat popup  -->
+
+        <div id="center-text">
+        </div>
+        <div id="body">
+            <img src="~/img/new.png" id="imgnew" style="display:none;position:fixed;z-index:999999999999999999999999999999;bottom:70px;right:50px;width:50px; " />
+            <div id="chat-circle" class="btn_chat btn-raised">
+                <div id="chat-overlay"></div>
+                <i data-feather="message-circle"></i>
+            </div>
+
+            <div class="chat-box">
+                <div class="chat-box-header">
+                    <select id="users" class="form-control col-md-4">
+                        <option>All</option>
+                    </select>
+                    <span class="chat-box-toggle"><i data-feather="x-circle"></i></span>
+                </div>
+                <div class="chat-box-body">
+                    <div class="chat-box-overlay">
+                    </div>
+                    <div class="chat-logs" id="chatlog">
+
+                    </div>
+                    <!--chat-log -->
+                </div>
+                <div class="chat-input">
+                    <form>
+                        <input type="text" id="chat-input" placeholder="Send a message..."/>
+                        <button type="button" id="btnsend" class="chat-submit"><i data-feather="play"></i></button>
+                        <input type="hidden" id="un" value=@User.Identity.Name.Substring(0,User.Identity.Name.IndexOf('.')).ToString().ToUpper() />
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        </section>
+        <!--  \END Chat pop up/  -->
+        <!--  Script  -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="~/Scripts/home.js"></script>
+    @*<script src="~/Scripts/jquery-1.6.4.min.js"></script>*@
+    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        
+        var un = $("#un").val();
+        var chats = $.connection.myChat;
+        //var chats = con.createHubProxy('mychat');
+
+        chats.client.senddata = function (un, msg) {
+            var list = "<li>" + un + " : " + msg + "</li>";
+            $("#ulchatlist").append(list);
+            $("#chat-input").val('');
+            $("#chat-input").focus();
+        }
+
+        // Create a function that the hub can call to broadcast chat messages.
+        chats.client.broadcastMessage = function (name, message) {
+            //Interpret smileys
+            //message = message.replace(":)", "<img src=\"/images/smile.gif\" class=\"smileys\" />");
+            //message = message.replace(":D", "<img src=\"/images/laugh.gif\" class=\"smileys\" />");
+            //message = message.replace(":o", "<img src=\"/images/cool.gif\" class=\"smileys\" />");
+
+            //display the message
+            $("#imgnew").css('display', 'block');
+            if (name == un) {
+                $('#chatlog').append('<div class="border" style="text-align:left;background:rgba(255,255,255,0.5);padding:10px;width:100%;"><span style="color:orange">' + name + '</span>: ' + message + '</div><br>');
+            }
+            else {
+                $('#chatlog').append('<div class="border" style="text-align:right;background:rgba(255,255,255,0.5);padding:10px;width:100%;"><span style="color:orange">' + name + '</span>: ' + message + '</div><br>');
+            }
+        };
+
+        chats.client.online = function (name) {
+            
+            // Update list of users
+            if (name == un)
+            {
+                $('#onlineusers').append('<div class="border" style="color:green">You: ' + name + '</div><hr/>');
+                //$("#users").append('<option value="' + name + '">' + name + '</option>');
+            }
+            else {
+                $('#onlineusers').append('<div class="border">' + name + '</div><hr/>');
+                $("#users").append('<option value="' + name + '">' + name + '</option>');
+            }
+        };
+
+        chats.client.enters = function (name) {
+            
+            $('#chatlog').append('<div style="font-style:italic;"><i>' + name + ' joins the conversation</i></div>');
+            $("#users").append('<option value="' + name + '">' + name + '</option>');
+            $('#onlineusers').append('<div class="border">' + name + '</div><hr/>');
+        };
+
+        chats.client.disconnected = function (name) {
+            //Calls when someone leaves the page
+            $('#chatlog').append('<div style="font-style:italic;"><i>' + name + ' leaves the conversation</i></div>');
+            $('#onlineusers div').remove(":contains('" + name + "')");
+            $("#users option").remove(":contains('" + name + "')");
+        };
+
+        $.connection.hub.start().done(function () {
+            
+
+            chats.server.notify(un, $.connection.hub.id);
+
+            $("#btnsend").click(function () {
+                var username = un;
+                var umessage = $("#chat-input").val();
+
+                //chats.server.sendnewmassage(username,umessage);
+                chats.server.sendToSpecific(un, $('#chat-input').val(), $("#users").val());
+                $('#chat-input').val('');
+            });
+
+        });
+
+
+
+
+    });
+
+    </script>
+        @RenderSection("scripts", required: false);
+</body>
+
+</html>
+

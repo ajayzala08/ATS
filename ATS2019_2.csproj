@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6F4EFAFA-CAA8-43AD-8BDE-CF872B4D17EA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ATS2019_2</RootNamespace>
+    <AssemblyName>ATS2019_2</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+    <!--<DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>-->
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <PublishDatabases>true</PublishDatabases>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.9.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.9.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Echovoice.JSON, Version=2.0.15151.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Echovoice.JSON.2.0.15151.1\lib\Echovoice.JSON.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader">
+      <HintPath>..\packages\ExcelDataReader.3.4.2\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.4.2\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="GridMvc">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ATSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ATSModel.edmx</DependentUpon>
+      <LastGenOutput>ATSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ATSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ATSModel.edmx</DependentUpon>
+      <LastGenOutput>ATSModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Content\adduser.css" />
+    <Content Include="Content\dash2.css" />
+    <Content Include="Content\dashboard.css" />
+    <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\login_2.css" />
+    <Content Include="Content\login_home.css" />
+    <Content Include="Content\profile.css" />
+    <Content Include="Global.asax" />
+    <Content Include="img\08.jpeg" />
+    <Content Include="img\09.jpeg" />
+    <Content Include="img\Accept.png" />
+    <Content Include="img\address.png" />
+    <Content Include="img\arche2017-1k.png" />
+    <Content Include="img\arche2019-1.png" />
+    <Content Include="img\contact.png" />
+    <Content Include="img\footer.PNG" />
+    <Content Include="img\header.PNG" />
+    <Content Include="img\icon\chat-oval-filled-speech-bubbles.svg" />
+    <Content Include="img\icon\man-with-tie.svg" />
+    <Content Include="img\image-1465348_640.jpg" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\mail.png" />
+    <Content Include="img\new.png" />
+    <Content Include="img\pexels-photo-1125273.jpeg" />
+    <Content Include="img\pexels-photo-1499327.jpeg" />
+    <Content Include="img\pexels-photo-267507.jpeg" />
+    <Content Include="img\reject.png" />
+    <Content Include="img\reynalogo.png" />
+    <Content Include="img\salaryslip.html" />
+    <Content Include="img\website.png" />
+    <!--  <Content Include="obj\Debug\ATS2019_2.csproj.FileListAbsolute.txt" />-->
+    <Content Include="MailTemplate\SalarySlip.html" />
+    <Content Include="obj\Debug\ATS2019_2.dll" />
+    <Content Include="obj\Debug\ATS2019_2.pdb" />
+    <Content Include="obj\Debug\TempPE\ATSModel.cs.dll" />
+    <Content Include="obj\Debug\TempPE\ATSModel.Designer.cs.dll" />
+    <Content Include="obj\Release\ATS2019_2.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\ATS2019_2.dll" />
+    <Content Include="obj\Release\ATS2019_2.pdb" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\ATS2019_2.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\EntityFramework.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\EntityFramework.SqlServer.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\ExcelDataReader.DataSet.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\ExcelDataReader.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\GridMvc.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\itextsharp.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\Microsoft.AspNet.SignalR.Core.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\Microsoft.AspNet.SignalR.SystemWeb.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\Microsoft.Owin.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\Microsoft.Owin.Security.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\Newtonsoft.Json.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\Owin.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\System.Linq.Dynamic.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\System.Web.Helpers.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\System.Web.Mvc.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\System.Web.Razor.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\System.Web.Webpages.Deployment.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\System.Web.Webpages.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\System.Web.Webpages.Razor.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\Content\adduser.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Content\dashboard.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Content\Gridmvc.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Content\login.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Content\login_2.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Content\login_home.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Content\profile.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Global.asax" />
+    <Content Include="obj\Release\Package\PackageTmp\img\08.jpeg" />
+    <Content Include="obj\Release\Package\PackageTmp\img\09.jpeg" />
+    <Content Include="obj\Release\Package\PackageTmp\img\Accept.png" />
+    <Content Include="obj\Release\Package\PackageTmp\img\arche2017-1k.png" />
+    <Content Include="obj\Release\Package\PackageTmp\img\arche2019-1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\img\icon\chat-oval-filled-speech-bubbles.svg" />
+    <Content Include="obj\Release\Package\PackageTmp\img\icon\man-with-tie.svg" />
+    <Content Include="obj\Release\Package\PackageTmp\img\image-1465348_640.jpg" />
+    <Content Include="obj\Release\Package\PackageTmp\img\loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\img\new.png" />
+    <Content Include="obj\Release\Package\PackageTmp\img\pexels-photo-1125273.jpeg" />
+    <Content Include="obj\Release\Package\PackageTmp\img\pexels-photo-1499327.jpeg" />
+    <Content Include="obj\Release\Package\PackageTmp\img\pexels-photo-267507.jpeg" />
+    <Content Include="obj\Release\Package\PackageTmp\img\reject.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Policy\hrpolicy.html" />
+    <Content Include="obj\Release\Package\PackageTmp\Scripts\gridmvc.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Scripts\gridmvc.lang.ru.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Scripts\gridmvc.min.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Scripts\home.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Scripts\jquery-1.6.4.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Scripts\jquery-1.6.4.min.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Scripts\jquery.signalR-2.4.0.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Scripts\jquery.signalR-2.4.0.min.js" />
+    <Content Include="obj\Release\Package\PackageTmp\UserImage\304.jpg" />
+    <Content Include="obj\Release\Package\PackageTmp\UserImage\4.jpg" />
+    <Content Include="obj\Release\Package\PackageTmp\UserImage\Dummy.jpg" />
+    <Content Include="obj\Release\TempPE\ATSModel.cs.dll" />
+    <Content Include="obj\Release\TempPE\ATSModel.Designer.cs.dll" />
+    <Content Include="obj\Release\_WPPLastBuildInfo.txt" />
+    <Content Include="Policy\hrpolicy.html" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
+    <Content Include="Scripts\home.js" />
+    <Content Include="obj\Debug\ATS2019_2.csprojResolveAssemblyReference.cache" />
+    <Content Include="obj\Debug\build.force" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\ATSModel.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\ATSModel.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\ATSModel.ssdl" />
+    <Content Include="obj\Release\ATS2019_2.csprojResolveAssemblyReference.cache" />
+    <Content Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Release\edmxResourcesToEmbed\ATSModel.csdl" />
+    <Content Include="obj\Release\edmxResourcesToEmbed\ATSModel.msl" />
+    <Content Include="obj\Release\edmxResourcesToEmbed\ATSModel.ssdl" />
+    <Content Include="obj\Release\Package\PackageTmp\ATSModel.edmx.diagram" />
+    <Content Include="obj\Release\Package\PackageTmp\Grid.mvc.readme" />
+    <Content Include="obj\Release\Package\PackageTmp\img\Thumbs.db" />
+    <Content Include="obj\Release\Package\PackageTmp\packages.config" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\AddNewClientStats.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Admindashboard.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ApplyForLeave.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\AssignClienttoSales.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ChangePassword.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\CreateClient.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\CreateHolidayList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\CreateRequirement.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\CreateTeam.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\CreateUser.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\CreateUserRole.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\DateWiseCountReport.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Editclient.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\EditTeam.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Edituser.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Managerdashboard.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Recruiterdashboard.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\RequireementDetailsJD.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\SalesClientWiseMonthlyRevenueAdd.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Salesdashboard.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\SalesMonthlyReport.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\SearchResume.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Teamleaddashboard.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\UploadRecruiterSalarySheet.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\UploadResume.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewActiveRequirement.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewApplyLeave.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewATSActivity.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewAttendance.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewAttendanceReport.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewBDDataList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Viewclient.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewClientStatus.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewColumnChart.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewDailyActivity.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewDeactiveOrDeleteRequirement.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewHolidayList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewInterview.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewJoinDataList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewlDatewiseTeamLeadCountReport.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewLeaveBalance.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewMonthIntervieww.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewMonthIOST.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewMonthOffer.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewMonthReport.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewMonthSalesReport.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewMonthStart.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewMonthSubmission.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewOffer.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewOfferDataList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewOfferList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewPendingApprovalList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewProfile.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewRecuiterSalarySlip.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewRequirement.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewRequirementDetail.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewReusme.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewRevenuewReportDatewise.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalarySlip.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesClient.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesClientList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesMonthClientWiseRevenueReport.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesMonthInterview.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesMonthOffer.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesMonthStart.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesMonthSubmission.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesTodayInterview.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesTodayOffer.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesTodayStart.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewSalesTodaySubmission.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewTeam.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewToBeJoinList.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewTodayInterview.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewTodayOffer.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewTodayReport.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewTodayStart.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewTodaySubmission.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewUser.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\ViewUserRole.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\Welcome.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\_BlankPage.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\ATS\_LayoutPage.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\Login\login.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\Login\_LoginPageMaster.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\Shared\_Grid.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\Shared\_GridPager.cshtml" />
+    <Content Include="obj\Release\Package\PackageTmp\Views\web.config" />
+    <Content Include="obj\Release\Package\PackageTmp\Web.config" />
+    <Content Include="obj\Release\TransformWebConfig\assist\Web.config" />
+    <Content Include="obj\Release\TransformWebConfig\original\Web.config" />
+    <Content Include="obj\Release\TransformWebConfig\transformed\Web.config" />
+    <Content Include="Employee Handbook.docx" />
+    <Content Include="EmployeeHandBook.pdf" />
+    <None Include="Properties\PublishProfiles\ats.pubxml" />
+    <None Include="Properties\PublishProfiles\ATS01.pubxml" />
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.0.min.js" />
+    <Content Include="UserImage\22.jpg" />
+    <Content Include="UserImage\30.jpg" />
+    <Content Include="UserImage\304.jpg" />
+    <Content Include="UserImage\307.jpg" />
+    <Content Include="UserImage\317.jpg" />
+    <Content Include="UserImage\4.jpg" />
+    <Content Include="UserImage\41.jpg" />
+    <Content Include="UserImage\55.png" />
+    <Content Include="UserImage\6.jpg" />
+    <Content Include="UserImage\76.jpg" />
+    <Content Include="UserImage\83.jpg" />
+    <Content Include="UserImage\98.jpg" />
+    <Content Include="UserImage\Dummy.jpg" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Arche_Resume_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATSModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ATSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATSModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ATSModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Attendance_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ATSController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="DailyTarget_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HolidayList_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hubs\MyChat.cs" />
+    <Compile Include="Interview_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Leave_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActivityViewModel.cs" />
+    <Compile Include="Models\ArcheResumeModel.cs" />
+    <Compile Include="Models\ARView.cs" />
+    <Compile Include="Models\ARViewModel.cs" />
+    <Compile Include="Models\AttendanceData.cs" />
+    <Compile Include="Models\AttendanceDataViewModel.cs" />
+    <Compile Include="Models\AttendanceModel.cs" />
+    <Compile Include="Models\Changepasswordmodel.cs" />
+    <Compile Include="Models\ClientModel.cs" />
+    <Compile Include="Models\ClientRequirementSIOHReport_Model.cs" />
+    <Compile Include="Models\ClientStatusModel.cs" />
+    <Compile Include="Models\ClosureModel.cs" />
+    <Compile Include="Models\columnchart_model.cs" />
+    <Compile Include="Models\HolidayModel.cs" />
+    <Compile Include="Models\InterviewViewModel.cs" />
+    <Compile Include="Models\LeaveBalanceModel.cs" />
+    <Compile Include="Models\LeaveModel.cs" />
+    <Compile Include="Models\loginmodel.cs" />
+    <Compile Include="Models\OTView.cs" />
+    <Compile Include="Models\RequirementModel.cs" />
+    <Compile Include="Models\ResumeModel.cs" />
+    <Compile Include="Models\SalesClientCallModel.cs" />
+    <Compile Include="Models\SalesClientModel.cs" />
+    <Compile Include="Models\SalesClientWiseMonthlyRevenueModel.cs" />
+    <Compile Include="Models\SalesMonthlyReportModel.cs" />
+    <Compile Include="Models\SIOSModel.cs" />
+    <Compile Include="Models\StartViewModel.cs" />
+    <Compile Include="Models\SubmissionViewModel.cs" />
+    <Compile Include="Models\TeamMemberModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\userrolemodel.cs" />
+    <Compile Include="Models\ViewOfferModel.cs" />
+    <Compile Include="Models\ViewTobejoinModel.cs" />
+    <Compile Include="NewClient_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NumberToWord.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Offer_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recruiter_SalarySlip_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requirement_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Resume_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reyna_SalarySlip_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesClientCall_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesClientwiseMonthlyRevenue_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesClient_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesMonthlyReport_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="Team_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRoleProvider.cs" />
+    <Compile Include="User_Activity_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User_Master.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\Login\_LoginPageMaster.cshtml" />
+    <Content Include="Views\Login\login.cshtml" />
+    <Content Include="img\Thumbs.db" />
+    <Content Include="Views\ATS\_LayoutPage.cshtml" />
+    <Content Include="Views\ATS\Admindashboard.cshtml" />
+    <Content Include="Views\ATS\CreateUser.cshtml" />
+    <Content Include="Views\ATS\ViewUser.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Grid.mvc.readme" />
+    <Content Include="Views\ATS\Edituser.cshtml" />
+    <Content Include="Views\ATS\CreateUserRole.cshtml" />
+    <Content Include="Views\ATS\ViewUserRole.cshtml" />
+    <Content Include="Views\ATS\ChangePassword.cshtml" />
+    <Content Include="Views\ATS\CreateClient.cshtml" />
+    <Content Include="Views\ATS\Viewclient.cshtml" />
+    <Content Include="Views\ATS\Editclient.cshtml" />
+    <Content Include="Views\ATS\CreateTeam.cshtml" />
+    <Content Include="Views\ATS\ViewTeam.cshtml" />
+    <Content Include="Views\ATS\EditTeam.cshtml" />
+    <Content Include="Views\ATS\CreateRequirement.cshtml" />
+    <EntityDeploy Include="ATSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ATSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ATSModel.edmx.diagram">
+      <DependentUpon>ATSModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\ATS\ViewRequirement.cshtml" />
+    <Content Include="Views\ATS\ViewRequirementDetail.cshtml" />
+    <Content Include="Views\ATS\RequireementDetailsJD.cshtml" />
+    <Content Include="Views\ATS\_BlankPage.cshtml" />
+    <Content Include="Views\ATS\UploadResume.cshtml" />
+    <Content Include="Views\ATS\ViewReusme.cshtml" />
+    <Content Include="Views\ATS\ViewOffer.cshtml" />
+    <Content Include="Views\ATS\ViewInterview.cshtml" />
+    <Content Include="Views\ATS\ViewOfferList.cshtml" />
+    <Content Include="Views\ATS\ViewToBeJoinList.cshtml" />
+    <Content Include="Views\ATS\ViewJoinDataList.cshtml" />
+    <Content Include="Views\ATS\ViewBDDataList.cshtml" />
+    <Content Include="Views\ATS\Recruiterdashboard.cshtml" />
+    <Content Include="Views\ATS\Teamleaddashboard.cshtml" />
+    <Content Include="Views\ATS\Welcome.cshtml" />
+    <Content Include="Views\ATS\ViewPendingApprovalList.cshtml" />
+    <Content Include="Views\ATS\ViewMonthSubmission.cshtml" />
+    <Content Include="Views\ATS\ViewMonthIntervieww.cshtml" />
+    <Content Include="Views\ATS\ViewMonthOffer.cshtml" />
+    <Content Include="Views\ATS\ViewMonthStart.cshtml" />
+    <Content Include="Views\ATS\ViewTodaySubmission.cshtml" />
+    <Content Include="Views\ATS\ViewTodayInterview.cshtml" />
+    <Content Include="Views\ATS\ViewTodayOffer.cshtml" />
+    <Content Include="Views\ATS\ViewTodayStart.cshtml" />
+    <Content Include="Views\ATS\AddNewClientStats.cshtml" />
+    <Content Include="Views\ATS\ViewClientStatus.cshtml" />
+    <Content Include="Views\ATS\ViewMonthReport.cshtml" />
+    <Content Include="Views\ATS\ViewTodayReport.cshtml" />
+    <Content Include="Views\ATS\ViewAttendance.cshtml" />
+    <Content Include="Views\ATS\ViewSalarySlip.cshtml" />
+    <Content Include="Views\ATS\AssignClienttoSales.cshtml" />
+    <Content Include="Views\ATS\ViewSalesClient.cshtml" />
+    <Content Include="Views\ATS\Salesdashboard.cshtml" />
+    <Content Include="Views\ATS\ViewAttendanceReport.cshtml" />
+    <Content Include="Views\ATS\DateWiseCountReport.cshtml" />
+    <Content Include="Views\ATS\ViewColumnChart.cshtml" />
+    <Content Include="Views\ATS\UploadRecruiterSalarySheet.cshtml" />
+    <Content Include="Views\ATS\ViewRecuiterSalarySlip.cshtml" />
+    <Content Include="Views\ATS\ViewDailyActivity.cshtml" />
+    <Content Include="Views\ATS\CreateHolidayList.cshtml" />
+    <Content Include="Views\ATS\ViewHolidayList.cshtml" />
+    <Content Include="Views\ATS\SearchResume.cshtml" />
+    <Content Include="Views\ATS\ViewSalesClientList.cshtml" />
+    <Content Include="Views\ATS\ViewSalesTodaySubmission.cshtml" />
+    <Content Include="Views\ATS\ViewSalesTodayInterview.cshtml" />
+    <Content Include="Views\ATS\ViewSalesTodayOffer.cshtml" />
+    <Content Include="Views\ATS\ViewSalesTodayStart.cshtml" />
+    <Content Include="Views\ATS\ApplyForLeave.cshtml" />
+    <Content Include="Views\ATS\ViewApplyLeave.cshtml" />
+    <Content Include="Views\ATS\Managerdashboard.cshtml" />
+    <Content Include="Views\ATS\ViewLeaveBalance.cshtml" />
+    <Content Include="Views\ATS\SalesClientWiseMonthlyRevenueAdd.cshtml" />
+    <Content Include="Views\ATS\ViewSalesMonthClientWiseRevenueReport.cshtml" />
+    <Content Include="Views\ATS\ViewlDatewiseTeamLeadCountReport.cshtml" />
+    <Content Include="Views\ATS\ViewOfferDataList.cshtml" />
+    <Content Include="Views\ATS\ViewRevenuewReportDatewise.cshtml" />
+    <Content Include="Views\ATS\ViewActiveRequirement.cshtml" />
+    <Content Include="Views\ATS\ViewDeactiveOrDeleteRequirement.cshtml" />
+    <Content Include="Views\ATS\ViewATSActivity.cshtml" />
+    <Content Include="Views\ATS\ViewMonthIOST.cshtml" />
+    <Content Include="Views\ATS\SalesMonthlyReport.cshtml" />
+    <Content Include="Views\ATS\ViewMonthSalesReport.cshtml" />
+    <Content Include="Views\ATS\ViewProfile.cshtml" />
+    <Content Include="Views\ATS\ViewRequirementProgressReport.cshtml" />
+    <Content Include="Views\ATS\facebookpost.cshtml" />
+    <Content Include="Views\ATS\AdminDashBoardNew.cshtml" />
+    <Content Include="Views\ATS\Managerdashboardnew.cshtml" />
+    <Content Include="Views\ATS\TeamLeaddashboardnew.cshtml" />
+    <Content Include="Views\ATS\Recruiterdashboardnew.cshtml" />
+    <Content Include="Views\ATS\Salesdashboardnew.cshtml" />
+    <Content Include="Views\ATS\ViewYesterdaySubmission.cshtml" />
+    <Content Include="Views\ATS\ViewYesterdayInterview.cshtml" />
+    <Content Include="Views\ATS\ViewYesterdayOffer.cshtml" />
+    <Content Include="Views\ATS\ViewYesterdayStart.cshtml" />
+    <Content Include="Views\ATS\ViewThisweekStart.cshtml" />
+    <Content Include="Views\ATS\ViewThisweekInterview.cshtml" />
+    <Content Include="Views\ATS\ViiewThisweekOffer.cshtml" />
+    <Content Include="Views\ATS\ViewThisweekSubmission.cshtml" />
+    <Content Include="Views\ATS\ViewTillDateSubmission.cshtml" />
+    <Content Include="Views\ATS\ViewTillDateInterview.cshtml" />
+    <Content Include="Views\ATS\ViewTillDateOffer.cshtml" />
+    <Content Include="Views\ATS\ViewTillDateStart.cshtml" />
+    <Content Include="Views\ATS\CreateClientCallRecord.cshtml" />
+    <Content Include="Views\ATS\ViewClientCallRecord.cshtml" />
+    <Content Include="Views\ATS\ViewDeactiveRequirement.cshtml" />
+    <Content Include="Views\ATS\ViewDeactiveRequirementViewresume.cshtml" />
+    <Content Include="Views\Register\_BlankPage.cshtml" />
+    <Content Include="Views\Register\Registration.cshtml" />
+    <Content Include="Views\ATS\Registrationlink.cshtml" />
+    <Content Include="Views\ATS\ViewCriticalRequirement.cshtml" />
+    <Content Include="Views\ATS\EditRequirement.cshtml" />
+    <Content Include="Views\ATS\UploadArcheResume.cshtml" />
+    <Content Include="Views\ATS\ViewArcheResume.cshtml" />
+    <Content Include="Views\ATS\ViewMonthAttendaceReport.cshtml" />
+    <Content Include="Views\ATS\CheckEmployeeAttendance.cshtml" />
+    <Content Include="Views\ATS\AttendanceRegularazation.cshtml" />
+    <Content Include="Views\ATS\ViewAllARDetails.cshtml" />
+    <Content Include="Views\ATS\AttendanceRegularazationView.cshtml" />
+    <Content Include="Views\ATS\Overtime.cshtml" />
+    <Content Include="Views\ATS\ViewOverTime.cshtml" />
+    <Content Include="Views\ATS\ViewOTAppoval.cshtml" />
+    <Content Include="Views\ATS\UploadReynaSalarySheet.cshtml" />
+    <Content Include="Views\ATS\ViewReynaSalarySlip.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="obj\Debug\__testMsDeployConnection__\" />
+    <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
+    <Folder Include="obj\Release\TransformWebConfig\transformed\Views\" />
+    <Folder Include="ResumeDirectory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>15035</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:15035/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

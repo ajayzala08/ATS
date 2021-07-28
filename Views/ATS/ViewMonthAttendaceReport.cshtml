@@ -1,0 +1,544 @@
+﻿
+@{
+    ViewBag.Title = "ViewMonthAttendaceReport";
+    Layout = "~/Views/ATS/_LayoutPage.cshtml";
+}
+
+
+
+    <form class="onlyform" style="background: #ecf0f1;">
+        <h1>Attendance</h1>
+        @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+        <div style="width:100%; padding:10px; display: flex; justify-content:flex-start; align-items:center; overflow: auto; position: relative;">
+            <style>
+                main {
+                    padding: 1em;
+                    overflow: hidden;
+                }
+
+                table {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                thead {
+                }
+
+                tbody {
+                    overflow-x: scroll;
+                }
+
+
+                tr {
+                    border-bottom: 1px solid;
+                    text-align: center;
+                }
+
+
+                th {
+                    /*background-color: #ecf0f1;*/
+                    color: #333;
+                    white-space: nowrap;
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+
+                th,
+                td {
+                    text-align: left;
+                    padding: 0.5em 1em;
+                    white-space: nowrap;
+                    width: 200px;
+                    font-size: 18px;
+                }
+
+                table td:nth-child(even) {
+                    background: rgba(0,0,0,.05);
+                }
+
+                table td:nth-child(odd) {
+                    background: rgba(255,255,255,.1);
+                }
+
+                table th:nth-child(odd) {
+                    background: rgba(0,0,0,.05);
+                }
+
+                table th:nth-child(even) {
+                    background: rgba(255,255,255,.1);
+                }
+
+                @@media screen and (max-width: 1140px) {
+                    table {
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                    }
+
+                    thead {
+                    }
+
+                    tbody {
+                        overflow-x: scroll;
+                        /*display: flex;
+                    position: relative;
+                    overflow-x: auto;
+                    overflow-y: hidden;
+                    max-width: 100%;
+                    background: linear-gradient(to right, white 30%, rgba(255,255,255,0)), linear-gradient(to right, rgba(255,255,255,0), white 70%) 0 100%, radial-gradient(farthest-side at 0% 50%, rgba(0,0,0,.4), rgba(0,0,0,0)), radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+                    background-repeat: no-repeat;
+                    background-color: white;
+                    background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+                    background-position: 0 0, 100%, 0 0, 100%;
+                    background-attachment: local, local, scroll, scroll;*/
+                    }
+
+                    th,
+                    td {
+                        display: block;
+                        background-color: #ecf0f1;
+                    }
+
+                    .numeric {
+                        text-align: right;
+                    }
+
+                    .text {
+                        text-align: center;
+                    }
+                }
+
+                p {
+                    text-align: right;
+                    margin-top: 1em;
+                    font-style: italic;
+                }
+
+                .btncallclass {
+                    border: none;
+                    background: #00cec9;
+                    padding: 5px 10px;
+                    color: white;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+                .btnmisspunchclass{
+
+                    border: none;
+                    background: #00cec9;
+                    padding: 5px 10px;
+                    color: white;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+
+                #tblinoutpunch {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                ::-webkit-scrollbar {
+                    width: 10px;
+                    background-color: #ecf0f1;
+                }
+
+                ::-webkit-scrollbar-thumb {
+                    background-color: rgba(0,0,0,.08);
+                    /*border-radius:5px;*/
+                }
+
+                ::-webkit-scrollbar-button {
+                    background-color: rgba(0,0,0,.08);
+                }
+            </style>
+
+            <main>
+                <div class="table-wrapper" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                            </tr>
+                            <tr>
+                                <th>Shift</th>
+                            </tr>
+                            <tr>
+                                <th>In Time</th>
+                            </tr>
+                            <tr>
+                                <th>1<sup>st</sup> Half</th>
+                            </tr>
+                            <tr>
+                                <th>2<sup>nd</sup> Half</th>
+                            </tr>
+                            <tr>
+                                <th>Out Time</th>
+                            </tr>
+                            <tr>
+                                <th>Total Time</th>
+                            </tr>
+                            <tr>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="tr1">
+                            </tr>
+                            <tr id="tr2">
+                            </tr>
+                            <tr id="tr3">
+                            </tr>
+                            <tr id="tr4">
+                            </tr>
+                            <tr id="tr5">
+                            </tr>
+                            <tr id="tr6">
+                            </tr>
+                            <tr id="tr7">
+                            </tr>
+                            <tr id="tr8">
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+
+
+        <div style="display:flex;justify-content:left;margin-top:50px;font-size:22px">
+            <p style="margin:0 10px auto 30px">Total Present : <span id="tpresent"></span></p>
+            <p style="margin:0 10px">Total Absent : <span id="tabsent"></span></p>
+
+            <p style="margin:0 10px">Total Weekoff : <span id="two"></span></p>
+            <p style="margin:0 10px">Total Missing Punch : <span id="tmp"></span></p>
+        </div>
+        @section scripts{
+            @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+
+
+
+
+
+
+                    $.ajax({
+                        url: "/ATS/LoadMonthAttendanceReport",
+                        type: "GET",
+                        datatype: "json",
+                        success: function (result) {
+
+
+                            var tbldaterow, tblshiftrow, tblintimerow, tblfirsthalfrow, tblsecondhalfrow, tblouttimerow, tbltotaltimerow, tbllinkbtn;
+                            for (item in result.data.attendanceDate) {
+                                var intime = String(result.data.totaltime[item]).split(':');
+                                var inminute = intime[0] * 60;
+                                var totaltimerow;
+                                debugger;
+                                if (String(result.data.totaltime[item]) == "WO") {
+                                    totaltimerow += "<td style='color:black;'>" + result.data.totaltime[item] + "</td>";
+                                }
+                                else {
+                                    if (inminute >= parseInt("480")) {
+                                        totaltimerow += "<td style='color:Green;font-weight:bold;'>" + result.data.totaltime[item] + "</td>";
+                                    }
+                                    else {
+                                        totaltimerow += "<td style='color:red;font-weight:bold;'>" + result.data.totaltime[item] + "</td>";
+                                    }
+                                }
+
+                                tbldaterow += "<td>" + result.data.attendanceDate[item] + "</td>";
+                                tblshiftrow += "<td style='color: #00cec9; font-weight: bold;'>" + result.data.shiftName[item] + "</td>";
+                                tblintimerow += "<td>" + result.data.intime[item] + "</td>";
+                                tblfirsthalfrow += "<td>" + result.data.firstHalf[item] + "</td>";
+                                tblsecondhalfrow += "<td>" + result.data.secondHalf[item] + "</td>";
+                                tblouttimerow += "<td>" + result.data.outtime[item] + "</td>";
+                                tbltotaltimerow = totaltimerow;
+                                tbllinkbtn += "<td><input type='button' date=" + result.data.attendanceDate[item] + " id='btninout' class='btncallclass' value='In-Out Punch'/></td>";
+
+                            }
+                            $("#tr1").append(tbldaterow);
+                            $("#tr2").append(tblshiftrow);
+                            $("#tr3").append(tblintimerow);
+                            $("#tr4").append(tblfirsthalfrow);
+                            $("#tr5").append(tblsecondhalfrow);
+                            $("#tr6").append(tblouttimerow);
+                            $("#tr7").append(tbltotaltimerow);
+                            $("#tr8").append(tbllinkbtn);
+                            $("#tpresent").html(result.data.totalpresent);
+                            $("#tabsent").html(result.data.totalabsent);
+                            $("#two").html(result.data.totalweekoff);
+                            $("#tmp").html(result.data.totalMissingPunch);
+                        }
+                    });
+
+                    $('table').on('click', '.btncallclass', function () {
+                        var datee = $(this).attr('date');
+
+                        $("#tblinoutpunch tr").remove();
+
+                        $.ajax({
+                            url: "/ATS/Getinoutpunch",
+                            type: "GET",
+                            datatype: "JSON",
+                            data: { cdate: datee },
+                            success: function (jsondatedata) {
+                                var jd = JSON.parse(jsondatedata);
+                                var trtd;
+
+                                for (item in jd) {
+                                    trtd += "<tr><td>" + jd[item] + "</td></tr>"
+                                }
+                                $("#tblinoutpunch").append(trtd);
+                                $("#mainpopup").css('visibility', 'visible');
+                            }
+
+                        });
+
+                    });
+                    $(".close").click(function () {
+                        $("#tblinoutpunch").val('');
+                        $("#mainpopup").css('visibility', 'hidden');
+                    });
+                    $("#btnaddmisspunch").click(function () {
+                        $("#mainpopup2").css('visibility', 'visible');
+                    });
+                    $(".close").click(function () {
+                        $("#tblinoutpunch").val('');
+                        $("#mainpopup2").css('visibility', 'hidden');
+                    });
+                });
+            </script>
+        }
+        <style>
+
+
+                #pop {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    width: 600px;
+                    height: 800px;
+                    background: #f2f2f2;
+                    box-shadow: 1px 5px 10px #aaa;
+                    border-radius: 10px;
+                }
+
+                #pop2 {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    width: 800px;
+                    height: 800px;
+                    background: #f2f2f2;
+                    box-shadow: 1px 5px 10px #aaa;
+                    border-radius: 10px;
+                }
+
+                #mainpopup {
+                    visibility: hidden;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    z-index: 99999;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.7);
+                }
+
+                #mainpopup2 {
+                    visibility: hidden;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    z-index: 99999;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.7);
+                }
+
+                #pop h2 {
+                    margin: 0 auto;
+                    color: #fff;
+                    font-family: Tahoma, Arial, sans-serif;
+                    text-align: center;
+                    padding: 5px;
+                    background: #3a4660;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                }
+
+                #pop .popcontent {
+                    border-top: 2px solid gray;
+                    height: 750px;
+                    overflow-y: scroll;
+                    color: #333;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    padding-left: 20px;
+                    font-size: 22px;
+                }
+
+                #pop .close {
+                    position: absolute;
+                    top: 20px;
+                    right: 100px;
+                    transition: all 200ms;
+                    font-size: 50px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    color: #fff;
+                }
+
+                #pop2 h2 {
+                    margin: 0 auto;
+                    color: #fff;
+                    font-family: Tahoma, Arial, sans-serif;
+                    text-align: center;
+                    padding: 5px;
+                    background: #3a4660;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                }
+
+                #pop2 .popcontent {
+                    border-top: 2px solid gray;
+                    overflow: auto;
+                    color: #333;
+                    padding: 10px;
+                }
+
+                    #pop2 .popcontent div {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-left: 150px;
+                    }
+
+                #pop2 p {
+                    font-size: 20px;
+                    font-weight: 500;
+                    margin: 0;
+                    width: 200px;
+                }
+
+
+                #pop2 .close {
+                    position: absolute;
+                    top: 20px;
+                    right: 100px;
+                    transition: all 200ms;
+                    font-size: 50px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    color: #fff;
+                }
+
+                /*#tblinoutpunch tr {
+                position: relative;
+                top: 50%;
+                left: 50%;
+                transform: translate(280%, -10%);
+                height: 50px;
+            }
+
+                #tblinoutpunch tr td {
+                    border-bottom: 1px solid #333 !important;
+                }*/
+        </style>
+        <div id="mainpopup">
+            <div id="pop">
+                <h2>In-Out Punch</h2>
+
+                <div class="popcontent">
+                    <table id="tblinoutpunch"></table>
+                    <button type="button" id="btnaddmisspunch" value="Add Miss-Punch" class="btnmisspunchclass">Add Miss-Punch</button>
+                </div>
+                <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+            </div>
+        </div>
+
+        <div id="mainpopup2">
+            <div id="pop2">
+                <h2>Add Miss-Punch Application</h2>
+
+                <div class="popcontent2" style="text-align:center" >
+
+
+
+                    <div class="contentform">
+                        <div id="sendmessage"> Your message has been sent successfully. Thank you. </div>
+                        <div class="leftcontact">
+                            <div class="form-group" style="display:flex">
+                                <p>Client Name<span>*</span></p>
+                                <span class="icon-case"><i class="fa fa-male"></i></span>
+                                <input class="ggg" type="text" name="nom" id="nom" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné.">
+                                <div class="validation"></div>
+                            </div>
+
+                            <div class="form-group" style="display:flex">
+                                <p>Client Name<span>*</span></p>
+                                <span class="icon-case"><i class="fa fa-male"></i></span>
+                                <input class="ggg" type="text" name="nom" id="nom" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné.">
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group" style="display:flex">
+                                <p>Client Name<span>*</span></p>
+                                <span class="icon-case"><i class="fa fa-male"></i></span>
+                                <input class="ggg" type="text" name="nom" id="nom" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné.">
+                                <div class="validation"></div>
+                            </div>
+
+                            <div class="form-group" style="display:flex">
+                                <p>Client Name<span>*</span></p>
+                                <span class="icon-case"><i class="fa fa-male"></i></span>
+                                <input class="ggg" type="text" name="nom" id="nom" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné.">
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group date" style="display:flex">
+                                <p>Start Time <span>*</span></p>
+                                <span class="icon-case"><i class="fas fa-clock"></i></span>
+                                <input class="ggg" type="time" name="dateofbirth" id="dateofbirth" placeholder="EX. January, 2019">
+                            </div>
+                            <div class="form-group date" style="display:flex">
+                                <p>End Time <span>*</span></p>
+                                <span class="icon-case"><i class="fas fa-clock"></i></span>
+                                <input class="ggg" type="time" name="dateofbirth" id="dateofbirth" placeholder="EX. January, 2019">
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <p>Comment <span>*</span></p>
+                                <span class="icon-case"><i class="fa fa-map-marker"></i></span>
+                                <textarea name="message" style="width: 54%;" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Message' doit être renseigné."></textarea>
+                                <div class="validation"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <button type="button" class="bouton-contact" style="width:15%">Request</button>
+                </div>
+                <a class="close" style="top:-10px;right:10px;" href="#">&times;</a>
+            </div>
+        </div>
+
+    </form>
